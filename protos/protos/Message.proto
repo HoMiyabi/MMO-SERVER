@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package proto;
+
+message Vector3
+{
+    int32 x = 1;
+    int32 y = 2;
+    int32 z = 3;
+}
+
+message Entity
+{
+    int32 id = 1;
+    int32 speed = 2;
+    Vector3 position = 3;
+    Vector3 rotation = 4;
+}
