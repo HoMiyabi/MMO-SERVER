@@ -20,6 +20,9 @@ namespace Common.Network
     /// </summary>
     public class MessageRouter : Singleton<MessageRouter>
     {
+        int threadCount = 1;
+        int workerCount = 0;
+
         /// <summary>
         /// 消息队列
         /// </summary>
@@ -46,7 +49,7 @@ namespace Common.Network
         }
 
         /// <summary>
-        /// 退订
+        /// 订阅
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="handler"></param>
@@ -57,6 +60,11 @@ namespace Common.Network
             delegateMap[key] = (delegateMap[key] as MessageHandler<T>) - handler;
         }
 
+        /// <summary>
+        /// 退订
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="message"></param>
         public void AddMessage(NetConnection sender, IMessage message)
         {
             messageQueue.Enqueue(new()
@@ -64,6 +72,45 @@ namespace Common.Network
                 sender = sender,
                 message = message,
             });
+        }
+
+        /// <summary>
+        /// Clamp to 1 ~ 200
+        /// </summary>
+        /// <param name="threadCount"></param>
+        public void Start(int threadCount)
+        {
+            this.threadCount = Math.Clamp(threadCount, 1, 200);
+            for (int i = 0; i < this.threadCount; i++)
+            {
+                ThreadPool.QueueUserWorkItem(new WaitCallback((MessageWork)));
+            }
+            while (workerCount < this.threadCount)
+            {
+                Thread.Sleep(100);
+            }
+        }
+
+        private void MessageWork(object state)
+        {
+            Console.WriteLine("worker thread start");
+
+            try
+            {
+                Interlocked.Increment(ref workerCount);
+                while (true)
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+                Interlocked.Decrement(ref workerCount);
+                Console.WriteLine("worker thread end");
+            }   
         }
     }
 }
