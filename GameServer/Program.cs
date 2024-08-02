@@ -1,4 +1,5 @@
-﻿using GameServer.Network;
+﻿using Common.Network;
+using GameServer.Network;
 using Network;
 using Proto;
 using System.Net;

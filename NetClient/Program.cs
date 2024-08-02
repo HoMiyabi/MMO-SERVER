@@ -23,6 +23,8 @@ namespace NetClient
             Vector3 v = new() { X = 100, Y = 200, Z = 300 };
 
             SendMessage(socket, v.ToByteArray());
+
+            Console.ReadKey();
         }
 
         static void SendMessage(Socket socket, byte[] body)

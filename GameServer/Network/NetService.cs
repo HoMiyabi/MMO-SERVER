@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Network;
 
 namespace GameServer.Network
 {
@@ -43,6 +44,7 @@ namespace GameServer.Network
         {
             var v = Vector3.Parser.ParseFrom(data);
             Console.WriteLine(v);
+            MessageRouter.Instance.AddMessage(sender, v);
         }
     }
 }
