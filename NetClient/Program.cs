@@ -1,7 +1,6 @@
 ﻿using System.Net.Sockets;
 using System.Net;
 using System.Text;
-using Proto;
 using Google.Protobuf;
 
 namespace NetClient
@@ -20,11 +19,23 @@ namespace NetClient
 
             Console.WriteLine("成功连接到服务器");
 
-            Vector3 v = new() { X = 100, Y = 200, Z = 300 };
+            Proto.Package package = new()
+            {
+                Request = new()
+                {
+                    UserLogin = new()
+                    {
+                        Username = "tyx",
+                        Password = "123456",
+                    }
+                }
+            };
 
-            SendMessage(socket, v.ToByteArray());
+            SendMessage(socket, package.ToByteArray());
 
             Console.ReadKey();
+
+            socket.Close();
         }
 
         static void SendMessage(Socket socket, byte[] body)

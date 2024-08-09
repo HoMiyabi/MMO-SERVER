@@ -42,9 +42,8 @@ namespace GameServer.Network
 
         private void OnDataReceived(NetConnection sender, byte[] data)
         {
-            var v = Vector3.Parser.ParseFrom(data);
-            Console.WriteLine(v);
-            MessageRouter.Instance.AddMessage(sender, v);
+            var package = Package.Parser.ParseFrom(data);
+            MessageRouter.Instance.AddMessage(sender, package);
         }
     }
 }

@@ -16,3 +16,45 @@ message Entity
     Vector3 position = 3;
     Vector3 rotation = 4;
 }
+
+message Package
+{
+    Request request = 1;
+    Response response = 2;
+}
+
+message Request
+{
+    UserRegisterRequest userRegister = 1;
+    UserLoginRequest userLogin = 2;
+}
+
+message Response
+{
+    UserRegisterResponse userRegister = 1;
+    UserLoginResponse userLogin = 2;
+}
+
+message UserRegisterRequest
+{
+    string username = 1;
+    string password = 2;
+}
+
+message UserRegisterResponse
+{
+    int32 code = 1;
+    string message = 2;
+}
+
+message UserLoginRequest
+{
+    string username = 1;
+    string password = 2;
+}
+
+message UserLoginResponse
+{
+    int32 code = 1;
+    string message = 2;
+}
