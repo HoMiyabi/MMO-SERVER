@@ -2,6 +2,7 @@
 using System.Net;
 using System.Text;
 using Google.Protobuf;
+using Common.Network;
 
 namespace NetClient
 {
@@ -31,18 +32,21 @@ namespace NetClient
                 }
             };
 
-            SendMessage(socket, package.ToByteArray());
+            NetConnection conn = new(socket, null, null);
+            conn.Send(package);
+            conn.Send(package);
+            conn.Send(package);
 
             Console.ReadKey();
 
-            socket.Close();
+            conn.Close();
         }
 
-        static void SendMessage(Socket socket, byte[] body)
-        {
-            byte[] lenBytes = BitConverter.GetBytes(body.Length);
-            socket.Send(lenBytes);
-            socket.Send(body);
-        }
+        //static void SendMessage(Socket socket, byte[] body)
+        //{
+        //    byte[] lenBytes = BitConverter.GetBytes(body.Length);
+        //    socket.Send(lenBytes);
+        //    socket.Send(body);
+        //}
     }
 }
