@@ -55,6 +55,51 @@ namespace Common.Network
             disconnectedCallback(this);
         }
 
+        #region 发送网络数据包
+
+        private Proto.Package _package = null;
+
+        public Proto.Request Request
+        {
+            get
+            {
+                if (_package == null)
+                {
+                    _package = new();
+                }
+                if (_package.Request == null)
+                {
+                    _package.Request = new();
+                }
+                return _package.Request;
+            }
+        }
+
+        public Proto.Response Response
+        {
+            get
+            {
+                if (_package == null)
+                {
+                    _package = new();
+                }
+                if (_package.Response == null)
+                {
+                    _package.Response = new();
+                }
+                return _package.Response;
+            }
+        }
+
+        public void Send()
+        {
+            if (_package != null)
+            {
+                Send(_package);
+                _package = null;
+            }
+        }
+
         public void Send(Proto.Package package)
         {
             // 我的
@@ -95,5 +140,7 @@ namespace Common.Network
             Socket client = (Socket)ar.AsyncState;
             int len = client.EndSend(ar);
         }
+
+        #endregion
     }
 }

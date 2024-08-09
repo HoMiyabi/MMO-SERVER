@@ -20,6 +20,8 @@ namespace NetClient
 
             Console.WriteLine("成功连接到服务器");
 
+            NetConnection conn = new(socket, null, null);
+
             Proto.Package package = new()
             {
                 Request = new()
@@ -31,22 +33,17 @@ namespace NetClient
                     }
                 }
             };
+            conn.Send(package);
 
-            NetConnection conn = new(socket, null, null);
-            conn.Send(package);
-            conn.Send(package);
-            conn.Send(package);
+            conn.Request.UserLogin = new()
+            {
+                Username = "man",
+                Password = "what can i say",
+            };
+            conn.Send();
 
             Console.ReadKey();
-
             conn.Close();
         }
-
-        //static void SendMessage(Socket socket, byte[] body)
-        //{
-        //    byte[] lenBytes = BitConverter.GetBytes(body.Length);
-        //    socket.Send(lenBytes);
-        //    socket.Send(body);
-        //}
     }
 }
