@@ -1,5 +1,4 @@
 ﻿using Common;
-using Google.Protobuf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +6,13 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
-using Proto;
 
 namespace Common.Network
 {
     internal class MessageUnit
     {
         public NetConnection sender;
-        public Proto.Package message;
+        public Google.Protobuf.IMessage message;
     }
 
     /// <summary>
@@ -45,9 +43,9 @@ namespace Common.Network
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="handler"></param>
-        public void On<T>(MessageHandler<T> handler) where T : IMessage
+        public void On<T>(MessageHandler<T> handler) where T : Google.Protobuf.IMessage
         {
-            string key = typeof(T).Name;
+            string key = typeof(T).FullName;
             delegateMap.TryAdd(key, null);
             delegateMap[key] = (delegateMap[key] as MessageHandler<T>) + handler;
             Console.WriteLine(key + ": " + delegateMap[key].GetInvocationList().Length);
@@ -58,9 +56,9 @@ namespace Common.Network
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="handler"></param>
-        public void Off<T>(MessageHandler<T> handler) where T : IMessage
+        public void Off<T>(MessageHandler<T> handler) where T : Google.Protobuf.IMessage
         {
-            string key = typeof(T).Name;
+            string key = typeof(T).FullName;
             delegateMap.TryAdd(key, null);
             delegateMap[key] = (delegateMap[key] as MessageHandler<T>) - handler;
         }
@@ -72,7 +70,7 @@ namespace Common.Network
         /// <param name="sender"></param>
         private void Fire<T>(NetConnection sender, T msg)
         {
-            string key = typeof(T).Name;
+            string key = typeof(T).FullName;
             // CollectionsMarshal.GetValueRefOrNullRef(delegateMap, key);
             if (delegateMap.ContainsKey(key))
             {
@@ -93,7 +91,7 @@ namespace Common.Network
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="message"></param>
-        public void AddMessage(NetConnection sender, Proto.Package message)
+        public void AddMessage(NetConnection sender, Google.Protobuf.IMessage message)
         {
             messageQueue.Enqueue(new()
             {
@@ -149,17 +147,12 @@ namespace Common.Network
                     }
 
                     MessageUnit msg = messageQueue.Dequeue();
-                    Proto.Package package = msg.message;
+                    Google.Protobuf.IMessage package = msg.message;
+
+
                     if (package != null)
                     {
-                        if (package.Request != null)
-                        {
-                            Execute(msg.sender, package.Request);
-                        }
-                        if (package.Response != null)
-                        {
-                            Execute(msg.sender, package.Response);
-                        }
+                        ExecuteMessage(msg.sender, package);
                     }
                 }
             }
@@ -175,28 +168,58 @@ namespace Common.Network
         }
 
         /// <summary>
-        /// 对消息进行自动分发
+        /// 递归处理消息
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="entity"></param>
-        private void Execute(NetConnection sender, object entity)
+        /// <param name="message"></param>
+        private void ExecuteMessage(NetConnection sender, Google.Protobuf.IMessage message)
         {
-            Type t = entity.GetType();
+            var fireMethod = GetType().GetMethod("Fire", BindingFlags.NonPublic | BindingFlags.Instance);
+
+            Type t = message.GetType();
             foreach (var p in t.GetProperties())
             {
-                if (p.Name != "Parser" && p.Name != "Descriptor")
+                if (p.Name == "Parser" || p.Name == "Descriptor")
                 {
-                    var value = p.GetValue(entity);
-                    if (value != null)
+                    continue;
+                }
+
+                var value = p.GetValue(message);
+                if (value != null)
+                {
+                    if (value.GetType().IsAssignableTo(typeof(Google.Protobuf.IMessage)))
                     {
-                        GetType()
-                            .GetMethod("Fire",
-                            BindingFlags.NonPublic | BindingFlags.Instance)
-                            .MakeGenericMethod(value.GetType())
+                        //Console.WriteLine("发现消息，触发订阅，需要递归");
+                        fireMethod.MakeGenericMethod(value.GetType())
                             .Invoke(this, new object[] { sender, value });
+                        ExecuteMessage(sender, value as Google.Protobuf.IMessage);
                     }
                 }
             }
         }
+
+        /// <summary>
+        /// 对消息进行自动分发
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="entity"></param>
+        //private void Execute(NetConnection sender, object entity)
+        //{
+        //    Type t = entity.GetType();
+        //    foreach (var p in t.GetProperties())
+        //    {
+        //        if (p.Name != "Parser" && p.Name != "Descriptor")
+        //        {
+        //            var value = p.GetValue(entity);
+        //            if (value != null)
+        //            {
+        //                GetType()
+        //                    .GetMethod("Fire",
+        //                    BindingFlags.NonPublic | BindingFlags.Instance)
+        //                    .MakeGenericMethod(value.GetType())
+        //                    .Invoke(this, new object[] { sender, value });
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

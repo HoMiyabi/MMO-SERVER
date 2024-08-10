@@ -10,6 +10,8 @@ namespace NetClient
     {
         static void Main(string[] args)
         {
+            Thread.Sleep(1000);
+
             string host = "127.0.0.1";
             int port = 32510;
 
