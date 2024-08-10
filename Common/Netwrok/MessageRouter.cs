@@ -48,7 +48,7 @@ namespace Common.Network
             string key = typeof(T).FullName;
             delegateMap.TryAdd(key, null);
             delegateMap[key] = (delegateMap[key] as MessageHandler<T>) + handler;
-            Console.WriteLine(key + ": " + delegateMap[key].GetInvocationList().Length);
+            Console.WriteLine("[订阅]" + key + ": " + delegateMap[key].GetInvocationList().Length);
         }
 
         /// <summary>
@@ -173,7 +173,10 @@ namespace Common.Network
         /// <param name="message"></param>
         private void ExecuteMessage(NetConnection sender, Google.Protobuf.IMessage message)
         {
-            var fireMethod = GetType().GetMethod("Fire", BindingFlags.NonPublic | BindingFlags.Instance);
+            GetType()
+                .GetMethod("Fire", BindingFlags.NonPublic | BindingFlags.Instance)
+                .MakeGenericMethod(message.GetType())
+                .Invoke(this, new object[] { sender, message });
 
             Type t = message.GetType();
             foreach (var p in t.GetProperties())
@@ -189,37 +192,11 @@ namespace Common.Network
                     if (value.GetType().IsAssignableTo(typeof(Google.Protobuf.IMessage)))
                     {
                         //Console.WriteLine("发现消息，触发订阅，需要递归");
-                        fireMethod.MakeGenericMethod(value.GetType())
-                            .Invoke(this, new object[] { sender, value });
                         ExecuteMessage(sender, value as Google.Protobuf.IMessage);
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// 对消息进行自动分发
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="entity"></param>
-        //private void Execute(NetConnection sender, object entity)
-        //{
-        //    Type t = entity.GetType();
-        //    foreach (var p in t.GetProperties())
-        //    {
-        //        if (p.Name != "Parser" && p.Name != "Descriptor")
-        //        {
-        //            var value = p.GetValue(entity);
-        //            if (value != null)
-        //            {
-        //                GetType()
-        //                    .GetMethod("Fire",
-        //                    BindingFlags.NonPublic | BindingFlags.Instance)
-        //                    .MakeGenericMethod(value.GetType())
-        //                    .Invoke(this, new object[] { sender, value });
-        //            }
-        //        }
-        //    }
-        //}
     }
 }
