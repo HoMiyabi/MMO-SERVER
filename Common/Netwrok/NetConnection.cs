@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Google.Protobuf;
 
-namespace Common.Network
+namespace Summer.Network
 {
     /// <summary>
     /// 客户端网络连接

@@ -1,5 +1,4 @@
 ﻿using Network;
-using Proto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Network;
+using Summer.Network;
 
 namespace GameServer.Network
 {
@@ -42,7 +41,7 @@ namespace GameServer.Network
 
         private void OnDataReceived(NetConnection sender, byte[] data)
         {
-            var package = Package.Parser.ParseFrom(data);
+            var package = Proto.Package.Parser.ParseFrom(data);
             MessageRouter.Instance.AddMessage(sender, package);
         }
     }
