@@ -40,7 +40,7 @@ namespace NetClient
                 Username = "man",
                 Password = "what can i say",
             };
-            conn.Send();
+            //conn.Send();
 
             Console.ReadKey();
             conn.Close();

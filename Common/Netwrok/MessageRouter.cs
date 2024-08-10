@@ -6,6 +6,8 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
+using Proto;
 
 namespace Common.Network
 {
@@ -152,17 +154,18 @@ namespace Common.Network
                     {
                         if (package.Request != null)
                         {
-                            DoRequest(msg.sender, package.Request);
+                            Execute(msg.sender, package.Request);
                         }
                         if (package.Response != null)
                         {
-                            DoResponse(msg.sender, package.Response);
+                            Execute(msg.sender, package.Response);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.StackTrace);
             }
             finally
             {
@@ -171,27 +174,28 @@ namespace Common.Network
             }
         }
 
-        private void DoRequest(NetConnection sender, Proto.Request request)
+        /// <summary>
+        /// 对消息进行自动分发
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="entity"></param>
+        private void Execute(NetConnection sender, object entity)
         {
-            if (request.UserRegister != null)
+            Type t = entity.GetType();
+            foreach (var p in t.GetProperties())
             {
-                Fire(sender, request.UserRegister);
-            }
-            if (request.UserLogin != null)
-            {
-                Fire(sender, request.UserLogin);
-            }
-        }
-
-        private void DoResponse(NetConnection sender, Proto.Response response)
-        {
-            if (response.UserRegister != null)
-            {
-                Fire(sender, response.UserRegister);
-            }
-            if (response.UserLogin != null)
-            {
-                Fire(sender, response.UserLogin);
+                if (p.Name != "Parser" && p.Name != "Descriptor")
+                {
+                    var value = p.GetValue(entity);
+                    if (value != null)
+                    {
+                        GetType()
+                            .GetMethod("Fire",
+                            BindingFlags.NonPublic | BindingFlags.Instance)
+                            .MakeGenericMethod(value.GetType())
+                            .Invoke(this, new object[] { sender, value });
+                    }
+                }
             }
         }
     }
