@@ -22,7 +22,7 @@ namespace NetClient
 
             Console.WriteLine("成功连接到服务器");
 
-            NetConnection conn = new(socket, null, null);
+            Connection conn = new(socket);
 
             Proto.Package package = new()
             {
@@ -36,13 +36,6 @@ namespace NetClient
                 }
             };
             conn.Send(package);
-
-            conn.Request.UserLogin = new()
-            {
-                Username = "man",
-                Password = "what can i say",
-            };
-            //conn.Send();
 
             Console.ReadKey();
             conn.Close();

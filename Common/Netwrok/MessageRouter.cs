@@ -12,7 +12,7 @@ namespace Summer.Network
 {
     internal class MessageUnit
     {
-        public NetConnection sender;
+        public Connection sender;
         public Google.Protobuf.IMessage message;
     }
 
@@ -32,7 +32,7 @@ namespace Summer.Network
         /// </summary>
         private Queue<MessageUnit> messageQueue = new();
 
-        public delegate void MessageHandler<T>(NetConnection sender, T message);
+        public delegate void MessageHandler<T>(Connection sender, T message);
 
         /// <summary>
         /// 消息频道
@@ -69,7 +69,7 @@ namespace Summer.Network
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="sender"></param>
-        private void Fire<T>(NetConnection sender, T msg)
+        private void Fire<T>(Connection sender, T msg)
         {
             string key = typeof(T).FullName;
             // CollectionsMarshal.GetValueRefOrNullRef(delegateMap, key);
@@ -92,7 +92,7 @@ namespace Summer.Network
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="message"></param>
-        public void AddMessage(NetConnection sender, Google.Protobuf.IMessage message)
+        public void AddMessage(Connection sender, Google.Protobuf.IMessage message)
         {
             messageQueue.Enqueue(new()
             {
@@ -172,7 +172,7 @@ namespace Summer.Network
         /// 递归处理消息
         /// </summary>
         /// <param name="message"></param>
-        private void ExecuteMessage(NetConnection sender, Google.Protobuf.IMessage message)
+        private void ExecuteMessage(Connection sender, Google.Protobuf.IMessage message)
         {
             GetType()
                 .GetMethod("Fire", BindingFlags.NonPublic | BindingFlags.Instance)

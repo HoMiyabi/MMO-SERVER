@@ -17,20 +17,20 @@ namespace Summer.Network
     /// </summary>
     public class Connection
     {
-        public delegate void DataReceivedCallback(Connection sender, byte[] data);
-        public delegate void DisconnectedCallback(Connection sender);
+        public delegate void DataReceivedAction(Connection sender, byte[] data);
+        public delegate void DisconnectedAction(Connection sender);
 
         public Socket socket;
 
         /// <summary>
         /// [回调] 当接收到数据
         /// </summary>
-        public event DataReceivedCallback onDataReceive;
+        public event DataReceivedAction onDataReceived;
 
         /// <summary>
         /// [回调] 当断开连接
         /// </summary>
-        public event DisconnectedCallback onDisconnected;
+        public event DisconnectedAction onDisconnected;
 
         public Connection(Socket socket)
         {
@@ -38,7 +38,7 @@ namespace Summer.Network
 
             // 创建解码器
             var lfd = new LengthFieldDecoder(socket, 64 * 1024, 0, 4, 0, 4);
-            lfd.DataReceived += data => onDataReceive?.Invoke(this, data);
+            lfd.DataReceived += data => onDataReceived?.Invoke(this, data);
             lfd.Disconnected += (_) => onDisconnected(this);
             lfd.Start(); // 启动解码器
         }

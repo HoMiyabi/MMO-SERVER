@@ -29,17 +29,17 @@ namespace GameServer.Network
 
         private void OnClientConnected(object sender, Socket socket)
         {
-            new NetConnection(socket,
-                OnDataReceived,
-                OnDisconnected);
+            var conn = new Connection(socket);
+            conn.onDataReceived += OnDataReceived;
+            conn.onDisconnected += OnDisconnected;
         }
 
-        private void OnDisconnected(NetConnection sender)
+        private void OnDisconnected(Connection sender)
         {
             Console.WriteLine("断开连接");
         }
 
-        private void OnDataReceived(NetConnection sender, byte[] data)
+        private void OnDataReceived(Connection sender, byte[] data)
         {
             var package = Proto.Package.Parser.ParseFrom(data);
             MessageRouter.Instance.AddMessage(sender, package);
