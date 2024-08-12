@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.Threading;
 
 namespace Summer.Network
 {
@@ -189,7 +190,7 @@ namespace Summer.Network
                 var value = p.GetValue(message);
                 if (value != null)
                 {
-                    if (value.GetType().IsAssignableTo(typeof(Google.Protobuf.IMessage)))
+                    if (typeof(Google.Protobuf.IMessage).IsAssignableFrom(value.GetType()))
                     {
                         //Console.WriteLine("发现消息，触发订阅，需要递归");
                         ExecuteMessage(sender, value as Google.Protobuf.IMessage);

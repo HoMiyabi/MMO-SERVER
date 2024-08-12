@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using Google.Protobuf;
+using System.IO;
 
 namespace Summer.Network
 {
