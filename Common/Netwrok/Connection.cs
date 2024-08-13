@@ -25,12 +25,12 @@ namespace Summer.Network
         /// <summary>
         /// [回调] 当接收到数据
         /// </summary>
-        public event DataReceivedAction onDataReceived;
+        public event DataReceivedAction OnDataReceived;
 
         /// <summary>
         /// [回调] 当断开连接
         /// </summary>
-        public event DisconnectedAction onDisconnected;
+        public event DisconnectedAction OnDisconnected;
 
         public Connection(Socket socket)
         {
@@ -38,8 +38,8 @@ namespace Summer.Network
 
             // 创建解码器
             var lfd = new LengthFieldDecoder(socket, 64 * 1024, 0, 4, 0, 4);
-            lfd.DataReceived += data => onDataReceived?.Invoke(this, data);
-            lfd.Disconnected += (_) => onDisconnected(this);
+            lfd.DataReceived += data => OnDataReceived?.Invoke(this, data);
+            lfd.Disconnected += (_) => OnDisconnected?.Invoke(this);
             lfd.Start(); // 启动解码器
         }
 
@@ -57,7 +57,7 @@ namespace Summer.Network
 
             }
             socket.Close();
-            onDisconnected?.Invoke(this);
+            OnDisconnected?.Invoke(this);
         }
 
 

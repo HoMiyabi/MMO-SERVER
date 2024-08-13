@@ -30,8 +30,8 @@ namespace GameServer.Network
         private void OnClientConnected(object sender, Socket socket)
         {
             var conn = new Connection(socket);
-            conn.onDataReceived += OnDataReceived;
-            conn.onDisconnected += OnDisconnected;
+            conn.OnDataReceived += OnDataReceived;
+            conn.OnDisconnected += OnDisconnected;
         }
 
         private void OnDisconnected(Connection sender)
