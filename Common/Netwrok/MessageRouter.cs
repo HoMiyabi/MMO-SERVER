@@ -49,7 +49,7 @@ namespace Summer.Network
             string key = typeof(T).FullName;
             delegateMap.TryAdd(key, null);
             delegateMap[key] = (delegateMap[key] as MessageHandler<T>) + handler;
-            Console.WriteLine("[订阅]" + key + ": " + delegateMap[key].GetInvocationList().Length);
+            Console.WriteLine($"[订阅] {key}:{delegateMap[key].GetInvocationList().Length}");
         }
 
         /// <summary>
@@ -94,11 +94,14 @@ namespace Summer.Network
         /// <param name="message"></param>
         public void AddMessage(Connection sender, Google.Protobuf.IMessage message)
         {
-            messageQueue.Enqueue(new()
+            lock (messageQueue)
             {
-                sender = sender,
-                message = message,
-            });
+                messageQueue.Enqueue(new()
+                {
+                    sender = sender,
+                    message = message,
+                });
+            }
             threadEvent.Set(); // 唤醒1个worker
         }
 
@@ -147,7 +150,13 @@ namespace Summer.Network
                         continue;
                     }
 
-                    MessageUnit msg = messageQueue.Dequeue();
+                    MessageUnit msg = null;
+                    lock (messageQueue)
+                    {
+                        if (messageQueue.Count == 0) continue;
+
+                        msg = messageQueue.Dequeue();
+                    }
                     Google.Protobuf.IMessage package = msg.message;
 
 

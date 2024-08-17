@@ -20,12 +20,15 @@ namespace GameServer
 
             MessageRouter.Instance.On<Proto.UserLoginRequest>(OnUserLoginRequest);
 
-            Console.ReadKey();
+            while (true)
+            {
+                Thread.Sleep(100);
+            }
         }
 
         private static void OnUserLoginRequest(Connection sender, UserLoginRequest message)
         {
-            Console.WriteLine($"发现用户登录请求:{message.Username},{message.Password}");
+            Console.WriteLine($"[用户登录] {message}");
         }
     }
 }

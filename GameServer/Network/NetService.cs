@@ -29,6 +29,9 @@ namespace GameServer.Network
 
         private void OnClientConnected(object sender, Socket socket)
         {
+            IPEndPoint iPEndPoint = socket.RemoteEndPoint as IPEndPoint;
+            Console.WriteLine($"[客户端连接] IP:{iPEndPoint?.Address} Port:{iPEndPoint?.Port}");
+
             var conn = new Connection(socket);
             conn.OnDataReceived += OnDataReceived;
             conn.OnDisconnected += OnDisconnected;
@@ -36,7 +39,8 @@ namespace GameServer.Network
 
         private void OnDisconnected(Connection sender)
         {
-            Console.WriteLine("断开连接");
+            IPEndPoint iPEndPoint = sender.socket.RemoteEndPoint as IPEndPoint;
+            Console.WriteLine($"[客户端断开] IP:{iPEndPoint?.Address} Port:{iPEndPoint?.Port}");
         }
 
         private void OnDataReceived(Connection sender, byte[] data)

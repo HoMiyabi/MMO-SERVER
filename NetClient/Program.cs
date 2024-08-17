@@ -30,12 +30,18 @@ namespace NetClient
                 {
                     UserLogin = new()
                     {
-                        Username = "tyx",
-                        Password = "123456",
+                        Username = String.Empty,
+                        Password = String.Empty,
                     }
                 }
             };
-            conn.Send(package);
+            for (int i = 0; i < 300000; i++)
+            {
+                package.Request.UserLogin.Username = "kirara" + i;
+                package.Request.UserLogin.Password = "pwd" + i;
+                conn.Send(package);
+            }
+
 
             Console.ReadKey();
             conn.Close();
