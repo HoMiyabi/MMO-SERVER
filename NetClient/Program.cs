@@ -8,7 +8,8 @@ namespace NetClient
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static private Connection conn;
+        static private void Main(string[] args)
         {
             Thread.Sleep(1000);
 
@@ -22,7 +23,7 @@ namespace NetClient
 
             Console.WriteLine("成功连接到服务器");
 
-            Connection conn = new(socket);
+            conn = new(socket);
 
             Proto.Package package = new()
             {
@@ -35,16 +36,31 @@ namespace NetClient
                     }
                 }
             };
-            for (int i = 0; i < 300000; i++)
-            {
-                package.Request.UserLogin.Username = "kirara" + i;
-                package.Request.UserLogin.Password = "pwd" + i;
-                conn.Send(package);
-            }
+            package.Request.UserLogin.Username = "kirara";
+            package.Request.UserLogin.Password = "pwd";
+            conn.Send(package);
 
 
             Console.ReadKey();
             conn.Close();
+        }
+
+        static private void SendRequest(Google.Protobuf.IMessage message)
+        {
+            Proto.Package package = new()
+            {
+                Request = new(),
+            };
+
+            foreach (var p in typeof(Proto.Request).GetProperties())
+            {
+                if (p.PropertyType == message.GetType())
+                {
+                    p.SetValue(package, message);
+                    conn.Send(package);
+                    return;
+                }
+            }
         }
     }
 }
