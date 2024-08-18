@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Threading;
 using Common;
+using Serilog;
 
 namespace Summer.Network
 {
@@ -50,7 +51,7 @@ namespace Summer.Network
             string key = typeof(T).FullName;
             delegateMap.TryAdd(key, null);
             delegateMap[key] = (delegateMap[key] as MessageHandler<T>) + handler;
-            Log.Info($"[订阅] {key}:{delegateMap[key].GetInvocationList().Length}");
+            Log.Debug($"[订阅] {key}:{delegateMap[key].GetInvocationList().Length}");
         }
 
         /// <summary>
@@ -83,7 +84,7 @@ namespace Summer.Network
                 }
                 catch (Exception ex)
                 {
-                    Log.Info("MessageRouter.Fire error: " + ex.StackTrace);
+                    Log.Information("MessageRouter.Fire error: " + ex.StackTrace);
                 }
             }
         }
@@ -140,7 +141,7 @@ namespace Summer.Network
 
         private void MessageWork(object state)
         {
-            Log.Info("worker thread start");
+            Log.Information("worker thread start");
 
             try
             {
@@ -171,12 +172,12 @@ namespace Summer.Network
             }
             catch (Exception ex)
             {
-                Log.Info(ex.StackTrace);
+                Log.Information(ex.StackTrace);
             }
             finally
             {
                 Interlocked.Decrement(ref workerCount);
-                Log.Info("worker thread end");
+                Log.Information("worker thread end");
             }
         }
 

@@ -3,7 +3,7 @@ using System.Net;
 using System.Text;
 using Google.Protobuf;
 using Summer.Network;
-using Common;
+using Serilog;
 
 namespace NetClient
 {
@@ -12,6 +12,12 @@ namespace NetClient
         static private Connection conn;
         static private void Main(string[] args)
         {
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.Console()
+                .WriteTo.File("logs/client-log.txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+
             Thread.Sleep(1000);
 
             string host = "127.0.0.1";
@@ -22,7 +28,7 @@ namespace NetClient
             var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             socket.Connect(ipEndPort);
 
-            Log.Info("成功连接到服务器");
+            Log.Information("成功连接到服务器");
 
             conn = new(socket);
 

@@ -5,7 +5,7 @@ using Proto;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using Common;
+using Serilog;
 
 namespace GameServer
 {
@@ -13,8 +13,15 @@ namespace GameServer
     {
         static void Main(string[] args)
         {
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.Console()
+                .WriteTo.File("logs/server-log.txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+
             NetService netService = new();
             netService.Start();
+            Log.Debug("服务器启动完成");
 
             MessageRouter.Instance.On<Proto.UserLoginRequest>(OnUserLoginRequest);
 
@@ -26,7 +33,7 @@ namespace GameServer
 
         private static void OnUserLoginRequest(Connection sender, UserLoginRequest message)
         {
-            Log.Info($"[用户登录] {message}");
+            Log.Information($"[用户登录] {message}");
         }
     }
 }

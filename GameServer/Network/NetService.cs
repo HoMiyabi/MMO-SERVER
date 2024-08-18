@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using Summer.Network;
-using Common;
+using Serilog;
 
 namespace GameServer.Network
 {
@@ -31,13 +31,13 @@ namespace GameServer.Network
         private void OnClientConnected(Connection conn)
         {
             IPEndPoint iPEndPoint = conn.Socket.RemoteEndPoint as IPEndPoint;
-            Log.Info($"[客户端连接] IP:{iPEndPoint?.Address} Port:{iPEndPoint?.Port}");
+            Log.Information($"[客户端连接] IP:{iPEndPoint?.Address} Port:{iPEndPoint?.Port}");
         }
 
         private void OnDisconnected(Connection conn)
         {
             IPEndPoint iPEndPoint = conn.Socket.RemoteEndPoint as IPEndPoint;
-            Log.Info($"[客户端断开] IP:{iPEndPoint?.Address} Port:{iPEndPoint?.Port}");
+            Log.Information($"[客户端断开] IP:{iPEndPoint?.Address} Port:{iPEndPoint?.Port}");
         }
 
         private void OnDataReceived(Connection conn, byte[] data)
