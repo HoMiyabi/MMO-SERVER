@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using Common;
 
 namespace GameServer.Network
 {
@@ -30,7 +31,7 @@ namespace GameServer.Network
                 serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 serverSocket.Bind(endPoint);
                 serverSocket.Listen();
-                Console.WriteLine("开始监听端口：" + endPoint.Port);
+                Log.Info("开始监听端口：" + endPoint.Port);
                 
                 SocketAsyncEventArgs args = new();
                 args.Completed += OnAccept; //当有人连入的时候

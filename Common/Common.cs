@@ -9,43 +9,47 @@ namespace Common
 {
     public class Log
     {
-        public const int DEBUG = 0; // 调试
-        public const int INFO  = 1; // 普通
-        public const int WARN  = 2; // 警告 
-        public const int ERROR = 3; // 错误
+        public enum Level
+        {
+            Debug, Info, Warning, Error
+        }
 
-        public static int level = INFO; // 日志级别
+        public static Level allowLevel = Level.Info; // 日志级别
 
         public delegate void PrintAction(string text);
         public static event PrintAction Print;
 
+        static Log()
+        {
+            Print += Console.WriteLine;
+        }
+
+        private static void WriteLine(Level textLevel, string text)
+        {
+            if (textLevel >= allowLevel)
+            {
+                Print?.Invoke($"[{textLevel}] - {text}");
+            }
+        }
+
         public static void Debug(string text)
         {
-            Print?.Invoke(text);
+            WriteLine(Level.Debug, text);
         }
 
         public static void Info(string text)
         {
-            if (level <= INFO)
-            {
-                Print?.Invoke(text);
-            }
+            WriteLine(Level.Info, text);
         }
 
-        public static void Warn(string text)
+        public static void Warning(string text)
         {
-            if (level <= WARN)
-            {
-                Print?.Invoke(text);
-            }
+            WriteLine(Level.Warning, text);
         }
 
         public static void Error(string text)
         {
-            if (level <= ERROR)
-            {
-                Print?.Invoke(text);
-            }
+            WriteLine(Level.Error, text);
         }
     }
 }

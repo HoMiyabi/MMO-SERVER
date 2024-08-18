@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.Threading;
+using Common;
 
 namespace Summer.Network
 {
@@ -49,7 +50,7 @@ namespace Summer.Network
             string key = typeof(T).FullName;
             delegateMap.TryAdd(key, null);
             delegateMap[key] = (delegateMap[key] as MessageHandler<T>) + handler;
-            Console.WriteLine($"[订阅] {key}:{delegateMap[key].GetInvocationList().Length}");
+            Log.Info($"[订阅] {key}:{delegateMap[key].GetInvocationList().Length}");
         }
 
         /// <summary>
@@ -82,7 +83,7 @@ namespace Summer.Network
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("MessageRouter.Fire error: " + ex.StackTrace);
+                    Log.Info("MessageRouter.Fire error: " + ex.StackTrace);
                 }
             }
         }
@@ -139,7 +140,7 @@ namespace Summer.Network
 
         private void MessageWork(object state)
         {
-            Console.WriteLine("worker thread start");
+            Log.Info("worker thread start");
 
             try
             {
@@ -170,12 +171,12 @@ namespace Summer.Network
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.StackTrace);
+                Log.Info(ex.StackTrace);
             }
             finally
             {
                 Interlocked.Decrement(ref workerCount);
-                Console.WriteLine("worker thread end");
+                Log.Info("worker thread end");
             }
         }
 
@@ -203,7 +204,7 @@ namespace Summer.Network
                 {
                     if (typeof(Google.Protobuf.IMessage).IsAssignableFrom(value.GetType()))
                     {
-                        //Console.WriteLine("发现消息，触发订阅，需要递归");
+                        //Log.Info("发现消息，触发订阅，需要递归");
                         ExecuteMessage(sender, value as Google.Protobuf.IMessage);
                     }
                 }
