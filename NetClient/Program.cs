@@ -3,6 +3,7 @@ using System.Net;
 using System.Text;
 using Google.Protobuf;
 using Summer.Network;
+using Common;
 
 namespace NetClient
 {
@@ -21,7 +22,7 @@ namespace NetClient
             var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             socket.Connect(ipEndPort);
 
-            Console.WriteLine("成功连接到服务器");
+            Log.Info("成功连接到服务器");
 
             conn = new(socket);
 

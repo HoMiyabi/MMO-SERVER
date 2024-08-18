@@ -5,6 +5,7 @@ using Proto;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using Common;
 
 namespace GameServer
 {
@@ -25,7 +26,7 @@ namespace GameServer
 
         private static void OnUserLoginRequest(Connection sender, UserLoginRequest message)
         {
-            Console.WriteLine($"[用户登录] {message}");
+            Log.Info($"[用户登录] {message}");
         }
     }
 }
