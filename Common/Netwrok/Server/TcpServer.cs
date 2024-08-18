@@ -10,6 +10,12 @@ namespace Summer.Network
 {
     /// <summary>
     /// 负责监听TCP网络端口，异步接收Socket连接
+    /// Connected 有新的连接
+    /// DataReceived 有新的消息
+    /// Disconnected 有连接断开
+    /// IsRunning 是否正在运行
+    /// Stop() 关闭服务器
+    /// Start() 启动服务器
     /// </summary>
     public class TcpServer
     {
@@ -18,6 +24,14 @@ namespace Summer.Network
         private int backlog = 100;
 
         public event EventHandler<Socket> SocketConnected; //客户端接入事件
+
+        public delegate void ConnectedAction(Connection conn);
+        public delegate void DataReceivedAction(Connection conn, byte[] data);
+        public delegate void DisconnectedAction(Connection conn);
+
+        public event ConnectedAction Connected;
+        public event DataReceivedAction DataReceived;
+        public event DisconnectedAction Disconnected;
 
         public TcpServer(string host, int port)
         {
@@ -62,9 +76,18 @@ namespace Summer.Network
             {
                 if (client != null)
                 {
-                    SocketConnected?.Invoke(this, client);
+                    OnSocketConnected(client);
                 }
             }
+        }
+
+        private void OnSocketConnected(Socket socket)
+        {
+            SocketConnected?.Invoke(this, socket);
+            Connection conn = new(socket);
+            conn.OnDataReceived += (conn, data) => DataReceived?.Invoke(conn, data);
+            conn.OnDisconnected += conn => Disconnected?.Invoke(conn);
+            Connected?.Invoke(conn);
         }
 
         public bool IsRunning

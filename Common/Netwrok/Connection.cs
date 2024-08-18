@@ -20,7 +20,7 @@ namespace Summer.Network
         public delegate void DataReceivedAction(Connection sender, byte[] data);
         public delegate void DisconnectedAction(Connection sender);
 
-        public Socket socket;
+        public Socket Socket { get; private set; }
 
         /// <summary>
         /// [回调] 当接收到数据
@@ -34,7 +34,7 @@ namespace Summer.Network
 
         public Connection(Socket socket)
         {
-            this.socket = socket;
+            this.Socket = socket;
 
             // 创建解码器
             var lfd = new LengthFieldDecoder(socket, 64 * 1024, 0, 4, 0, 4);
@@ -50,13 +50,13 @@ namespace Summer.Network
         {
             try
             {
-                socket.Shutdown(SocketShutdown.Both);
+                Socket.Shutdown(SocketShutdown.Both);
             }
             catch
             {
 
             }
-            socket.Close();
+            Socket.Close();
             OnDisconnected?.Invoke(this);
         }
 
@@ -67,10 +67,20 @@ namespace Summer.Network
         {
             // 我的
             int size = message.CalculateSize();
+            byte[] sizeBytes = BitConverter.GetBytes(size);
+
+            // 转大端
+            if (BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(sizeBytes);
+            }
+
             byte[] data = new byte[4 + size];
             var ms = new MemoryStream(data);
-            ms.Write(BitConverter.GetBytes(size));
+
+            ms.Write(sizeBytes);
             message.WriteTo(ms);
+
             Send(data, 0, data.Length);
 
             // 视频
@@ -89,9 +99,9 @@ namespace Summer.Network
         {
             lock (this)
             {
-                if (socket.Connected)
+                if (Socket.Connected)
                 {
-                    socket.BeginSend(data, offset, count, SocketFlags.None, SendCallback, socket);
+                    Socket.BeginSend(data, offset, count, SocketFlags.None, SendCallback, Socket);
                 }
             }
         }

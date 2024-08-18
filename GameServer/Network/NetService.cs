@@ -12,41 +12,37 @@ namespace GameServer.Network
 {
     public class NetService
     {
-        private TcpSocketListener listener = null;
-
-        public NetService() { }
-
-        public void Init(int port)
+        TcpServer tcpServer;
+        public NetService()
         {
-            listener = new TcpSocketListener("0.0.0.0", port);
-            listener.SocketConnected += OnClientConnected;
+            tcpServer = new("0.0.0.0", 32510);
+            tcpServer.Connected += OnClientConnected;
+            tcpServer.Disconnected += OnDisconnected;
+            tcpServer.DataReceived += OnDataReceived;
         }
 
         public void Start()
         {
-            listener.Start();
+            tcpServer.Start();
+            MessageRouter.Instance.Start(10);
         }
 
-        private void OnClientConnected(object sender, Socket socket)
+        private void OnClientConnected(Connection conn)
         {
-            IPEndPoint iPEndPoint = socket.RemoteEndPoint as IPEndPoint;
+            IPEndPoint iPEndPoint = conn.Socket.RemoteEndPoint as IPEndPoint;
             Console.WriteLine($"[客户端连接] IP:{iPEndPoint?.Address} Port:{iPEndPoint?.Port}");
-
-            var conn = new Connection(socket);
-            conn.OnDataReceived += OnDataReceived;
-            conn.OnDisconnected += OnDisconnected;
         }
 
-        private void OnDisconnected(Connection sender)
+        private void OnDisconnected(Connection conn)
         {
-            IPEndPoint iPEndPoint = sender.socket.RemoteEndPoint as IPEndPoint;
+            IPEndPoint iPEndPoint = conn.Socket.RemoteEndPoint as IPEndPoint;
             Console.WriteLine($"[客户端断开] IP:{iPEndPoint?.Address} Port:{iPEndPoint?.Port}");
         }
 
-        private void OnDataReceived(Connection sender, byte[] data)
+        private void OnDataReceived(Connection conn, byte[] data)
         {
             var package = Proto.Package.Parser.ParseFrom(data);
-            MessageRouter.Instance.AddMessage(sender, package);
+            MessageRouter.Instance.AddMessage(conn, package);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers.Binary;
 using System.Net.Sockets;
 using System.Text;
 
@@ -119,8 +120,13 @@ namespace Network
                         return;
                     }
 
+
                     //获取包长度
-                    int bodyLen = BitConverter.ToInt32(mBuffer, mOffect + lengthFieldOffset);
+                    //int bodyLen = BitConverter.ToInt32(mBuffer, mOffect + lengthFieldOffset);
+                    // 使用大端的len
+                    int bodyLen = BinaryPrimitives.ReadInt32BigEndian(
+                        new ReadOnlySpan<byte>(mBuffer, mOffect + lengthFieldOffset, 4));
+
                     if (remain < headLen + adj + bodyLen)
                     {
                         //接收的数据不够一个完整的包，继续接收

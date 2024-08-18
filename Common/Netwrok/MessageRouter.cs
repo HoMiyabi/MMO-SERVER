@@ -111,6 +111,8 @@ namespace Summer.Network
         /// <param name="threadCount"></param>
         public void Start(int threadCount)
         {
+            if (running) return;
+
             running = true;
             threadCount = Math.Clamp(threadCount, 1, 200);
             this.threadCount = threadCount;

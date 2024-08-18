@@ -13,10 +13,7 @@ namespace GameServer
         static void Main(string[] args)
         {
             NetService netService = new();
-            netService.Init(32510);
             netService.Start();
-
-            MessageRouter.Instance.Start(4);
 
             MessageRouter.Instance.On<Proto.UserLoginRequest>(OnUserLoginRequest);
 
