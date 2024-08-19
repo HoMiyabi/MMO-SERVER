@@ -17,7 +17,7 @@ namespace Summer.Network
     /// </summary>
     public class Connection
     {
-        public delegate void DataReceivedAction(Connection sender, byte[] data);
+        public delegate void DataReceivedAction(Connection sender, IMessage data);
         public delegate void DisconnectedAction(Connection sender);
 
         public Socket Socket { get; private set; }
@@ -38,7 +38,7 @@ namespace Summer.Network
 
             // 创建解码器
             var lfd = new LengthFieldDecoder(socket, 64 * 1024, 0, 4, 0, 4);
-            lfd.DataReceived += data => OnDataReceived?.Invoke(this, data);
+            lfd.DataReceived += Received;
             lfd.Disconnected += (_) => OnDisconnected?.Invoke(this);
             lfd.Start(); // 启动解码器
         }
@@ -65,8 +65,8 @@ namespace Summer.Network
 
         public void Send(Google.Protobuf.IMessage message)
         {
-            // 我的
-            int size = message.CalculateSize();
+            Proto.Package package = ProtoHelper.Pack(message);
+            int size = package.CalculateSize();
             byte[] sizeBytes = BitConverter.GetBytes(size);
 
             // 转大端
@@ -79,7 +79,7 @@ namespace Summer.Network
             var ms = new MemoryStream(data);
 
             ms.Write(sizeBytes);
-            message.WriteTo(ms);
+            package.WriteTo(ms);
 
             Send(data, 0, data.Length);
 
@@ -111,6 +111,14 @@ namespace Summer.Network
             // 发送的字节数
             Socket client = (Socket)ar.AsyncState;
             int len = client.EndSend(ar);
+        }
+
+        private void Received(byte[] data)
+        {
+            var package = Proto.Package.Parser.ParseFrom(data);
+            var message = ProtoHelper.Unpack(package);
+
+            OnDataReceived?.Invoke(this, message);
         }
 
         #endregion

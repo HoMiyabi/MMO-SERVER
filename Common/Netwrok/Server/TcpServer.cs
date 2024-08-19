@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
+using Google.Protobuf;
 using Serilog;
 
 namespace Summer.Network
@@ -28,7 +29,7 @@ namespace Summer.Network
         public event EventHandler<Socket> SocketConnected; //客户端接入事件
 
         public delegate void ConnectedAction(Connection conn);
-        public delegate void DataReceivedAction(Connection conn, byte[] data);
+        public delegate void DataReceivedAction(Connection conn, IMessage data);
         public delegate void DisconnectedAction(Connection conn);
 
         public event ConnectedAction Connected;
