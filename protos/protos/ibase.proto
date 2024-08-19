@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package proto;
+
+message Package
+{
+    string fullname = 1;
+    bytes data = 2;
+}

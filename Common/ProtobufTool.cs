@@ -37,5 +37,20 @@ namespace Summer
             msg = (T)msg.Descriptor.Parser.ParseFrom(dataBytes);
             return msg;
         }
+
+        public static Proto.Package Pack(IMessage message)
+        {
+            Proto.Package package = new()
+            {
+                Fullname = message.Descriptor.FullName,
+                Data = message.ToByteString(),
+            };
+            return package;
+        }
+
+        public static IMessage Unpack(Proto.Package package)
+        {
+            return null;
+        }
     }
 }

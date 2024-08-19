@@ -17,12 +17,6 @@ message Entity
     Vector3 rotation = 4;
 }
 
-message Package
-{
-    Request request = 1;
-    Response response = 2;
-}
-
 message Request
 {
     UserRegisterRequest userRegister = 1;
