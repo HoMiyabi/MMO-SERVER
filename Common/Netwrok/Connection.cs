@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Google.Protobuf;
 using System.IO;
+using System.Buffers.Binary;
 
 namespace Summer.Network
 {
@@ -63,45 +64,50 @@ namespace Summer.Network
 
         #region 发送网络数据包
 
-        public void Send(Google.Protobuf.IMessage message)
+        private static Proto.Package Protocol_AddRoute(IMessage message)
         {
-            Proto.Package package = ProtoHelper.Pack(message);
+            return ProtoHelper.Pack(message);
+        }
+
+        private static byte[] Protocol_AddHeader(Proto.Package package)
+        {
             int size = package.CalculateSize();
             byte[] sizeBytes = BitConverter.GetBytes(size);
 
-            // 转大端
-            if (BitConverter.IsLittleEndian)
+            if (BitConverter.IsLittleEndian) // 转大端
             {
                 Array.Reverse(sizeBytes);
             }
 
-            byte[] data = new byte[4 + size];
-            var ms = new MemoryStream(data);
+            byte[] buffer = new byte[4 + size];
+            var ms = new MemoryStream(buffer);
 
             ms.Write(sizeBytes);
             package.WriteTo(ms);
 
-            Send(data, 0, data.Length);
-
-            // 视频
-            //byte[] data = null;
-            //using (var ms = new MemoryStream())
-            //{
-            //    package.WriteTo(ms);
-            //    data = new byte[4 + ms.Length];
-            //    Buffer.BlockCopy(BitConverter.GetBytes(ms.Length), 0, data, 0, 4);
-            //    Buffer.BlockCopy(ms.GetBuffer(), 0, data, 4, (int)ms.Length);
-            //}
-            //Send(data, 0, data.Length);
+            return buffer;
         }
 
-        public void Send(byte[] data, int offset, int count)
+        private static byte[] Protocol_Pack(IMessage message)
+        {
+            Proto.Package package = Protocol_AddRoute(message);
+            byte[] buffer = Protocol_AddHeader(package);
+            return buffer;
+        }
+
+        public void Send(Google.Protobuf.IMessage message)
+        {
+            byte[] buffer = Protocol_Pack(message);
+            SocketSend(buffer, 0, buffer.Length);
+        }
+
+        public void SocketSend(byte[] buffer, int offset, int size)
         {
             lock (this)
             {
                 if (Socket.Connected)
                 {
-                    Socket.BeginSend(data, offset, count, SocketFlags.None, SendCallback, Socket);
+                    Socket.BeginSend(buffer, offset, size, SocketFlags.None, SendCallback, Socket);
                 }
             }
         }

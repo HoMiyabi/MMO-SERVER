@@ -67,9 +67,8 @@ namespace Summer
         public static IMessage Unpack(Proto.Package package)
         {
             string fullname = package.Fullname;
-            if (!String.IsNullOrEmpty(fullname) && _registry.ContainsKey(fullname))
+            if (!String.IsNullOrEmpty(fullname) && _registry.TryGetValue(fullname, out Type t))
             {
-                Type t = _registry[fullname];
                 var desc = t.GetProperty("Descriptor").GetValue(t) as MessageDescriptor;
                 return desc.Parser.ParseFrom(package.Data);
             }
