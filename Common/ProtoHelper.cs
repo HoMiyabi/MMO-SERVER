@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using Google.Protobuf;
 using System.IO;
 using System;
+using System.Reflection;
+using Google.Protobuf.Reflection;
 
 namespace Summer
 {
     /// <summary>
     /// Protobuf序列化与反序列化
     /// </summary>
-    public class ProtobufTool
+    public class ProtoHelper
     {
         /// <summary>
         /// 序列化protobuf
@@ -38,6 +40,20 @@ namespace Summer
             return msg;
         }
 
+        private static Dictionary<string, Type> _registry = new();
+
+        static ProtoHelper()
+        {
+            foreach (var t in Assembly.GetExecutingAssembly().GetTypes())
+            {
+                if (typeof(Google.Protobuf.IMessage).IsAssignableFrom(t))
+                {
+                    var desc = t.GetProperty("Descriptor").GetValue(t) as MessageDescriptor;
+                    _registry.Add(desc.FullName, t);
+                }
+            }
+        }
+
         public static Proto.Package Pack(IMessage message)
         {
             Proto.Package package = new()
@@ -50,6 +66,13 @@ namespace Summer
 
         public static IMessage Unpack(Proto.Package package)
         {
+            string fullname = package.Fullname;
+            if (!String.IsNullOrEmpty(fullname) && _registry.ContainsKey(fullname))
+            {
+                Type t = _registry[fullname];
+                var desc = t.GetProperty("Descriptor").GetValue(t) as MessageDescriptor;
+                return desc.Parser.ParseFrom(package.Data);
+            }
             return null;
         }
     }

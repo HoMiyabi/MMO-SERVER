@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Summer.Network;
 using Serilog;
+using Google.Protobuf;
 
 namespace GameServer.Network
 {
@@ -40,10 +41,9 @@ namespace GameServer.Network
             Log.Information($"[客户端断开] IP:{iPEndPoint?.Address} Port:{iPEndPoint?.Port}");
         }
 
-        private void OnDataReceived(Connection conn, byte[] data)
+        private void OnDataReceived(Connection conn, IMessage message)
         {
-            var package = Proto.Package.Parser.ParseFrom(data);
-            MessageRouter.Instance.AddMessage(conn, package);
+            MessageRouter.Instance.AddMessage(conn, message);
         }
     }
 }

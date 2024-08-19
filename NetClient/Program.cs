@@ -32,42 +32,16 @@ namespace NetClient
 
             conn = new(socket);
 
-            Proto.Package package = new()
+            Proto.UserLoginRequest request = new()
             {
-                Request = new()
-                {
-                    UserLogin = new()
-                    {
-                        Username = String.Empty,
-                        Password = String.Empty,
-                    }
-                }
+                Username = "kirara",
+                Password = "password",
             };
-            package.Request.UserLogin.Username = "kirara";
-            package.Request.UserLogin.Password = "pwd";
-            conn.Send(package);
+            conn.Send(request);
 
 
             Console.ReadKey();
             conn.Close();
-        }
-
-        static private void SendRequest(Google.Protobuf.IMessage message)
-        {
-            Proto.Package package = new()
-            {
-                Request = new(),
-            };
-
-            foreach (var p in typeof(Proto.Request).GetProperties())
-            {
-                if (p.PropertyType == message.GetType())
-                {
-                    p.SetValue(package, message);
-                    conn.Send(package);
-                    return;
-                }
-            }
         }
     }
 }
