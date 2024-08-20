@@ -23,7 +23,7 @@ namespace GameServer
             netService.Start();
             Log.Debug("服务器启动完成");
 
-            MessageRouter.Instance.On<Proto.UserLoginRequest>(OnUserLoginRequest);
+            MessageRouter.Instance.Subscribe<Proto.UserLoginRequest>(OnUserLoginRequest);
 
             while (true)
             {

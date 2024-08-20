@@ -124,7 +124,13 @@ namespace Summer.Network
             var package = Proto.Package.Parser.ParseFrom(data);
             var message = ProtoHelper.Unpack(package);
 
+            if (MessageRouter.Instance.Running)
+            {
+                MessageRouter.Instance.AddMessage(this, message);
+            }
+
             OnDataReceived?.Invoke(this, message);
+
         }
 
         #endregion

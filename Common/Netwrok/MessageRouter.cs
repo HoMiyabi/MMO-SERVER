@@ -23,11 +23,16 @@ namespace Summer.Network
     /// </summary>
     public class MessageRouter : Singleton<MessageRouter>
     {
-        int threadCount = 1; // 工作线程数
-        int workerCount = 0; // 正在工作的线程数
-        bool running = false; // 是否在运行
+        private int threadCount = 1; // 工作线程数
+        private int workerCount = 0; // 正在工作的线程数
+        private bool _running = false; // 是否在运行
 
-        AutoResetEvent threadEvent = new(true); // 通过Set每次可以唤醒1个线程
+        public bool Running
+        {
+            get => _running;
+        }
+
+        private AutoResetEvent threadEvent = new(true); // 通过Set每次可以唤醒1个线程
 
         /// <summary>
         /// 消息队列
@@ -46,7 +51,7 @@ namespace Summer.Network
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="handler"></param>
-        public void On<T>(MessageHandler<T> handler) where T : Google.Protobuf.IMessage
+        public void Subscribe<T>(MessageHandler<T> handler) where T : Google.Protobuf.IMessage
         {
             string key = typeof(T).FullName;
             delegateMap.TryAdd(key, null);
@@ -113,9 +118,9 @@ namespace Summer.Network
         /// <param name="threadCount"></param>
         public void Start(int threadCount)
         {
-            if (running) return;
+            if (_running) return;
 
-            running = true;
+            _running = true;
             threadCount = Math.Clamp(threadCount, 1, 200);
             this.threadCount = threadCount;
             for (int i = 0; i < threadCount; i++)
@@ -130,7 +135,7 @@ namespace Summer.Network
 
         public void Stop()
         {
-            running = false;
+            _running = false;
             messageQueue.Clear();
             while (workerCount > 0)
             {
@@ -146,7 +151,7 @@ namespace Summer.Network
             try
             {
                 Interlocked.Increment(ref workerCount);
-                while (running)
+                while (_running)
                 {
                     if (messageQueue.Count == 0)
                     {
