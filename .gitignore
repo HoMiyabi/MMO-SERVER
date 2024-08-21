@@ -33,6 +33,7 @@ bld/
 [Ll]ogs/
 
 .idea/
+.ignore/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
