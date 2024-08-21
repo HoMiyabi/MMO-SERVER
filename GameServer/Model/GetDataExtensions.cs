@@ -22,7 +22,7 @@ namespace GameServer.Model
         {
             return new()
             {
-                Id = o.Id,
+                Id = o.EntityId,
                 Position = o.Position.GetData(),
                 Direction = o.Direction.GetData(),
             };

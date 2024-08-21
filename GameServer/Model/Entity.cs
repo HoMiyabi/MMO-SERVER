@@ -9,11 +9,11 @@ namespace GameServer.Model
     // 在MMO世界进行同步的实体
     public class Entity
     {
-        private int id;
+        private int entityId;
         private Vector3Int position; // 位置
         private Vector3Int direction; // 方向
 
-        public int Id => id;
+        public int EntityId => entityId;
 
         public Vector3Int Position
         {
@@ -29,7 +29,7 @@ namespace GameServer.Model
 
         public Entity(int id, Vector3Int position, Vector3Int direction)
         {
-            this.id = id;
+            this.entityId = id;
             this.position = position;
             this.direction = direction;
         }

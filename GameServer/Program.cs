@@ -28,10 +28,12 @@ namespace GameServer
 
             MessageRouter.Instance.Subscribe<Proto.UserLoginRequest>(OnUserLoginRequest);
 
-            while (true)
-            {
-                Thread.Sleep(100);
-            }
+            //while (true)
+            //{
+            //    Thread.Sleep(100);
+            //}
+            Console.ReadKey();
+            // 修正提交测试
         }
 
         private static void OnUserLoginRequest(Connection sender, Proto.UserLoginRequest message)
