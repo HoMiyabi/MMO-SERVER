@@ -2,20 +2,40 @@ syntax = "proto3";
 
 package proto;
 
-message Vector3
+message NVector3
 {
     int32 x = 1;
     int32 y = 2;
     int32 z = 3;
 }
 
-message Entity
+enum NState
+{
+    None = 0;
+    Idle = 1;
+    Move = 2;
+    Jump = 3;
+    Ride = 4;
+}
+
+message NEntity
 {
     int32 id = 1;
-    int32 speed = 2;
-    Vector3 position = 3;
-    Vector3 rotation = 4;
+    NVector3 position = 2;
+    NVector3 direction = 3;
 }
+
+message GameEnterRequest
+{
+    int32 characterId = 1;
+}
+
+message SpaceCharactersEnterResponse
+{
+    int32 spaceId = 1;
+    repeated NEntity entityList = 2;
+}
+
 
 message Request
 {
@@ -28,6 +48,8 @@ message Response
     UserRegisterResponse userRegister = 1;
     UserLoginResponse userLogin = 2;
 }
+
+
 
 message UserRegisterRequest
 {

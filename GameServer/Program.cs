@@ -1,7 +1,6 @@
 ﻿using Summer.Network;
 using GameServer.Network;
 using Network;
-using Proto;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -23,6 +22,10 @@ namespace GameServer
             netService.Start();
             Log.Debug("服务器启动完成");
 
+            UserService userService = new();
+            userService.Start();
+            Log.Debug("玩家服务启动完成");
+
             MessageRouter.Instance.Subscribe<Proto.UserLoginRequest>(OnUserLoginRequest);
 
             while (true)
@@ -31,9 +34,9 @@ namespace GameServer
             }
         }
 
-        private static void OnUserLoginRequest(Connection sender, UserLoginRequest message)
+        private static void OnUserLoginRequest(Connection sender, Proto.UserLoginRequest message)
         {
-            Log.Information($"[用户登录] {message}");
+            Log.Information($"用户登录 {message}");
         }
     }
 }

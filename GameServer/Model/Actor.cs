@@ -9,8 +9,8 @@ namespace GameServer.Model
     public class Actor : Entity
     {
         public string Name { get; set; }
-
         public int Level { get; set; }
+        public int Speed { get; set; }
 
         public Actor(int id, Vector3Int position, Vector3Int direction) : base(id, position, direction)
         {

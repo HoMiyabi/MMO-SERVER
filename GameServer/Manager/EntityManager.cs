@@ -26,5 +26,18 @@ namespace GameServer.Manager
                 return entity;
             }
         }
+
+        public int NextEntityId
+        {
+            get
+            {
+                lock (this)
+                {
+                    int id = index;
+                    index++;
+                    return id;
+                }
+            }
+        }
     }
 }

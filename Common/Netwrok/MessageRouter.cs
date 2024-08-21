@@ -56,7 +56,7 @@ namespace Summer.Network
             string key = typeof(T).FullName;
             delegateMap.TryAdd(key, null);
             delegateMap[key] = (delegateMap[key] as MessageHandler<T>) + handler;
-            Log.Debug($"[订阅] {key}:{delegateMap[key].GetInvocationList().Length}");
+            Log.Debug($"订阅 {key}，共{delegateMap[key].GetInvocationList().Length}");
         }
 
         /// <summary>
