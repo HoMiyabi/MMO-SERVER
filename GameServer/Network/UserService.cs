@@ -21,6 +21,7 @@ namespace GameServer.Network
         {
             MessageRouter.Instance.Subscribe<Proto.GameEnterRequest>(OnGameEnterRequest);
             space.Name = "新手村";
+            space.Id = 6; // 新手村Id
         }
 
         private void OnGameEnterRequest(Connection sender, Proto.GameEnterRequest message)

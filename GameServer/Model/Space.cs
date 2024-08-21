@@ -25,9 +25,9 @@ namespace GameServer.Model
         /// <param name="character"></param>
         public void CharacterJoin(Connection conn, Character character)
         {
-            Log.Information($"角色进入场景 {character.Id}");
+            Log.Information($"角色进入场景 EntityId={character.EntityId}");
 
-            idToCharacter.Add(character.Id, character);
+            idToCharacter.Add(character.EntityId, character);
             character.conn = conn;
 
             if (!connectionToCharacter.ContainsKey(conn))
