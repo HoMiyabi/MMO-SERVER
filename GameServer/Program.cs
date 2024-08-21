@@ -33,7 +33,6 @@ namespace GameServer
             //    Thread.Sleep(100);
             //}
             Console.ReadKey();
-            // 修正提交测试
         }
 
         private static void OnUserLoginRequest(Connection sender, Proto.UserLoginRequest message)
