@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace GameServer.Model
 {
-    internal static class GetDataExtensions
+    internal static class GetProtoExtensions
     {
-        public static Proto.NVector3 GetData(this Vector3Int o)
+        public static Proto.NVector3 GetProto(this Vector3Int o)
         {
             return new()
             {
@@ -18,13 +18,13 @@ namespace GameServer.Model
             };
         }
 
-        public static Proto.NEntity GetData(this Entity o)
+        public static Proto.NEntity GetProto(this Entity o)
         {
             return new()
             {
                 Id = o.EntityId,
-                Position = o.Position.GetData(),
-                Direction = o.Direction.GetData(),
+                Position = o.Position.GetProto(),
+                Direction = o.Direction.GetProto(),
             };
         }
     }

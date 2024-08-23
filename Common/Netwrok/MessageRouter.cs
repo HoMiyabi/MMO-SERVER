@@ -146,7 +146,7 @@ namespace Summer.Network
 
         private void MessageWork(object state)
         {
-            Log.Information("worker thread start");
+            Log.Information("消息路由工作线程启动");
 
             try
             {

@@ -29,7 +29,9 @@ namespace GameServer.Network
             Log.Information("进入游戏");
 
             int entityId = EntityManager.Instance.NextEntityId;
-            Vector3Int position = new(500, 1, 500);
+
+            Random random = new();
+            Vector3Int position = new(500 + random.Next(-5, 6), 0, 500 + random.Next(-5, 6));
             Character character = new(entityId, position, Vector3Int.zero);
 
             space.CharacterJoin(sender, character);

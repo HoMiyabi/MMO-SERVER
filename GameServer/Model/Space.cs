@@ -40,13 +40,24 @@ namespace GameServer.Model
             {
                 SpaceId = Id,
             };
-            response.EntityList.Add(character.GetData());
+            response.EntityList.Add(character.GetProto());
 
+            // 发送角色进入场景的消息给其他人
             foreach (var (_, ch) in idToCharacter)
             {
-                // 发送角色进入场景的消息
-                ch.conn.Send(response);
+                if (ch.conn != conn)
+                {
+                    ch.conn.Send(response);
+                }
             }
+
+            // 新上线的角色需要获取全部角色
+            response.EntityList.Clear();
+            foreach (var (_, ch) in idToCharacter)
+            {
+                response.EntityList.Add(ch.GetProto());
+            }
+            conn.Send(response);
         }
     }
 }
