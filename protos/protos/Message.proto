@@ -30,6 +30,12 @@ message GameEnterRequest
     int32 characterId = 1;
 }
 
+message GameEnterResponse
+{
+    bool success = 1;
+    NEntity entity = 2;
+}
+
 message SpaceCharactersEnterResponse
 {
     int32 spaceId = 1;

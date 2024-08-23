@@ -34,8 +34,7 @@ namespace GameServer.Model
             {
                 connectionToCharacter.Add(conn, character);
             }
-
-            // 广播给场景的其他玩家
+            // 把新进入的角色广播给场景的其他玩家
             Proto.SpaceCharactersEnterResponse response = new()
             {
                 SpaceId = Id,
@@ -51,11 +50,14 @@ namespace GameServer.Model
                 }
             }
 
-            // 新上线的角色需要获取全部角色
+            // 新上线的角色需要获取其他角色
             response.EntityList.Clear();
             foreach (var (_, ch) in idToCharacter)
             {
-                response.EntityList.Add(ch.GetProto());
+                if (ch.conn != conn)
+                {
+                    response.EntityList.Add(ch.GetProto());
+                }
             }
             conn.Send(response);
         }

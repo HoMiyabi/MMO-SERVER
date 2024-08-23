@@ -24,7 +24,7 @@ namespace GameServer.Network
             space.Id = 6; // 新手村Id
         }
 
-        private void OnGameEnterRequest(Connection sender, Proto.GameEnterRequest message)
+        private void OnGameEnterRequest(Connection conn, Proto.GameEnterRequest message)
         {
             Log.Information("进入游戏");
 
@@ -34,7 +34,16 @@ namespace GameServer.Network
             Vector3Int position = new(500 + random.Next(-5, 6), 0, 500 + random.Next(-5, 6));
             Character character = new(entityId, position, Vector3Int.zero);
 
-            space.CharacterJoin(sender, character);
+            // 通知玩家登录成功
+            Proto.GameEnterResponse response = new()
+            {
+                Success = true,
+                Entity = character.GetProto(),
+            };
+            conn.Send(response);
+
+            // 将新角色加入到地图
+            space.CharacterJoin(conn, character);
         }
     }
 }
