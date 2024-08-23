@@ -9,13 +9,12 @@ message NVector3
     int32 z = 3;
 }
 
-enum NState
+enum EntityState
 {
-    None = 0;
-    Idle = 1;
-    Move = 2;
-    Jump = 3;
-    Ride = 4;
+    NONE = 0;
+    IDLE = 1;
+    MOVE = 2;
+    JUMP = 3;
 }
 
 message NEntity
@@ -23,6 +22,22 @@ message NEntity
     int32 id = 1;
     NVector3 position = 2;
     NVector3 direction = 3;
+}
+
+message NEntitySync
+{
+    NEntity entity = 1;
+    EntityState state = 2;
+}
+
+message SpaceEntitySyncRequest
+{
+    NEntitySync entitySync = 1;
+}
+
+message SpaceEntitySyncResponse
+{
+    NEntitySync entitySync = 1;
 }
 
 message GameEnterRequest

@@ -61,5 +61,17 @@ namespace GameServer.Model
             }
             conn.Send(response);
         }
+
+        public bool HasConnection(Connection conn)
+            => connectionToCharacter.ContainsKey(conn);
+
+        /// <summary>
+        /// 广播更新客户端的Entity信息
+        /// </summary>
+        /// <param name="entitySync"></param>
+        public void UpdateEntity(Proto.NEntitySync entitySync)
+        {
+            Log.Information("UpdateEntity " + entitySync);
+        }
     }
 }

@@ -27,28 +27,35 @@ namespace Proto {
             "Cg1NZXNzYWdlLnByb3RvEgVwcm90byIrCghOVmVjdG9yMxIJCgF4GAEgASgF",
             "EgkKAXkYAiABKAUSCQoBehgDIAEoBSJcCgdORW50aXR5EgoKAmlkGAEgASgF",
             "EiEKCHBvc2l0aW9uGAIgASgLMg8ucHJvdG8uTlZlY3RvcjMSIgoJZGlyZWN0",
-            "aW9uGAMgASgLMg8ucHJvdG8uTlZlY3RvcjMiJwoQR2FtZUVudGVyUmVxdWVz",
-            "dBITCgtjaGFyYWN0ZXJJZBgBIAEoBSJEChFHYW1lRW50ZXJSZXNwb25zZRIP",
-            "CgdzdWNjZXNzGAEgASgIEh4KBmVudGl0eRgCIAEoCzIOLnByb3RvLk5FbnRp",
-            "dHkiUwocU3BhY2VDaGFyYWN0ZXJzRW50ZXJSZXNwb25zZRIPCgdzcGFjZUlk",
-            "GAEgASgFEiIKCmVudGl0eUxpc3QYAiADKAsyDi5wcm90by5ORW50aXR5ImcK",
-            "B1JlcXVlc3QSMAoMdXNlclJlZ2lzdGVyGAEgASgLMhoucHJvdG8uVXNlclJl",
-            "Z2lzdGVyUmVxdWVzdBIqCgl1c2VyTG9naW4YAiABKAsyFy5wcm90by5Vc2Vy",
-            "TG9naW5SZXF1ZXN0ImoKCFJlc3BvbnNlEjEKDHVzZXJSZWdpc3RlchgBIAEo",
-            "CzIbLnByb3RvLlVzZXJSZWdpc3RlclJlc3BvbnNlEisKCXVzZXJMb2dpbhgC",
-            "IAEoCzIYLnByb3RvLlVzZXJMb2dpblJlc3BvbnNlIjkKE1VzZXJSZWdpc3Rl",
-            "clJlcXVlc3QSEAoIdXNlcm5hbWUYASABKAkSEAoIcGFzc3dvcmQYAiABKAki",
-            "NQoUVXNlclJlZ2lzdGVyUmVzcG9uc2USDAoEY29kZRgBIAEoBRIPCgdtZXNz",
-            "YWdlGAIgASgJIjYKEFVzZXJMb2dpblJlcXVlc3QSEAoIdXNlcm5hbWUYASAB",
-            "KAkSEAoIcGFzc3dvcmQYAiABKAkiMgoRVXNlckxvZ2luUmVzcG9uc2USDAoE",
-            "Y29kZRgBIAEoBRIPCgdtZXNzYWdlGAIgASgJKjoKBk5TdGF0ZRIICgROb25l",
-            "EAASCAoESWRsZRABEggKBE1vdmUQAhIICgRKdW1wEAMSCAoEUmlkZRAEYgZw",
-            "cm90bzM="));
+            "aW9uGAMgASgLMg8ucHJvdG8uTlZlY3RvcjMiUAoLTkVudGl0eVN5bmMSHgoG",
+            "ZW50aXR5GAEgASgLMg4ucHJvdG8uTkVudGl0eRIhCgVzdGF0ZRgCIAEoDjIS",
+            "LnByb3RvLkVudGl0eVN0YXRlIkAKFlNwYWNlRW50aXR5U3luY1JlcXVlc3QS",
+            "JgoKZW50aXR5U3luYxgBIAEoCzISLnByb3RvLk5FbnRpdHlTeW5jIkEKF1Nw",
+            "YWNlRW50aXR5U3luY1Jlc3BvbnNlEiYKCmVudGl0eVN5bmMYASABKAsyEi5w",
+            "cm90by5ORW50aXR5U3luYyInChBHYW1lRW50ZXJSZXF1ZXN0EhMKC2NoYXJh",
+            "Y3RlcklkGAEgASgFIkQKEUdhbWVFbnRlclJlc3BvbnNlEg8KB3N1Y2Nlc3MY",
+            "ASABKAgSHgoGZW50aXR5GAIgASgLMg4ucHJvdG8uTkVudGl0eSJTChxTcGFj",
+            "ZUNoYXJhY3RlcnNFbnRlclJlc3BvbnNlEg8KB3NwYWNlSWQYASABKAUSIgoK",
+            "ZW50aXR5TGlzdBgCIAMoCzIOLnByb3RvLk5FbnRpdHkiZwoHUmVxdWVzdBIw",
+            "Cgx1c2VyUmVnaXN0ZXIYASABKAsyGi5wcm90by5Vc2VyUmVnaXN0ZXJSZXF1",
+            "ZXN0EioKCXVzZXJMb2dpbhgCIAEoCzIXLnByb3RvLlVzZXJMb2dpblJlcXVl",
+            "c3QiagoIUmVzcG9uc2USMQoMdXNlclJlZ2lzdGVyGAEgASgLMhsucHJvdG8u",
+            "VXNlclJlZ2lzdGVyUmVzcG9uc2USKwoJdXNlckxvZ2luGAIgASgLMhgucHJv",
+            "dG8uVXNlckxvZ2luUmVzcG9uc2UiOQoTVXNlclJlZ2lzdGVyUmVxdWVzdBIQ",
+            "Cgh1c2VybmFtZRgBIAEoCRIQCghwYXNzd29yZBgCIAEoCSI1ChRVc2VyUmVn",
+            "aXN0ZXJSZXNwb25zZRIMCgRjb2RlGAEgASgFEg8KB21lc3NhZ2UYAiABKAki",
+            "NgoQVXNlckxvZ2luUmVxdWVzdBIQCgh1c2VybmFtZRgBIAEoCRIQCghwYXNz",
+            "d29yZBgCIAEoCSIyChFVc2VyTG9naW5SZXNwb25zZRIMCgRjb2RlGAEgASgF",
+            "Eg8KB21lc3NhZ2UYAiABKAkqNQoLRW50aXR5U3RhdGUSCAoETk9ORRAAEggK",
+            "BElETEUQARIICgRNT1ZFEAISCAoESlVNUBADYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Proto.NState), }, null, new pbr::GeneratedClrTypeInfo[] {
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Proto.EntityState), }, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.NVector3), global::Proto.NVector3.Parser, new[]{ "X", "Y", "Z" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.NEntity), global::Proto.NEntity.Parser, new[]{ "Id", "Position", "Direction" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.NEntitySync), global::Proto.NEntitySync.Parser, new[]{ "Entity", "State" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.SpaceEntitySyncRequest), global::Proto.SpaceEntitySyncRequest.Parser, new[]{ "EntitySync" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.SpaceEntitySyncResponse), global::Proto.SpaceEntitySyncResponse.Parser, new[]{ "EntitySync" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.GameEnterRequest), global::Proto.GameEnterRequest.Parser, new[]{ "CharacterId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.GameEnterResponse), global::Proto.GameEnterResponse.Parser, new[]{ "Success", "Entity" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.SpaceCharactersEnterResponse), global::Proto.SpaceCharactersEnterResponse.Parser, new[]{ "SpaceId", "EntityList" }, null, null, null, null),
@@ -64,12 +71,11 @@ namespace Proto {
 
   }
   #region Enums
-  public enum NState {
-    [pbr::OriginalName("None")] None = 0,
-    [pbr::OriginalName("Idle")] Idle = 1,
-    [pbr::OriginalName("Move")] Move = 2,
-    [pbr::OriginalName("Jump")] Jump = 3,
-    [pbr::OriginalName("Ride")] Ride = 4,
+  public enum EntityState {
+    [pbr::OriginalName("NONE")] None = 0,
+    [pbr::OriginalName("IDLE")] Idle = 1,
+    [pbr::OriginalName("MOVE")] Move = 2,
+    [pbr::OriginalName("JUMP")] Jump = 3,
   }
 
   #endregion
@@ -638,6 +644,664 @@ namespace Proto {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class NEntitySync : pb::IMessage<NEntitySync>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<NEntitySync> _parser = new pb::MessageParser<NEntitySync>(() => new NEntitySync());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<NEntitySync> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public NEntitySync() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public NEntitySync(NEntitySync other) : this() {
+      entity_ = other.entity_ != null ? other.entity_.Clone() : null;
+      state_ = other.state_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public NEntitySync Clone() {
+      return new NEntitySync(this);
+    }
+
+    /// <summary>Field number for the "entity" field.</summary>
+    public const int EntityFieldNumber = 1;
+    private global::Proto.NEntity entity_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Proto.NEntity Entity {
+      get { return entity_; }
+      set {
+        entity_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "state" field.</summary>
+    public const int StateFieldNumber = 2;
+    private global::Proto.EntityState state_ = global::Proto.EntityState.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Proto.EntityState State {
+      get { return state_; }
+      set {
+        state_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as NEntitySync);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(NEntitySync other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Entity, other.Entity)) return false;
+      if (State != other.State) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (entity_ != null) hash ^= Entity.GetHashCode();
+      if (State != global::Proto.EntityState.None) hash ^= State.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (entity_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Entity);
+      }
+      if (State != global::Proto.EntityState.None) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) State);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (entity_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Entity);
+      }
+      if (State != global::Proto.EntityState.None) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) State);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (entity_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Entity);
+      }
+      if (State != global::Proto.EntityState.None) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) State);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(NEntitySync other) {
+      if (other == null) {
+        return;
+      }
+      if (other.entity_ != null) {
+        if (entity_ == null) {
+          Entity = new global::Proto.NEntity();
+        }
+        Entity.MergeFrom(other.Entity);
+      }
+      if (other.State != global::Proto.EntityState.None) {
+        State = other.State;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (entity_ == null) {
+              Entity = new global::Proto.NEntity();
+            }
+            input.ReadMessage(Entity);
+            break;
+          }
+          case 16: {
+            State = (global::Proto.EntityState) input.ReadEnum();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            if (entity_ == null) {
+              Entity = new global::Proto.NEntity();
+            }
+            input.ReadMessage(Entity);
+            break;
+          }
+          case 16: {
+            State = (global::Proto.EntityState) input.ReadEnum();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class SpaceEntitySyncRequest : pb::IMessage<SpaceEntitySyncRequest>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<SpaceEntitySyncRequest> _parser = new pb::MessageParser<SpaceEntitySyncRequest>(() => new SpaceEntitySyncRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<SpaceEntitySyncRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SpaceEntitySyncRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SpaceEntitySyncRequest(SpaceEntitySyncRequest other) : this() {
+      entitySync_ = other.entitySync_ != null ? other.entitySync_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SpaceEntitySyncRequest Clone() {
+      return new SpaceEntitySyncRequest(this);
+    }
+
+    /// <summary>Field number for the "entitySync" field.</summary>
+    public const int EntitySyncFieldNumber = 1;
+    private global::Proto.NEntitySync entitySync_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Proto.NEntitySync EntitySync {
+      get { return entitySync_; }
+      set {
+        entitySync_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as SpaceEntitySyncRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(SpaceEntitySyncRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(EntitySync, other.EntitySync)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (entitySync_ != null) hash ^= EntitySync.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (entitySync_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(EntitySync);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (entitySync_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(EntitySync);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (entitySync_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(EntitySync);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(SpaceEntitySyncRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.entitySync_ != null) {
+        if (entitySync_ == null) {
+          EntitySync = new global::Proto.NEntitySync();
+        }
+        EntitySync.MergeFrom(other.EntitySync);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (entitySync_ == null) {
+              EntitySync = new global::Proto.NEntitySync();
+            }
+            input.ReadMessage(EntitySync);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            if (entitySync_ == null) {
+              EntitySync = new global::Proto.NEntitySync();
+            }
+            input.ReadMessage(EntitySync);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class SpaceEntitySyncResponse : pb::IMessage<SpaceEntitySyncResponse>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<SpaceEntitySyncResponse> _parser = new pb::MessageParser<SpaceEntitySyncResponse>(() => new SpaceEntitySyncResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<SpaceEntitySyncResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SpaceEntitySyncResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SpaceEntitySyncResponse(SpaceEntitySyncResponse other) : this() {
+      entitySync_ = other.entitySync_ != null ? other.entitySync_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SpaceEntitySyncResponse Clone() {
+      return new SpaceEntitySyncResponse(this);
+    }
+
+    /// <summary>Field number for the "entitySync" field.</summary>
+    public const int EntitySyncFieldNumber = 1;
+    private global::Proto.NEntitySync entitySync_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Proto.NEntitySync EntitySync {
+      get { return entitySync_; }
+      set {
+        entitySync_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as SpaceEntitySyncResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(SpaceEntitySyncResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(EntitySync, other.EntitySync)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (entitySync_ != null) hash ^= EntitySync.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (entitySync_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(EntitySync);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (entitySync_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(EntitySync);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (entitySync_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(EntitySync);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(SpaceEntitySyncResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.entitySync_ != null) {
+        if (entitySync_ == null) {
+          EntitySync = new global::Proto.NEntitySync();
+        }
+        EntitySync.MergeFrom(other.EntitySync);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (entitySync_ == null) {
+              EntitySync = new global::Proto.NEntitySync();
+            }
+            input.ReadMessage(EntitySync);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            if (entitySync_ == null) {
+              EntitySync = new global::Proto.NEntitySync();
+            }
+            input.ReadMessage(EntitySync);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class GameEnterRequest : pb::IMessage<GameEnterRequest>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -652,7 +1316,7 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -850,7 +1514,7 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1094,7 +1758,7 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1318,7 +1982,7 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1571,7 +2235,7 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1824,7 +2488,7 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2059,7 +2723,7 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2294,7 +2958,7 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2529,7 +3193,7 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[10]; }
+      get { return global::Proto.MessageReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

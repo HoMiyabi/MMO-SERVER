@@ -39,7 +39,7 @@ namespace Summer.Network
         /// </summary>
         private Queue<MessageUnit> messageQueue = new();
 
-        public delegate void MessageHandler<T>(Connection sender, T message);
+        public delegate void MessageHandler<T>(Connection conn, T message);
 
         /// <summary>
         /// 消息频道

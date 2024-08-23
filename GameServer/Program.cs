@@ -20,13 +20,17 @@ namespace GameServer
 
             NetService netService = new();
             netService.Start();
-            Log.Debug("服务器启动完成");
+            Log.Debug("网络服务启动完成");
 
-            UserService userService = new();
+            UserService userService = UserService.Instance;
             userService.Start();
             Log.Debug("玩家服务启动完成");
 
-            MessageRouter.Instance.Subscribe<Proto.UserLoginRequest>(OnUserLoginRequest);
+            SpaceService spaceService = SpaceService.Instance;
+            spaceService.Start();
+            Log.Debug("地图服务启动完成");
+
+            // MessageRouter.Instance.Subscribe<Proto.UserLoginRequest>(OnUserLoginRequest);
 
             //while (true)
             //{
@@ -35,9 +39,9 @@ namespace GameServer
             Console.ReadKey();
         }
 
-        private static void OnUserLoginRequest(Connection sender, Proto.UserLoginRequest message)
-        {
-            Log.Information($"用户登录 {message}");
-        }
+        // private static void OnUserLoginRequest(Connection sender, Proto.UserLoginRequest message)
+        // {
+        //     Log.Information($"用户登录 {message}");
+        // }
     }
 }
