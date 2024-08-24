@@ -14,8 +14,9 @@ namespace GameServer
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .WriteTo.Console()
-                .WriteTo.File("logs/server-log.txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.Async(c => c.Console())
+                .WriteTo.Async(c
+                    =>c.File("logs/server-log.txt", rollingInterval: RollingInterval.Day))
                 .CreateLogger();
 
             NetService netService = new();
@@ -32,10 +33,6 @@ namespace GameServer
 
             // MessageRouter.Instance.Subscribe<Proto.UserLoginRequest>(OnUserLoginRequest);
 
-            //while (true)
-            //{
-            //    Thread.Sleep(100);
-            //}
             Console.ReadKey();
         }
 

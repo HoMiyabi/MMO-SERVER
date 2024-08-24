@@ -57,6 +57,11 @@ message SpaceCharactersEnterResponse
     repeated NEntity entityList = 2;
 }
 
+message SpaceCharacterLeaveResponse
+{
+    int32 entityId = 1;
+}
+
 
 message Request
 {

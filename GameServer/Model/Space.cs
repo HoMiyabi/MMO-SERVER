@@ -23,7 +23,7 @@ namespace GameServer.Model
         /// </summary>
         /// <param name="conn"></param>
         /// <param name="character"></param>
-        public void CharacterJoin(Connection conn, Character character)
+        public void CharacterEnter(Connection conn, Character character)
         {
             Log.Information($"角色进入场景 EntityId={character.EntityId}");
 
@@ -40,8 +40,9 @@ namespace GameServer.Model
             {
                 connectionToCharacter.Add(conn, character);
             }
+
             // 把新进入的角色广播给场景的其他玩家
-            Proto.SpaceCharactersEnterResponse response = new()
+            var response = new Proto.SpaceCharactersEnterResponse()
             {
                 SpaceId = Id,
             };
@@ -66,6 +67,29 @@ namespace GameServer.Model
                 }
             }
             conn.Send(response);
+        }
+
+        /// <summary>
+        /// 角色离开地图
+        /// 客户端离线、切换地图
+        /// </summary>
+        /// <param name="conn"></param>
+        /// <param name="character"></param>
+        public void CharacterLeave(Connection conn, Character character)
+        {
+            Log.Information($"角色离开场景 EntityId={character.EntityId}");
+            conn.Set<Space>(null);
+            idToCharacter.Remove(character.EntityId);
+
+            var response = new Proto.SpaceCharacterLeaveResponse()
+            {
+                EntityId = character.EntityId
+            };
+
+            foreach (var (_, ch) in idToCharacter)
+            {
+                ch.conn.Send(response);
+            }
         }
 
         /// <summary>

@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using GameServer.Model;
 using Summer.Network;
 using Serilog;
 using Google.Protobuf;
@@ -39,6 +40,13 @@ public class NetService
     {
         IPEndPoint iPEndPoint = conn.Socket.RemoteEndPoint as IPEndPoint;
         Log.Information($"客户端断开 IP:{iPEndPoint?.Address} Port:{iPEndPoint?.Port}");
+
+        var space = conn.Get<Space>();
+        if (space != null)
+        {
+            var ch = conn.Get<Character>();
+            space.CharacterLeave(conn, ch);
+        }
     }
 
     //private void OnDataReceived(Connection conn, IMessage message)

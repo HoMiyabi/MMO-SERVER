@@ -45,6 +45,6 @@ public class UserService : Singleton<UserService>
 
         // 将新角色加入到地图
         var space = SpaceService.Instance.GetSpace(6); // 新手村id
-        space.CharacterJoin(conn, character);
+        space.CharacterEnter(conn, character);
     }
 }
