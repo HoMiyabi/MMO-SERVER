@@ -27,6 +27,12 @@ namespace GameServer.Model
         {
             Log.Information($"角色进入场景 EntityId={character.EntityId}");
 
+            // 角色和场景存入连接
+            conn.Set(character);
+            conn.Set(this);
+
+            character.SpaceId = Id;
+
             idToCharacter.Add(character.EntityId, character);
             character.conn = conn;
 
@@ -62,16 +68,28 @@ namespace GameServer.Model
             conn.Send(response);
         }
 
-        public bool HasConnection(Connection conn)
-            => connectionToCharacter.ContainsKey(conn);
-
         /// <summary>
-        /// 广播更新客户端的Entity信息
+        /// 广播更新Entity信息
         /// </summary>
         /// <param name="entitySync"></param>
         public void UpdateEntity(Proto.NEntitySync entitySync)
         {
             Log.Information("UpdateEntity " + entitySync);
+            foreach (var (_, ch) in idToCharacter)
+            {
+                if (ch.EntityId == entitySync.Entity.Id)
+                {
+                    ch.SetFromProto(entitySync.Entity);
+                }
+                else
+                {
+                    var response = new Proto.SpaceEntitySyncResponse()
+                    {
+                        EntitySync = entitySync,
+                    };
+                    ch.conn.Send(response);
+                }
+            }
         }
     }
 }

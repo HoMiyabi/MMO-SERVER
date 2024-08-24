@@ -1,31 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace GameServer.Model;
 
-namespace GameServer.Model
+internal static class GetProtoExtensions
 {
-    internal static class GetProtoExtensions
+    public static Proto.NVector3 GetProto(this Vector3Int self)
     {
-        public static Proto.NVector3 GetProto(this Vector3Int o)
+        return new Proto.NVector3()
         {
-            return new()
-            {
-                X = o.x,
-                Y = o.y,
-                Z = o.z,
-            };
-        }
+            X = self.x,
+            Y = self.y,
+            Z = self.z,
+        };
+    }
 
-        public static Proto.NEntity GetProto(this Entity o)
+    public static void SetFromProto(this Vector3Int self, Proto.NVector3 other)
+    {
+        self.x = other.X;
+        self.y = other.Y;
+        self.z = other.Z;
+    }
+
+    public static Proto.NEntity GetProto(this Entity self)
+    {
+        return new Proto.NEntity()
         {
-            return new()
-            {
-                Id = o.EntityId,
-                Position = o.Position.GetProto(),
-                Direction = o.Direction.GetProto(),
-            };
-        }
+            Id = self.EntityId,
+            Position = self.Position.GetProto(),
+            Direction = self.Direction.GetProto(),
+        };
+    }
+
+    public static void SetFromProto(this Entity self, Proto.NEntity other)
+    {
+        // self.EntityId = other.Id;
+
+        self.Position.SetFromProto(other.Position);
+        self.Direction.SetFromProto(other.Direction);
     }
 }

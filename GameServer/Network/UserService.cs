@@ -31,6 +31,8 @@ public class UserService : Singleton<UserService>
 
         Random random = new();
         Vector3Int position = new(500 + random.Next(-5, 6), 0, 500 + random.Next(-5, 6));
+        position *= 1000;
+
         Character character = new(entityId, position, Vector3Int.zero);
 
         // 通知玩家登录成功

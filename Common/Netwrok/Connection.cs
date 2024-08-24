@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Google.Protobuf;
 using System.IO;
 using System.Buffers.Binary;
+using Common;
 
 namespace Summer.Network
 {
@@ -16,8 +17,9 @@ namespace Summer.Network
     /// 通用网络连接
     /// 职责：发送消息，接收消息回调，关闭连接，断开通知回调
     /// </summary>
-    public class Connection
+    public class Connection : TypeAttributeStore
     {
+
         public delegate void DataReceivedAction(Connection sender, IMessage data);
         public delegate void DisconnectedAction(Connection sender);
 

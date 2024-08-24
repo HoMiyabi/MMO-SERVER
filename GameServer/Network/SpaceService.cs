@@ -26,23 +26,16 @@ public class SpaceService : Singleton<SpaceService>
     public Space GetSpace(int spaceId)
         => idToSpace[spaceId];
 
-    // 不太合理 space应该是conn或player的属性
-    public Space GetSpace(Connection conn)
-    {
-        foreach (Space space in idToSpace.Values)
-        {
-            if (space.HasConnection(conn))
-            {
-                return space;
-            }
-        }
-        return null;
-    }
-
     private void OnSpaceEntitySyncRequest(Connection conn, Proto.SpaceEntitySyncRequest message)
     {
-        // 找到 conn 所在的地图
-        Space space = GetSpace(conn);
+        // 获取当前场景
+        var space = conn.Get<Space>();
+
+        if (space == null)
+        {
+            return;
+        }
+
         space.UpdateEntity(message.EntitySync);
     }
 }

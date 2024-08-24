@@ -13,6 +13,14 @@ namespace GameServer.Model
         private Vector3Int position; // 位置
         private Vector3Int direction; // 方向
 
+        private int spaceId;
+
+        public int SpaceId
+        {
+            get => spaceId;
+            set => spaceId = value;
+        }
+
         public int EntityId => entityId;
 
         public Vector3Int Position
