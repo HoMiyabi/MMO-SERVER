@@ -98,7 +98,7 @@ namespace GameServer.Model
         /// <param name="entitySync"></param>
         public void UpdateEntity(Proto.NEntitySync entitySync)
         {
-            Log.Information("UpdateEntity " + entitySync);
+            // Log.Information("UpdateEntity " + entitySync);
             foreach (var (_, ch) in idToCharacter)
             {
                 if (ch.EntityId == entitySync.Entity.Id)

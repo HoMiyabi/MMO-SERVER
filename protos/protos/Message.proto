@@ -2,6 +2,16 @@ syntax = "proto3";
 
 package proto;
 
+message HeartBeatRequest
+{
+    
+}
+
+message HeartBeatResponse
+{
+    
+}
+
 message NVector3
 {
     int32 x = 1;

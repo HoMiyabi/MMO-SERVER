@@ -1,21 +1,17 @@
-﻿using Network;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
 using GameServer.Model;
 using Summer.Network;
 using Serilog;
-using Google.Protobuf;
 
 namespace GameServer.Network;
 
 public class NetService
 {
-    TcpServer tcpServer;
+    private TcpServer tcpServer;
+
+    // 记录conn最后一次心跳包的时间
+    private Dictionary<Connection, DateTime> connToLastHeartBeatTime = new();
+
     public NetService()
     {
         tcpServer = new("0.0.0.0", 32510);
@@ -28,18 +24,54 @@ public class NetService
     {
         tcpServer.Start();
         MessageRouter.Instance.Start(10);
+
+        MessageRouter.Instance.Subscribe<Proto.HeartBeatRequest>(OnHeartBeatRequest);
+
+        Task.Run(CleanConnectionAsync);
+    }
+
+    // todo)) 有线程安全问题
+    private async Task CleanConnectionAsync()
+    {
+        while (true)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(5.0));
+
+            var now = DateTime.UtcNow;
+            foreach (var (conn, lastTime) in connToLastHeartBeatTime)
+            {
+                if ((now - lastTime).TotalSeconds > 10)
+                {
+                    conn.Close();
+                    connToLastHeartBeatTime.Remove(conn);
+                }
+            }
+        }
+    }
+
+    private void OnHeartBeatRequest(Connection conn, Proto.HeartBeatRequest message)
+    {
+        // Log.Information("收到心跳包: " + conn);
+        connToLastHeartBeatTime[conn] = DateTime.UtcNow;
+
+        Proto.HeartBeatResponse response = new();
+        conn.Send(response);
     }
 
     private void OnClientConnected(Connection conn)
     {
+        connToLastHeartBeatTime[conn] = DateTime.UtcNow;
+
         IPEndPoint iPEndPoint = conn.Socket.RemoteEndPoint as IPEndPoint;
         Log.Information($"客户端连接 IP:{iPEndPoint?.Address} Port:{iPEndPoint?.Port}");
     }
 
     private void OnDisconnected(Connection conn)
     {
-        IPEndPoint iPEndPoint = conn.Socket.RemoteEndPoint as IPEndPoint;
-        Log.Information($"客户端断开 IP:{iPEndPoint?.Address} Port:{iPEndPoint?.Port}");
+        connToLastHeartBeatTime.Remove(conn);
+        // IPEndPoint iPEndPoint = conn.Socket.RemoteEndPoint as IPEndPoint;
+        // Log.Information($"客户端断开 IP:{iPEndPoint?.Address} Port:{iPEndPoint?.Port}");
+        Log.Information($"客户端断开");
 
         var space = conn.Get<Space>();
         if (space != null)
