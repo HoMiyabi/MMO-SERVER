@@ -41,6 +41,7 @@ public class UserService : Singleton<UserService>
             Success = true,
             Entity = character.GetProto(),
         };
+        Log.Debug($"response={response}");
         conn.Send(response);
 
         // 将新角色加入到地图

@@ -1,48 +1,48 @@
-﻿namespace GameServer.Model;
+﻿using Proto;
+
+namespace GameServer.Model;
 
 internal static class ModelExtensions
 {
-    public static Proto.NVector3 SetFromNative(this Proto.NVector3 self, Vector3Int other)
+    public static NVector3 GetProto(this Vector3Int self)
     {
-        self.X = other.x;
-        self.Y = other.y;
-        self.Z = other.z;
-        return self;
+        return new NVector3()
+        {
+            X = self.x,
+            Y = self.y,
+            Z = self.z,
+        };
     }
 
-    public static void SetFromProto(this Vector3Int self, Proto.NVector3 other)
+    public static Vector3Int GetNative(this NVector3 self)
+    {
+        var v = new Vector3Int();
+        return v.SetFromProto(self);
+    }
+
+    public static ref Vector3Int SetFromProto(ref this Vector3Int self, NVector3 other)
     {
         self.x = other.X;
         self.y = other.Y;
         self.z = other.Z;
+        return ref self;
     }
 
-    public static Proto.NVector3 GetProto(this Vector3Int self)
-    {
-        return new Proto.NVector3().SetFromNative(self);
-    }
 
-    public static void SetFromNative(this Proto.NEntity self, Entity other)
-    {
-        self.Id = other.EntityId;
-        self.Position.SetFromNative(other.Position);
-        self.Direction.SetFromNative(other.Direction);
-    }
-
-    public static void SetFromProto(this Entity self, Proto.NEntity other)
+    public static void SetFromProto(this Entity self, NEntity other)
     {
         // self.EntityId = other.Id;
 
-        self.Position.SetFromProto(other.Position);
-        self.Direction.SetFromProto(other.Direction);
+        self.Position = other.Position.GetNative();
+        self.Direction = other.Direction.GetNative();
     }
 
-    public static Proto.NEntity GetProto(this Entity self)
+    public static NEntity GetProto(this Entity self)
     {
-        var entity = new Proto.NEntity()
+        var entity = new NEntity()
         {
             Id = self.EntityId,
-            Position = self.Direction.GetProto(),
+            Position = self.Position.GetProto(),
             Direction = self.Direction.GetProto(),
         };
         return entity;
