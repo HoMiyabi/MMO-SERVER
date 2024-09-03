@@ -2,11 +2,6 @@
 using GameServer.Model;
 using Serilog;
 using Summer.Network;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Summer;
 
 namespace GameServer.Network;
@@ -41,6 +36,7 @@ public class UserService : Singleton<UserService>
             Success = true,
             Entity = character.GetProto(),
         };
+        Log.Debug($"response={response}");
         conn.Send(response);
 
         // 将新角色加入到地图

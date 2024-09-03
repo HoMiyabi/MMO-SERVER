@@ -19,6 +19,8 @@ namespace GameServer
                     =>c.File("logs/server-log.txt", rollingInterval: RollingInterval.Day))
                 .CreateLogger();
 
+
+
             NetService netService = new();
             netService.Start();
             Log.Debug("网络服务启动完成");
@@ -31,14 +33,7 @@ namespace GameServer
             spaceService.Start();
             Log.Debug("地图服务启动完成");
 
-            // MessageRouter.Instance.Subscribe<Proto.UserLoginRequest>(OnUserLoginRequest);
-
             Console.ReadKey();
         }
-
-        // private static void OnUserLoginRequest(Connection sender, Proto.UserLoginRequest message)
-        // {
-        //     Log.Information($"用户登录 {message}");
-        // }
     }
 }
