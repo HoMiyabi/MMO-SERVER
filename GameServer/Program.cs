@@ -1,9 +1,5 @@
-﻿using Summer.Network;
-using GameServer.Network;
-using Network;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
+﻿using GameServer.Network;
+using GameServer.Database;
 using Serilog;
 
 namespace GameServer
@@ -18,8 +14,6 @@ namespace GameServer
                 .WriteTo.Async(c
                     =>c.File("logs/server-log.txt", rollingInterval: RollingInterval.Day))
                 .CreateLogger();
-
-
 
             NetService netService = new();
             netService.Start();

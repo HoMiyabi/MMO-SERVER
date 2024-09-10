@@ -95,8 +95,9 @@ message UserRegisterRequest
 
 message UserRegisterResponse
 {
-    int32 code = 1;
-    string message = 2;
+    bool success = 1;
+    int32 code = 2;
+    string message = 3;
 }
 
 message UserLoginRequest
@@ -107,6 +108,7 @@ message UserLoginRequest
 
 message UserLoginResponse
 {
-    int32 code = 1;
-    string message = 2;
+    bool success = 1;
+    int32 code = 2;
+    string message = 3;
 }
