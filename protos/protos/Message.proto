@@ -72,21 +72,6 @@ message SpaceCharacterLeaveResponse
     int32 entityId = 1;
 }
 
-
-message Request
-{
-    UserRegisterRequest userRegister = 1;
-    UserLoginRequest userLogin = 2;
-}
-
-message Response
-{
-    UserRegisterResponse userRegister = 1;
-    UserLoginResponse userLogin = 2;
-}
-
-
-
 message UserRegisterRequest
 {
     string username = 1;
@@ -111,4 +96,50 @@ message UserLoginResponse
     bool success = 1;
     int32 code = 2;
     string message = 3;
+}
+
+message CharacterCreateRequest
+{
+    string name = 1;
+    int32 jobType = 2;
+}
+
+message NCharacter
+{
+    int32 id = 1;
+    int32 type_id = 2; // 角色类型
+    int32 entity_id = 3;
+    string name = 4;
+    int32 level = 5;
+    int64 exp = 6;
+    int32 spaceId = 7;
+    int64 gold = 8;
+    NEntity entity = 9;
+}
+
+message CharacterCreateResponse
+{
+    bool success = 1;
+    string message = 2;
+    NCharacter character = 3;
+}
+
+message CharacterListRequest
+{
+}
+
+message CharacterListResponse
+{
+    repeated NCharacter characterList = 1;
+}
+
+message CharacterDeleteRequest
+{
+    int32 characterId = 1;
+}
+
+message CharacterDeleteResponse
+{
+    bool success = 1;
+    string message = 2;
 }

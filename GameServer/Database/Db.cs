@@ -13,7 +13,7 @@ public class Db
 
     private static string connectionString =
         $"Data Source={host};Port={port};User ID={user};Password={password};" +
-        $"Initial Catalog={dbName};Charset=utf8mb4;SslMode=none;Min pool size=10";
+        $"Initial Catalog={dbName};Charset=utf8mb4;SslMode=Required;Min pool size=10";
 
     public static IFreeSql fsql = new FreeSql.FreeSqlBuilder()
         .UseConnectionString(FreeSql.DataType.MySql, connectionString)
