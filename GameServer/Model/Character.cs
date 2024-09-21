@@ -1,9 +1,6 @@
-﻿using Summer.Network;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GameServer.Database;
+using GameServer.Manager;
+using Summer.Network;
 
 namespace GameServer.Model
 {
@@ -13,9 +10,37 @@ namespace GameServer.Model
         // 当前角色的客户端连接
         public Connection conn;
 
-        public Character(int id, Vector3Int position, Vector3Int direction) : base(id, position, direction)
+        public Character(int entityId, Vector3Int position, Vector3Int direction) : base(entityId, position, direction)
         {
 
+        }
+
+        public static explicit operator Character(DbCharacter r)
+        {
+            // 申请EntityId
+            int entityId = EntityManager.Instance.NextEntityId;
+
+            var character = new Character(entityId, new Vector3Int(r.X, r.Y, r.Z), Vector3Int.zero)
+            {
+                Id = r.Id,
+                Name = r.Name,
+                Level = r.Level,
+                nCharacter = new()
+                {
+                    Id = r.Id,
+                    TypeId = r.JobId,
+                    EntityId = 0,
+                    Name = r.Name,
+                    Level = r.Level,
+                    Exp = r.Exp,
+                    SpaceId = r.SpaceId,
+                    Gold = r.Gold,
+                    Entity = null,
+                    Hp = r.Hp,
+                    Mp = r.Mp,
+                },
+            };
+            return character;
         }
     }
 }

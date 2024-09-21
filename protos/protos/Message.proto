@@ -59,6 +59,7 @@ message GameEnterResponse
 {
     bool success = 1;
     NEntity entity = 2;
+    NCharacter character = 3;
 }
 
 message SpaceCharactersEnterResponse
@@ -115,6 +116,8 @@ message NCharacter
     int32 spaceId = 7;
     int64 gold = 8;
     NEntity entity = 9;
+    int32 hp = 10;
+    int32 mp = 11;
 }
 
 message CharacterCreateResponse

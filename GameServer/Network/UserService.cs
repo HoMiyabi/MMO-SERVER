@@ -1,4 +1,5 @@
-﻿using GameServer.Database;
+﻿using System.Numerics;
+using GameServer.Database;
 using GameServer.Manager;
 using GameServer.Model;
 using Proto;
@@ -156,21 +157,25 @@ public class UserService : Singleton<UserService>
 
     private void OnGameEnterRequest(Connection conn, GameEnterRequest message)
     {
-        Log.Information("进入游戏");
+        Log.Information($"玩家进入游戏，id={message.CharacterId}");
 
-        int entityId = EntityManager.Instance.NextEntityId;
+        // 获取当前角色
+        var player = conn.Get<DbPlayer>();
+        // 查询数据库的角色
+        var dbC = Db.fsql.Select<DbCharacter>()
+            .Where(it => it.Id == message.CharacterId)
+            .Where(it => it.PlayerId == player.Id)
+            .First();
 
-        Random random = new();
-        Vector3Int position = new(500 + random.Next(-5, 6), 0, 500 + random.Next(-5, 6));
-        position *= 1000;
-
-        Character character = new(entityId, position, Vector3Int.zero);
+        // 把数据库角色变成游戏角色
+        var character = (Character)dbC;
 
         // 通知玩家登录成功
-        GameEnterResponse response = new()
+        var response = new GameEnterResponse()
         {
             Success = true,
             Entity = character.GetProto(),
+            Character = character.nCharacter,
         };
         Log.Debug($"response={response}");
         conn.Send(response);

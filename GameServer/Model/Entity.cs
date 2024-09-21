@@ -35,9 +35,9 @@ namespace GameServer.Model
             set => direction = value;
         }
 
-        public Entity(int id, Vector3Int position, Vector3Int direction)
+        public Entity(int entityId, Vector3Int position, Vector3Int direction)
         {
-            this.entityId = id;
+            this.entityId = entityId;
             this.position = position;
             this.direction = direction;
         }

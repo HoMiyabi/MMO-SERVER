@@ -6,7 +6,7 @@ namespace GameServer
 {
     internal class Program
     {
-        static void Main(string[] args)
+        private static void InitLogger()
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
@@ -14,6 +14,14 @@ namespace GameServer
                 .WriteTo.Async(c
                     =>c.File("logs/server-log.txt", rollingInterval: RollingInterval.Day))
                 .CreateLogger();
+        }
+
+        private static void Main(string[] args)
+        {
+            InitLogger();
+
+            string content = File.ReadAllText("Data/SpaceDefine.json");
+            Log.Information(content);
 
             NetService netService = new();
             netService.Start();
