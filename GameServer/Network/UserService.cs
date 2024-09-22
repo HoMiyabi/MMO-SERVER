@@ -2,10 +2,9 @@
 using GameServer.Database;
 using GameServer.Manager;
 using GameServer.Model;
+using Kirara;
 using Proto;
 using Serilog;
-using Summer.Network;
-using Summer;
 
 namespace GameServer.Network;
 
@@ -13,7 +12,7 @@ namespace GameServer.Network;
 /// 玩家服务
 /// 注册，登录，创建角色，进入游戏
 /// </summary>
-public class UserService : Singleton<UserService>
+public class UserService : Summer.Singleton<UserService>
 {
 
     public void Start()
@@ -181,7 +180,7 @@ public class UserService : Singleton<UserService>
         conn.Send(response);
 
         // 将新角色加入到地图
-        var space = SpaceService.Instance.GetSpace(6); // 新手村id
+        var space = SpaceManager.Instance.GetSpace(dbC.SpaceId); // 新手村id
         space.CharacterEnter(conn, character);
     }
 }

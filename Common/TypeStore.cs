@@ -1,6 +1,6 @@
-﻿namespace Common;
+﻿namespace Kirara;
 
-public class TypeAttributeStore
+public class TypeStore
 {
     private Dictionary<string, object> dict = new();
 

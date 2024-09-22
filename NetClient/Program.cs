@@ -1,8 +1,10 @@
-﻿using System.Net.Sockets;
+﻿using System.Diagnostics;
+using System.Net.Sockets;
 using System.Net;
 using System.Text;
 using Google.Protobuf;
-using Summer.Network;
+using Kirara;
+using Proto;
 using Serilog;
 
 namespace NetClient
@@ -10,6 +12,8 @@ namespace NetClient
     internal class Program
     {
         private static Connection conn;
+        private static Stopwatch stopwatch = new();
+
         private static void Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
@@ -30,18 +34,29 @@ namespace NetClient
 
             Log.Information("成功连接到服务器");
 
+            MessageRouter.Instance.Subscribe<HeartBeatResponse>(Handler);
+            MessageRouter.Instance.Start(4);
+
             conn = new(socket);
+            conn.Received += MessageRouter.Instance.AddMessage;
 
-            Proto.UserLoginRequest request = new()
+            var message = new HeartBeatRequest() { };
+
+            for (int i = 0; i < 10; i++)
             {
-                Username = "kirara",
-                Password = "password",
-            };
-            conn.Send(request);
+                stopwatch.Restart();
+                conn.Send(message);
+                Log.Information("Send");
+                Thread.Sleep(100);
+            }
 
-
-            Console.ReadKey();
             conn.Close();
+            MessageRouter.Instance.Stop();
+        }
+
+        private static void Handler(Connection connection, HeartBeatResponse message)
+        {
+            Log.Information($"Receive {stopwatch.ElapsedMilliseconds}");
         }
     }
 }

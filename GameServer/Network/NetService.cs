@@ -1,41 +1,55 @@
 ﻿using System.Net;
 using GameServer.Model;
-using Summer.Network;
+using Kirara;
 using Serilog;
+// using Connection = Summer.Network.Connection;
+// using MessageRouter = Summer.Network.MessageRouter;
 
 namespace GameServer.Network;
 
 public class NetService
 {
-    private TcpServer tcpServer;
+    // private TcpServer tcpServer;
+    private Server server;
 
     // 记录conn最后一次心跳包的时间
     private Dictionary<Connection, DateTime> connToLastHeartBeatTime = new();
 
+    private CancellationTokenSource cts = new();
+
     public NetService()
     {
-        tcpServer = new("0.0.0.0", 32510);
-        tcpServer.Connected += OnClientConnected;
-        tcpServer.Disconnected += OnDisconnected;
+        server = new Server("0.0.0.0", 32510);
+        server.Connected += OnClientConnected;
+        server.Disconnected += OnDisconnected;
+
+        // tcpServer = new("0.0.0.0", 32510);
+        // tcpServer.Connected += OnClientConnected;
+        // tcpServer.Disconnected += OnDisconnected;
         //tcpServer.DataReceived += OnDataReceived;
     }
 
     public void Start()
     {
-        tcpServer.Start();
+        // tcpServer.Start();
+        server.Start();
         MessageRouter.Instance.Start(10);
 
         MessageRouter.Instance.Subscribe<Proto.HeartBeatRequest>(OnHeartBeatRequest);
 
-        Task.Run(CleanConnectionAsync);
+        Task.Run(() => CleanConnectionAsync(cts.Token));
     }
 
     // todo)) 有线程安全问题
-    private async Task CleanConnectionAsync()
+    private async Task CleanConnectionAsync(CancellationToken token)
     {
-        while (true)
+        while (!token.IsCancellationRequested)
         {
-            await Task.Delay(TimeSpan.FromSeconds(5.0));
+            await Task.Delay(TimeSpan.FromSeconds(5.0), token);
+            if (token.IsCancellationRequested)
+            {
+                break;
+            }
 
             var now = DateTime.UtcNow;
             foreach (var (conn, lastTime) in connToLastHeartBeatTime)
@@ -51,7 +65,7 @@ public class NetService
 
     private void OnHeartBeatRequest(Connection conn, Proto.HeartBeatRequest message)
     {
-        // Log.Information("收到心跳包: " + conn);
+        // Log.Debug("收到心跳包: " + conn);
         connToLastHeartBeatTime[conn] = DateTime.UtcNow;
 
         Proto.HeartBeatResponse response = new();
@@ -62,7 +76,7 @@ public class NetService
     {
         connToLastHeartBeatTime[conn] = DateTime.UtcNow;
 
-        IPEndPoint iPEndPoint = conn.Socket.RemoteEndPoint as IPEndPoint;
+        IPEndPoint iPEndPoint = conn.socket.RemoteEndPoint as IPEndPoint;
         Log.Information($"客户端连接 IP:{iPEndPoint?.Address} Port:{iPEndPoint?.Port}");
     }
 
@@ -81,8 +95,9 @@ public class NetService
         }
     }
 
-    //private void OnDataReceived(Connection conn, IMessage message)
-    //{
-    //    //MessageRouter.Instance.AddMessage(conn, message);
-    //}
+    public void Close()
+    {
+        cts.Cancel();
+        server.Stop();
+    }
 }

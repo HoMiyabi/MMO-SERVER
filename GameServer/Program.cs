@@ -1,5 +1,6 @@
 ﻿using GameServer.Network;
 using GameServer.Database;
+using GameServer.Manager;
 using Serilog;
 
 namespace GameServer
@@ -11,8 +12,8 @@ namespace GameServer
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.Async(c => c.Console())
-                .WriteTo.Async(c
-                    =>c.File("logs/server-log.txt", rollingInterval: RollingInterval.Day))
+                .WriteTo.Async(c =>
+                    c.File("logs/server-log.txt", rollingInterval: RollingInterval.Day))
                 .CreateLogger();
         }
 
@@ -20,8 +21,7 @@ namespace GameServer
         {
             InitLogger();
 
-            string content = File.ReadAllText("Data/SpaceDefine.json");
-            Log.Information(content);
+            DefineManager.Instance.Init();
 
             NetService netService = new();
             netService.Start();
@@ -35,7 +35,8 @@ namespace GameServer
             spaceService.Start();
             Log.Debug("地图服务启动完成");
 
-            Console.ReadKey();
+            Console.ReadLine();
+            netService.Close();
         }
     }
 }

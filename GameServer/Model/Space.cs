@@ -1,10 +1,5 @@
 ﻿using Serilog;
-using Summer.Network;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Kirara;
 
 namespace GameServer.Model
 {
@@ -14,9 +9,20 @@ namespace GameServer.Model
         public int Id { get; set; }
         public string Name { get; set; }
 
+        public SpaceDefine SpaceDefine { get; set; }
+
         private Dictionary<int, Character> idToCharacter = new();
 
         private Dictionary<Connection, Character> connectionToCharacter = new();
+
+        public Space() {}
+
+        public Space(SpaceDefine spaceDefine)
+        {
+            SpaceDefine = spaceDefine;
+            Id = spaceDefine.SID;
+            Name = spaceDefine.Name;
+        }
 
         /// <summary>
         /// 角色进入场景
