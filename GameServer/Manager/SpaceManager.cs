@@ -1,25 +1,27 @@
-﻿using GameServer.Model;
+﻿using System.Collections.Generic;
+using GameServer.Model;
 using Kirara;
 using Serilog;
 
-namespace GameServer.Manager;
-
-public class SpaceManager : Singleton<SpaceManager>
+namespace GameServer.Manager
 {
-    private Dictionary<int, Space> idToSpace;
-
-    public void Init()
+    public class SpaceManager : Singleton<SpaceManager>
     {
-        idToSpace = new Dictionary<int, Space>();
-        foreach (var (key, spaceDefine) in DefineManager.Instance.spaceDefineDict)
+        private Dictionary<int, Space> idToSpace;
+
+        public void Init()
         {
-            idToSpace.Add(key, new Space(spaceDefine));
-            Log.Information($"初始化地图：{spaceDefine.Name}");
+            idToSpace = new Dictionary<int, Space>();
+            foreach (var (key, spaceDefine) in DefineManager.Instance.spaceDefineDict)
+            {
+                idToSpace.Add(key, new Space(spaceDefine));
+                Log.Information($"初始化地图：{spaceDefine.Name}");
+            }
         }
-    }
 
-    public Space GetSpace(int id)
-    {
-        return idToSpace[id];
+        public Space GetSpace(int id)
+        {
+            return idToSpace[id];
+        }
     }
 }

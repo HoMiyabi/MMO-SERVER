@@ -1,4 +1,5 @@
-﻿using Serilog;
+﻿using System.Collections.Generic;
+using Serilog;
 using Kirara;
 
 namespace GameServer.Model

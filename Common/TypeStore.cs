@@ -1,22 +1,25 @@
-﻿namespace Kirara;
+﻿using System.Collections.Generic;
 
-public class TypeStore
+namespace Kirara
 {
-    private Dictionary<string, object> dict = new();
-
-    public void Set<T>(T value)
+    public class TypeStore
     {
-        string key = typeof(T).FullName;
-        dict[key] = value;
-    }
+        private Dictionary<string, object> dict = new();
 
-    public T Get<T>()
-    {
-        string key = typeof(T).FullName;
-        if (dict.TryGetValue(key, out object value))
+        public void Set<T>(T value)
         {
-            return (T)value;
+            string key = typeof(T).FullName;
+            dict[key] = value;
         }
-        return default;
+
+        public T Get<T>()
+        {
+            string key = typeof(T).FullName;
+            if (dict.TryGetValue(key, out object value))
+            {
+                return (T)value;
+            }
+            return default;
+        }
     }
 }

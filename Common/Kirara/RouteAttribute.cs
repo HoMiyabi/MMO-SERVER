@@ -1,6 +1,8 @@
 ﻿using System.Reflection;
 
-namespace Kirara;
+namespace Kirara
+{
+}
 
 // [AttributeUsage(AttributeTargets.Method)]
 // public class RouteAttribute : Attribute

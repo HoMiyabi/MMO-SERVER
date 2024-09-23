@@ -1,17 +1,18 @@
-﻿namespace Kirara;
-
-public class Singleton<T> where T : Singleton<T>, new()
+﻿namespace Kirara
 {
-    private static T instance;
-    public static T Instance
+    public class Singleton<T> where T : Singleton<T>, new()
     {
-        get
+        private static T instance;
+        public static T Instance
         {
-            if (instance == null)
+            get
             {
-                instance = new T();
+                if (instance == null)
+                {
+                    instance = new T();
+                }
+                return instance;
             }
-            return instance;
         }
     }
 }

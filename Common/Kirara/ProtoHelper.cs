@@ -1,17 +1,19 @@
-﻿using Google.Protobuf.Reflection;
+﻿using System.Collections.Generic;
+using Google.Protobuf.Reflection;
 using Proto;
 
-namespace Kirara;
-
-public static class ProtoHelper
+namespace Kirara
 {
-    public static readonly Dictionary<string, MessageDescriptor> fullNameToDescriptor = new();
-
-    static ProtoHelper()
+    public static class ProtoHelper
     {
-        foreach (MessageDescriptor descriptor in MessageReflection.Descriptor.MessageTypes)
+        public static readonly Dictionary<string, MessageDescriptor> fullNameToDescriptor = new();
+
+        static ProtoHelper()
         {
-            fullNameToDescriptor.Add(descriptor.FullName, descriptor);
+            foreach (MessageDescriptor descriptor in MessageReflection.Descriptor.MessageTypes)
+            {
+                fullNameToDescriptor.Add(descriptor.FullName, descriptor);
+            }
         }
     }
 }
