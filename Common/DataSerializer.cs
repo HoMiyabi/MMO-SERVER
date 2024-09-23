@@ -1,4 +1,5 @@
-﻿using Serilog;
+﻿/*
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -169,7 +170,7 @@ namespace Summer
                         byte[] arr = new byte[len];
                         stream.Read(arr, 0, len);
                         ulong r = Varint.VarintDecode(arr);
-                        
+
                         list.Add((long)r);
                     }
                     else if (type == 8) //ulong
@@ -217,11 +218,11 @@ namespace Summer
                     }
 
                 }
-                
+
                 return list.ToArray();
             }
         }
-        
+
 
 
     }
@@ -255,7 +256,7 @@ while(true)
 
 Log.Information("{0}", DataSerializer.VarintEncode(562949953421311).Length);
 Log.Information("{0}", DataSerializer.VarintEncode(562949953421312).Length);
- */
+ #1#
 
  //VarintEncode
        /* public static byte[] VarintEncode(ulong value)
@@ -343,7 +344,7 @@ Log.Information("{0}", DataSerializer.VarintEncode(562949953421312).Length);
         //VarintDecode
         public static uint VarintDecode(byte[] data)
         {
-            uint value = 0;*/
+            uint value = 0;#1#
+            */
 
 
-        

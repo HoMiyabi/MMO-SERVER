@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace Common
+﻿namespace Kirara
 {
     public struct Float3
     {

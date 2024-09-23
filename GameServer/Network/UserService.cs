@@ -12,7 +12,7 @@ namespace GameServer.Network
     /// 玩家服务
     /// 注册，登录，创建角色，进入游戏
     /// </summary>
-    public class UserService : Summer.Singleton<UserService>
+    public class UserService : Singleton<UserService>
     {
 
         public void Start()

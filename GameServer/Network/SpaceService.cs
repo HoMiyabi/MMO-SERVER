@@ -7,7 +7,7 @@ namespace GameServer.Network
     /// <summary>
     /// 地图服务
     /// </summary>
-    public class SpaceService : Summer.Singleton<SpaceService>
+    public class SpaceService : Singleton<SpaceService>
     {
         public void Start()
         {

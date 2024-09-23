@@ -4,7 +4,7 @@ namespace Kirara
 {
     public class TypeStore
     {
-        private Dictionary<string, object> dict = new();
+        private readonly Dictionary<string, object> dict = new();
 
         public void Set<T>(T value)
         {
