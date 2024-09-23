@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameServer.Model
+﻿namespace GameServer.Model
 {
     // 在MMO世界进行同步的实体
     public class Entity
