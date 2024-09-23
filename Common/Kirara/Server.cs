@@ -45,6 +45,7 @@ namespace Kirara
                 }
                 catch (OperationCanceledException e)
                 {
+                    Log.Information(e.Message + e.StackTrace);
                 }
             }
         }

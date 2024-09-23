@@ -7,22 +7,17 @@ namespace GameServer.Model
     // 空间 场景
     public class Space
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-
         public SpaceDefine SpaceDefine { get; set; }
 
         private Dictionary<int, Character> idToCharacter = new();
 
         private Dictionary<Connection, Character> connectionToCharacter = new();
 
-        public Space() {}
+        // public Space() {}
 
         public Space(SpaceDefine spaceDefine)
         {
             SpaceDefine = spaceDefine;
-            Id = spaceDefine.SID;
-            Name = spaceDefine.Name;
         }
 
         /// <summary>
@@ -32,15 +27,13 @@ namespace GameServer.Model
         /// <param name="character"></param>
         public void CharacterEnter(Connection conn, Character character)
         {
-            Log.Information($"角色进入场景 EntityId={character.EntityId}");
+            Log.Information($"角色进入场景 Id={character.Id}");
 
             // 角色和场景存入连接
             conn.Set(character);
-            conn.Set(this);
+            character.space = this;
 
-            character.SpaceId = Id;
-
-            idToCharacter.Add(character.EntityId, character);
+            idToCharacter.Add(character.Id, character);
             character.conn = conn;
 
             if (!connectionToCharacter.ContainsKey(conn))
@@ -51,7 +44,7 @@ namespace GameServer.Model
             // 把新进入的角色广播给场景的其他玩家
             var response = new Proto.SpaceCharactersEnterResponse()
             {
-                SpaceId = Id,
+                SpaceId = SpaceDefine.SID,
             };
             response.EntityList.Add(character.GetProto());
 
@@ -84,9 +77,9 @@ namespace GameServer.Model
         /// <param name="character"></param>
         public void CharacterLeave(Connection conn, Character character)
         {
-            Log.Information($"角色离开场景 EntityId={character.EntityId}");
+            Log.Information($"角色离开场景 Id={character.Id}");
             conn.Set<Space>(null);
-            idToCharacter.Remove(character.EntityId);
+            idToCharacter.Remove(character.Id);
 
             var response = new Proto.SpaceCharacterLeaveResponse()
             {

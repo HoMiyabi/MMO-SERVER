@@ -12,9 +12,9 @@ namespace GameServer.Manager
         public void Init()
         {
             idToSpace = new Dictionary<int, Space>();
-            foreach (var (key, spaceDefine) in DefineManager.Instance.spaceDefineDict)
+            foreach (var (_, spaceDefine) in DefineManager.Instance.spaceDefineDict)
             {
-                idToSpace.Add(key, new Space(spaceDefine));
+                idToSpace.Add(spaceDefine.SID, new Space(spaceDefine));
                 Log.Information($"初始化地图：{spaceDefine.Name}");
             }
         }

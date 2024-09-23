@@ -24,24 +24,44 @@
             this.z = z;
         }
 
-        public static Float3 operator +(Float3 left, Float3 right)
+        public override string ToString()
         {
-            return new Float3(left.x + right.x, left.y + right.y, left.z + right.z);
+            return $"({x}, {y}, {z})";
         }
 
-        public static Float3 operator -(Float3 left, Float3 right)
+        public static Float3 operator +(Float3 l, Float3 r)
         {
-            return new Float3(left.x - right.x, left.y - right.y, left.z - right.z);
+            return new Float3(l.x + r.x, l.y + r.y, l.z + r.z);
         }
 
-        public static Float3 operator *(Float3 left, Float3 right)
+        public static Float3 operator -(Float3 l, Float3 r)
         {
-            return new Float3(left.x * right.x, left.y * right.y, left.z * right.z);
+            return new Float3(l.x - r.x, l.y - r.y, l.z - r.z);
         }
 
-        public static Float3 operator /(Float3 left, Float3 right)
+        public static Float3 operator *(Float3 l, Float3 r)
         {
-            return new Float3(left.x / right.x, left.y / right.y, left.z / right.z);
+            return new Float3(l.x * r.x, l.y * r.y, l.z * r.z);
+        }
+
+        public static Float3 operator *(Float3 l, float r)
+        {
+            return new Float3(l.x * r, l.y * r, l.z * r);
+        }
+
+        public static Float3 operator *(float l, Float3 r)
+        {
+            return new Float3(l * r.x, l * r.y, l * r.z);
+        }
+
+        public static Float3 operator /(Float3 l, Float3 r)
+        {
+            return new Float3(l.x / r.x, l.y / r.y, l.z / r.z);
+        }
+
+        public static Float3 operator /(Float3 l, float r)
+        {
+            return new Float3(l.x / r, l.y / r, l.z / r);
         }
     }
 }

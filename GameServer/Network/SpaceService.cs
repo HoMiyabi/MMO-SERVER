@@ -1,6 +1,7 @@
 ﻿using GameServer.Manager;
 using GameServer.Model;
 using Kirara;
+using Proto;
 
 namespace GameServer.Network
 {
@@ -14,7 +15,7 @@ namespace GameServer.Network
             SpaceManager.Instance.Init();
 
             // 位置同步请求
-            MessageRouter.Instance.Subscribe<Proto.SpaceEntitySyncRequest>(OnSpaceEntitySyncRequest);
+            MessageRouter.Instance.Subscribe<SpaceEntitySyncRequest>(OnSpaceEntitySyncRequest);
         }
 
         private void OnSpaceEntitySyncRequest(Connection conn, Proto.SpaceEntitySyncRequest message)

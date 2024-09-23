@@ -26,11 +26,6 @@ namespace GameServer.Network
             server = new Server("0.0.0.0", 32510);
             server.Connected += OnClientConnected;
             server.Disconnected += OnDisconnected;
-
-            // tcpServer = new("0.0.0.0", 32510);
-            // tcpServer.Connected += OnClientConnected;
-            // tcpServer.Disconnected += OnDisconnected;
-            //tcpServer.DataReceived += OnDataReceived;
         }
 
         public void Start()
