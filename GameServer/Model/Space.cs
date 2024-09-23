@@ -9,6 +9,7 @@ namespace GameServer.Model
     {
         public SpaceDefine SpaceDefine { get; set; }
 
+        // 当前场景中全部的角色 <ChrId, ChrObj>
         private Dictionary<int, Character> idToCharacter = new();
 
         private Dictionary<Connection, Character> connectionToCharacter = new();
@@ -27,7 +28,7 @@ namespace GameServer.Model
         /// <param name="character"></param>
         public void CharacterEnter(Connection conn, Character character)
         {
-            Log.Information($"角色进入场景 Id={character.Id}");
+            Log.Information($"角色进入场景 SpaceId={SpaceDefine.SID} CharacterId={character.Id}");
 
             // 角色和场景存入连接
             conn.Set(character);
@@ -77,8 +78,7 @@ namespace GameServer.Model
         /// <param name="character"></param>
         public void CharacterLeave(Connection conn, Character character)
         {
-            Log.Information($"角色离开场景 Id={character.Id}");
-            conn.Set<Space>(null);
+            Log.Information($"角色离开场景 SpaceId={SpaceDefine.SID} CharacterId={character.Id}");
             idToCharacter.Remove(character.Id);
 
             var response = new Proto.SpaceCharacterLeaveResponse()

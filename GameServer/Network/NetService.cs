@@ -86,11 +86,14 @@ namespace GameServer.Network
             // Log.Information($"客户端断开 IP:{iPEndPoint?.Address} Port:{iPEndPoint?.Port}");
             Log.Information($"客户端断开");
 
-            var space = conn.Get<Space>();
-            if (space != null)
+            var character = conn.Get<Character>();
+            if (character != null)
             {
-                var ch = conn.Get<Character>();
-                space.CharacterLeave(conn, ch);
+                var space = character.space;
+                if (space != null)
+                {
+                    space.CharacterLeave(conn, character);
+                }
             }
         }
 
