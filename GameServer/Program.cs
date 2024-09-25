@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using GameServer.Network;
 using GameServer.Manager;
+using Kirara;
 using Serilog;
+using Summer;
 
 namespace GameServer
 {
@@ -35,8 +39,12 @@ namespace GameServer
             spaceService.Start();
             Log.Debug("地图服务启动完成");
 
+            // Schedule.Instance.Start();
+            // Log.Debug("定时器启动完成");
+
             Console.ReadLine();
             netService.Close();
+            CharacterManager.Instance.Close();
         }
     }
 }

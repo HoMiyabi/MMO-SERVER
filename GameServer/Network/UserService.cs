@@ -160,13 +160,13 @@ namespace GameServer.Network
             // 获取当前角色
             var player = conn.Get<DbPlayer>();
             // 查询数据库的角色
-            var dbC = Db.fsql.Select<DbCharacter>()
+            var dbCharacter = Db.fsql.Select<DbCharacter>()
                 .Where(it => it.Id == message.CharacterId)
                 .Where(it => it.PlayerId == player.Id)
                 .First();
 
             // 把数据库角色变成游戏角色
-            var character = (Character)dbC;
+            var character = CharacterManager.Instance.CreateCharacter(dbCharacter);
 
             // 通知玩家登录成功
             var response = new GameEnterResponse()
@@ -179,7 +179,7 @@ namespace GameServer.Network
             conn.Send(response);
 
             // 将新角色加入到地图
-            var space = SpaceManager.Instance.GetSpace(dbC.SpaceId); // 新手村id
+            var space = SpaceManager.Instance.GetSpace(dbCharacter.SpaceId); // 新手村id
             space.CharacterEnter(conn, character);
         }
     }

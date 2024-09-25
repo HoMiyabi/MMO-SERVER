@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using GameServer.Manager;
 using GameServer.Model;
 using Kirara;
 using Serilog;
@@ -94,6 +95,7 @@ namespace GameServer.Network
                 {
                     space.CharacterLeave(conn, character);
                 }
+                CharacterManager.Instance.RemoveCharacter(character.Id);
             }
         }
 

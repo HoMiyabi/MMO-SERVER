@@ -10,37 +10,31 @@ namespace GameServer.Model
         // 当前角色的客户端连接
         public Connection conn;
 
-        public Character(int entityId, Vector3Int position, Vector3Int direction) : base(entityId, position, direction)
+        public DbCharacter dbCharacter;
+
+        public Character(DbCharacter dbCharacter) : base(
+            EntityManager.Instance.NextEntityId,
+            new Vector3Int(dbCharacter.X, dbCharacter.Y, dbCharacter.Z),
+            Vector3Int.zero)
         {
-
-        }
-
-        public static explicit operator Character(DbCharacter r)
-        {
-            // 申请EntityId
-            int entityId = EntityManager.Instance.NextEntityId;
-
-            var character = new Character(entityId, new Vector3Int(r.X, r.Y, r.Z), Vector3Int.zero)
+            this.dbCharacter = dbCharacter;
+            Id = dbCharacter.Id;
+            Name = dbCharacter.Name;
+            Level = dbCharacter.Level;
+            nCharacter = new()
             {
-                Id = r.Id,
-                Name = r.Name,
-                Level = r.Level,
-                nCharacter = new()
-                {
-                    Id = r.Id,
-                    TypeId = r.JobId,
-                    EntityId = 0,
-                    Name = r.Name,
-                    Level = r.Level,
-                    Exp = r.Exp,
-                    SpaceId = r.SpaceId,
-                    Gold = r.Gold,
-                    Entity = null,
-                    Hp = r.Hp,
-                    Mp = r.Mp,
-                },
+                Id = dbCharacter.Id,
+                TypeId = dbCharacter.JobId,
+                EntityId = 0,
+                Name = dbCharacter.Name,
+                Level = dbCharacter.Level,
+                Exp = dbCharacter.Exp,
+                SpaceId = dbCharacter.SpaceId,
+                Gold = dbCharacter.Gold,
+                Entity = null,
+                Hp = dbCharacter.Hp,
+                Mp = dbCharacter.Mp,
             };
-            return character;
         }
     }
 }

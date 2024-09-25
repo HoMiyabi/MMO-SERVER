@@ -45,7 +45,8 @@ namespace Kirara
                 }
                 catch (OperationCanceledException e)
                 {
-                    Log.Information(e.Message + e.StackTrace);
+                    Log.Information("停止监听");
+                    return;
                 }
             }
         }

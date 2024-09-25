@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Serilog;
 using Kirara;
+using Proto;
 
 namespace GameServer.Model
 {
@@ -43,7 +44,7 @@ namespace GameServer.Model
             }
 
             // 把新进入的角色广播给场景的其他玩家
-            var response = new Proto.SpaceCharactersEnterResponse()
+            var response = new SpaceCharactersEnterResponse()
             {
                 SpaceId = SpaceDefine.SID,
             };
@@ -96,7 +97,7 @@ namespace GameServer.Model
         /// 广播更新Entity信息
         /// </summary>
         /// <param name="entitySync"></param>
-        public void UpdateEntity(Proto.NEntitySync entitySync)
+        public void UpdateEntity(NEntitySync entitySync)
         {
             // Log.Information("UpdateEntity " + entitySync);
             foreach (var (_, ch) in idToCharacter)
@@ -104,6 +105,9 @@ namespace GameServer.Model
                 if (ch.EntityId == entitySync.Entity.Id)
                 {
                     ch.SetFromProto(entitySync.Entity);
+                    ch.dbCharacter.X = entitySync.Entity.Position.X;
+                    ch.dbCharacter.Y = entitySync.Entity.Position.Y;
+                    ch.dbCharacter.Z = entitySync.Entity.Position.Z;
                 }
                 else
                 {

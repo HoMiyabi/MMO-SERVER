@@ -89,7 +89,10 @@ namespace Kirara
         {
             for (int i = 0; i < threadCount; i++)
             {
-                new Thread(() => Work(cts.Token)).Start();
+                new Thread(() => Work(cts.Token))
+                {
+                    Name = "MessageRouter Worker",
+                }.Start();
             }
         }
 
