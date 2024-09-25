@@ -117,8 +117,12 @@ namespace GameServer.Network
             {
                 Name = message.Name,
                 JobId = message.JobType,
-                Hp = 100, Mp = 100, Level = 1, Exp = 0,
-                SpaceId = 6, Gold = 0,
+                Hp = 100,
+                Mp = 100,
+                Level = 1,
+                Exp = 0,
+                SpaceId = 1,
+                Gold = 0,
                 PlayerId = player.Id
             };
             int aff = Db.fsql.Insert(character).ExecuteAffrows();
@@ -172,7 +176,7 @@ namespace GameServer.Network
             var response = new GameEnterResponse()
             {
                 Success = true,
-                Entity = character.GetProto(),
+                Entity = character.NEntity,
                 Character = character.nCharacter,
             };
             Log.Debug($"response={response}");

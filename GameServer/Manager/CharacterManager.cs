@@ -36,15 +36,17 @@ namespace GameServer.Manager
             {
                 Log.Warning($"不能添加角色到字典 {dbCharacter.Id.NameValue()}");
             }
+            EntityManager.Instance.AddEntity(dbCharacter.SpaceId, character);
             return character;
         }
 
         public void RemoveCharacter(int characterId)
         {
-            if (!idToCharacter.TryRemove(characterId, out _))
+            if (!idToCharacter.TryRemove(characterId, out var character))
             {
                 Log.Warning($"字典找不到角色 {characterId.NameValue()}");
             }
+            EntityManager.Instance.RemoveEntity(character.dbCharacter.SpaceId, character);
         }
 
         public void ClearCharacter()

@@ -13,7 +13,7 @@ namespace GameServer.Model
 
         public NCharacter nCharacter { get; set; }
 
-        public Actor(int entityId, Vector3Int position, Vector3Int direction) : base(entityId, position, direction)
+        public Actor(Vector3Int position, Vector3Int direction) : base(position, direction)
         {
 
         }

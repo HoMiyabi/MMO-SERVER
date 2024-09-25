@@ -13,7 +13,6 @@ namespace GameServer.Model
         public DbCharacter dbCharacter;
 
         public Character(DbCharacter dbCharacter) : base(
-            EntityManager.Instance.NextEntityId,
             new Vector3Int(dbCharacter.X, dbCharacter.Y, dbCharacter.Z),
             Vector3Int.zero)
         {

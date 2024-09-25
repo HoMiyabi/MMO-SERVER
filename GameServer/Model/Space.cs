@@ -48,7 +48,7 @@ namespace GameServer.Model
             {
                 SpaceId = SpaceDefine.SID,
             };
-            response.EntityList.Add(character.GetProto());
+            response.EntityList.Add(character.NEntity);
 
             // 发送角色进入场景的消息给其他人
             foreach (var (_, ch) in idToCharacter)
@@ -65,7 +65,7 @@ namespace GameServer.Model
             {
                 if (ch.conn != conn)
                 {
-                    response.EntityList.Add(ch.GetProto());
+                    response.EntityList.Add(ch.NEntity);
                 }
             }
             conn.Send(response);
@@ -104,7 +104,7 @@ namespace GameServer.Model
             {
                 if (ch.EntityId == entitySync.Entity.Id)
                 {
-                    ch.SetFromProto(entitySync.Entity);
+                    ch.NEntity = entitySync.Entity;
                     ch.dbCharacter.X = entitySync.Entity.Position.X;
                     ch.dbCharacter.Y = entitySync.Entity.Position.Y;
                     ch.dbCharacter.Z = entitySync.Entity.Position.Z;

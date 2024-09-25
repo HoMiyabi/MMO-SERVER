@@ -2,7 +2,7 @@
 {
     public class Monster : Actor
     {
-        public Monster(int id, Vector3Int position, Vector3Int direction) : base(id, position, direction)
+        public Monster(Vector3Int position, Vector3Int direction) : base(position, direction)
         {
         }
     }

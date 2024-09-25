@@ -1,6 +1,8 @@
 ﻿using System.Collections.Concurrent;
-using GameServer.Model;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using GameServer.Model;
 using Kirara;
 using Serilog;
 
@@ -11,39 +13,58 @@ namespace GameServer.Manager
     /// </summary>
     public class EntityManager : Singleton<EntityManager>
     {
-        private int index = 1;
-        private ConcurrentDictionary<int, Entity> idToEntity = new();
+        private int id = 0;
+        // 记录全部的Entity对象，<EntityId, Entity>
+        private ConcurrentDictionary<int, Entity> entityIdToEntity = new();
+        // 记录场景中的Entity列表，<SpaceId, EntityList>
+        private ConcurrentDictionary<int, List<Entity>> spaceIdToEntities = new();
 
-        // public Entity CreateEntity()
-        // {
-        //     lock (this)
-        //     {
-        //         Entity entity = new(index, Vector3Int.zero, Vector3Int.zero);
-        //         idToEntity.Add(index, entity);
-        //         index++;
-        //         return entity;
-        //     }
-        // }
+        private readonly object addEntityLock = new();
+        private readonly object removeEntityLock = new();
 
         public void AddEntity(int spaceId, Entity entity)
         {
-            if (!idToEntity.TryAdd(entity.EntityId, entity))
+            entity.NEntity.Id = NextEntityId;
+            if (!entityIdToEntity.TryAdd(entity.EntityId, entity))
             {
-                Log.Warning($"不能添加 entityId={entity.EntityId}");
+                Log.Warning($"不能添加到entityIdToEntity {entity.EntityId.NameValue()}");
             }
-        }
 
-        public int NextEntityId
-        {
-            get
+            if (!spaceIdToEntities.TryAdd(spaceId, new List<Entity>() {entity}))
             {
-                lock (this)
+                var list = spaceIdToEntities[spaceId];
+                lock (addEntityLock)
                 {
-                    int id = index;
-                    index++;
-                    return id;
+                    list.Add(entity);
                 }
             }
         }
+
+        public void RemoveEntity(int spaceId, Entity entity)
+        {
+            if (!entityIdToEntity.TryRemove(entity.EntityId, out _))
+            {
+                Log.Warning($"不能删除 {entity.EntityId.NameValue()}");
+            }
+
+            if (spaceIdToEntities.TryGetValue(spaceId, out var list))
+            {
+                lock (removeEntityLock)
+                {
+                    list.RemoveAll(it => it.EntityId == entity.EntityId);
+                }
+            }
+            else
+            {
+                Log.Warning($"场景找不到 {spaceId.NameValue()} {entity.EntityId.NameValue()}");
+            }
+        }
+
+        public Entity GetEntity(int entityId)
+        {
+            return entityIdToEntity.GetValueOrDefault(entityId);
+        }
+
+        private int NextEntityId => Interlocked.Increment(ref id);
     }
 }
