@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 
 namespace GameServer
 {
@@ -110,7 +111,7 @@ namespace GameServer
         //     Returns the length of this vector (Read Only).
         public float magnitude
         {
-            
+
             get
             {
                 return (float)Math.Sqrt(x * x + y * y + z * z);
@@ -122,7 +123,7 @@ namespace GameServer
         //     Returns the squared length of this vector (Read Only).
         public int sqrMagnitude
         {
-            
+
             get
             {
                 return x * x + y * y + z * z;
@@ -134,7 +135,7 @@ namespace GameServer
         //     Shorthand for writing Vector3Int(0, 0, 0).
         public static Vector3Int zero
         {
-            
+
             get
             {
                 return s_Zero;
@@ -146,7 +147,7 @@ namespace GameServer
         //     Shorthand for writing Vector3Int(1, 1, 1).
         public static Vector3Int one
         {
-            
+
             get
             {
                 return s_One;
@@ -158,7 +159,7 @@ namespace GameServer
         //     Shorthand for writing Vector3Int(0, 1, 0).
         public static Vector3Int up
         {
-            
+
             get
             {
                 return s_Up;
@@ -170,7 +171,7 @@ namespace GameServer
         //     Shorthand for writing Vector3Int(0, -1, 0).
         public static Vector3Int down
         {
-            
+
             get
             {
                 return s_Down;
@@ -182,7 +183,7 @@ namespace GameServer
         //     Shorthand for writing Vector3Int(-1, 0, 0).
         public static Vector3Int left
         {
-            
+
             get
             {
                 return s_Left;
@@ -194,7 +195,7 @@ namespace GameServer
         //     Shorthand for writing Vector3Int(1, 0, 0).
         public static Vector3Int right
         {
-            
+
             get
             {
                 return s_Right;
@@ -206,7 +207,7 @@ namespace GameServer
         //     Shorthand for writing Vector3Int(0, 0, 1).
         public static Vector3Int forward
         {
-            
+
             get
             {
                 return s_Forward;
@@ -218,7 +219,7 @@ namespace GameServer
         //     Shorthand for writing Vector3Int(0, 0, -1).
         public static Vector3Int back
         {
-            
+
             get
             {
                 return s_Back;
@@ -236,7 +237,7 @@ namespace GameServer
         //
         //   y:
         //     The Y component of the Vector3Int.
-        
+
         public Vector3Int(int x, int y)
         {
             m_X = x;
@@ -257,7 +258,7 @@ namespace GameServer
         //
         //   z:
         //     The Z component of the Vector3Int.
-        
+
         public Vector3Int(int x, int y, int z)
         {
             m_X = x;
@@ -275,7 +276,7 @@ namespace GameServer
         //   y:
         //
         //   z:
-        
+
         public void Set(int x, int y, int z)
         {
             m_X = x;
@@ -291,7 +292,7 @@ namespace GameServer
         //   a:
         //
         //   b:
-        
+
         public static float Distance(Vector3Int a, Vector3Int b)
         {
             return (a - b).magnitude;
@@ -305,7 +306,7 @@ namespace GameServer
         //   lhs:
         //
         //   rhs:
-        
+
         public static Vector3Int Min(Vector3Int lhs, Vector3Int rhs)
         {
             return new Vector3Int(Math.Min(lhs.x, rhs.x), Math.Min(lhs.y, rhs.y), Math.Min(lhs.z, rhs.z));
@@ -319,7 +320,7 @@ namespace GameServer
         //   lhs:
         //
         //   rhs:
-        
+
         public static Vector3Int Max(Vector3Int lhs, Vector3Int rhs)
         {
             return new Vector3Int(Math.Max(lhs.x, rhs.x), Math.Max(lhs.y, rhs.y), Math.Max(lhs.z, rhs.z));
@@ -333,7 +334,7 @@ namespace GameServer
         //   a:
         //
         //   b:
-        
+
         public static Vector3Int Scale(Vector3Int a, Vector3Int b)
         {
             return new Vector3Int(a.x * b.x, a.y * b.y, a.z * b.z);
@@ -345,7 +346,7 @@ namespace GameServer
         //
         // 参数:
         //   scale:
-        
+
         public void Scale(Vector3Int scale)
         {
             x *= scale.x;
@@ -361,7 +362,7 @@ namespace GameServer
         //   min:
         //
         //   max:
-        
+
         public void Clamp(Vector3Int min, Vector3Int max)
         {
             x = Math.Max(min.x, x);
@@ -372,56 +373,56 @@ namespace GameServer
             z = Math.Min(max.z, z);
         }
 
-        
-        
+
+
         public static Vector3Int operator +(Vector3Int a, Vector3Int b)
         {
             return new Vector3Int(a.x + b.x, a.y + b.y, a.z + b.z);
         }
 
-        
+
         public static Vector3Int operator -(Vector3Int a, Vector3Int b)
         {
             return new Vector3Int(a.x - b.x, a.y - b.y, a.z - b.z);
         }
 
-        
+
         public static Vector3Int operator *(Vector3Int a, Vector3Int b)
         {
             return new Vector3Int(a.x * b.x, a.y * b.y, a.z * b.z);
         }
 
-        
+
         public static Vector3Int operator -(Vector3Int a)
         {
             return new Vector3Int(-a.x, -a.y, -a.z);
         }
 
-        
+
         public static Vector3Int operator *(Vector3Int a, int b)
         {
             return new Vector3Int(a.x * b, a.y * b, a.z * b);
         }
 
-        
+
         public static Vector3Int operator *(int a, Vector3Int b)
         {
             return new Vector3Int(a * b.x, a * b.y, a * b.z);
         }
 
-        
+
         public static Vector3Int operator /(Vector3Int a, int b)
         {
             return new Vector3Int(a.x / b, a.y / b, a.z / b);
         }
 
-        
+
         public static bool operator ==(Vector3Int lhs, Vector3Int rhs)
         {
             return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z;
         }
 
-        
+
         public static bool operator !=(Vector3Int lhs, Vector3Int rhs)
         {
             return !(lhs == rhs);
@@ -453,7 +454,7 @@ namespace GameServer
             return Equals((Vector3Int)other);
         }
 
-        
+
         public bool Equals(Vector3Int other)
         {
             return this == other;
@@ -465,7 +466,7 @@ namespace GameServer
         //
         // 返回结果:
         //     The hash code of the Vector3Int.
-        
+
         public override int GetHashCode()
         {
             int hashCode = y.GetHashCode();
@@ -519,3 +520,4 @@ namespace GameServer
         }
     }
 }
+*/

@@ -1,10 +1,11 @@
-﻿using Proto;
+﻿using Kirara;
+using Proto;
 
 namespace GameServer.Model
 {
     internal static class ModelExtensions
     {
-        public static NVector3 GetProto(this Vector3Int self)
+        public static NVector3 GetProto(this Int3 self)
         {
             return new NVector3()
             {
@@ -14,14 +15,9 @@ namespace GameServer.Model
             };
         }
 
-        public static Vector3Int GetNative(this NVector3 self)
+        public static Int3 GetNative(this NVector3 self)
         {
-            return new Vector3Int()
-            {
-                x = self.X,
-                y = self.Y,
-                z = self.Z,
-            };
+            return new Int3(self.X, self.Y, self.Z);
         }
     }
 }

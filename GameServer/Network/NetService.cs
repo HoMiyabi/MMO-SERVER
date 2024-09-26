@@ -95,7 +95,7 @@ namespace GameServer.Network
                 {
                     space.CharacterLeave(conn, character);
                 }
-                CharacterManager.Instance.RemoveCharacter(character.Id);
+                CharacterManager.Instance.RemoveCharacter(character.characterId);
             }
         }
 

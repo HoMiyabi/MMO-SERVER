@@ -1,8 +1,10 @@
-﻿namespace GameServer.Model
+﻿using Kirara;
+
+namespace GameServer.Model
 {
-    public class Monster : Actor
+    public class Monster : Entity
     {
-        public Monster(Vector3Int position, Vector3Int direction) : base(position, direction)
+        public Monster(Int3 position, Int3 direction) : base(position, direction)
         {
         }
     }

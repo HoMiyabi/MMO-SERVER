@@ -29,13 +29,13 @@ namespace GameServer.Model
         /// <param name="character"></param>
         public void CharacterEnter(Connection conn, Character character)
         {
-            Log.Information($"角色进入场景 SpaceId={SpaceDefine.SID} CharacterId={character.Id}");
+            Log.Information($"角色进入场景 SpaceId={SpaceDefine.SID} CharacterId={character.characterId}");
 
             // 角色和场景存入连接
             conn.Set(character);
             character.space = this;
 
-            idToCharacter.Add(character.Id, character);
+            idToCharacter.Add(character.characterId, character);
             character.conn = conn;
 
             if (!connectionToCharacter.ContainsKey(conn))
@@ -48,7 +48,7 @@ namespace GameServer.Model
             {
                 SpaceId = SpaceDefine.SID,
             };
-            response.EntityList.Add(character.NEntity);
+            response.Characters.Add(character.nCharacter);
 
             // 发送角色进入场景的消息给其他人
             foreach (var (_, ch) in idToCharacter)
@@ -60,12 +60,12 @@ namespace GameServer.Model
             }
 
             // 新上线的角色需要获取其他角色
-            response.EntityList.Clear();
+            response.Characters.Clear();
             foreach (var (_, ch) in idToCharacter)
             {
                 if (ch.conn != conn)
                 {
-                    response.EntityList.Add(ch.NEntity);
+                    response.Characters.Add(ch.nCharacter);
                 }
             }
             conn.Send(response);
@@ -79,8 +79,8 @@ namespace GameServer.Model
         /// <param name="character"></param>
         public void CharacterLeave(Connection conn, Character character)
         {
-            Log.Information($"角色离开场景 SpaceId={SpaceDefine.SID} CharacterId={character.Id}");
-            idToCharacter.Remove(character.Id);
+            Log.Information($"角色离开场景 SpaceId={SpaceDefine.SID} CharacterId={character.characterId}");
+            idToCharacter.Remove(character.characterId);
 
             var response = new Proto.SpaceCharacterLeaveResponse()
             {

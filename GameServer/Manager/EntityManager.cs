@@ -19,9 +19,6 @@ namespace GameServer.Manager
         // 记录场景中的Entity列表，<SpaceId, EntityList>
         private ConcurrentDictionary<int, List<Entity>> spaceIdToEntities = new();
 
-        private readonly object addEntityLock = new();
-        private readonly object removeEntityLock = new();
-
         public void AddEntity(int spaceId, Entity entity)
         {
             entity.NEntity.Id = NextEntityId;
@@ -33,7 +30,7 @@ namespace GameServer.Manager
             if (!spaceIdToEntities.TryAdd(spaceId, new List<Entity>() {entity}))
             {
                 var list = spaceIdToEntities[spaceId];
-                lock (addEntityLock)
+                lock (list)
                 {
                     list.Add(entity);
                 }
@@ -49,7 +46,7 @@ namespace GameServer.Manager
 
             if (spaceIdToEntities.TryGetValue(spaceId, out var list))
             {
-                lock (removeEntityLock)
+                lock (list)
                 {
                     list.RemoveAll(it => it.EntityId == entity.EntityId);
                 }

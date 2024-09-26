@@ -1,39 +1,25 @@
-﻿using Proto;
+﻿using Kirara;
+using Proto;
 
 namespace GameServer.Model
 {
     // 在MMO世界进行同步的实体
     public class Entity
     {
-        private Vector3Int position; // 位置
-        private Vector3Int direction; // 方向
-        private NEntity nEntity; // 网络对象
+        public Int3 position; // 位置
+        public Int3 direction; // 方向
+        private NEntity nEntity;
 
         public int EntityId => nEntity.Id;
 
-        public Vector3Int Position
-        {
-            get => position;
-            set
-            {
-                position = value;
-                nEntity.Position = value.GetProto();
-            }
-        }
-
-        public Vector3Int Direction
-        {
-            get => direction;
-            set
-            {
-                direction = value;
-                nEntity.Direction = value.GetProto();
-            }
-        }
-
         public NEntity NEntity
         {
-            get => nEntity;
+            get
+            {
+                nEntity.Position = position.GetProto();
+                nEntity.Direction = direction.GetProto();
+                return nEntity;
+            }
             set
             {
                 nEntity = value;
@@ -42,11 +28,11 @@ namespace GameServer.Model
             }
         }
 
-        public Entity(Vector3Int position, Vector3Int direction)
+        public Entity(Int3 position, Int3 direction)
         {
             nEntity = new NEntity();
-            Position = position;
-            Direction = direction;
+            this.position = position;
+            this.direction = direction;
         }
     }
 }

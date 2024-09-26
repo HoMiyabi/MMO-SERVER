@@ -12,7 +12,7 @@ message HeartBeatResponse
     
 }
 
-message NVector3
+message NInt3
 {
     int32 x = 1;
     int32 y = 2;
@@ -29,9 +29,9 @@ enum EntityState
 
 message NEntity
 {
-    int32 id = 1;
-    NVector3 position = 2;
-    NVector3 direction = 3;
+    int32 entityId = 1;
+    NInt3 position = 2;
+    NInt3 direction = 3;
 }
 
 message NEntitySync
@@ -65,7 +65,7 @@ message GameEnterResponse
 message SpaceCharactersEnterResponse
 {
     int32 spaceId = 1;
-    repeated NEntity entityList = 2;
+    repeated NCharacter characters = 2;
 }
 
 message SpaceCharacterLeaveResponse
@@ -107,7 +107,7 @@ message CharacterCreateRequest
 
 message NCharacter
 {
-    int32 id = 1;
+    NEntity nEntity = 1;
     int32 type_id = 2; // 角色类型
     int32 entity_id = 3;
     string name = 4;
@@ -115,7 +115,6 @@ message NCharacter
     int64 exp = 6;
     int32 spaceId = 7;
     int64 gold = 8;
-    NEntity entity = 9;
     int32 hp = 10;
     int32 mp = 11;
 }

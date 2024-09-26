@@ -32,7 +32,7 @@ namespace GameServer.Manager
         public Character CreateCharacter(DbCharacter dbCharacter)
         {
             var character = new Character(dbCharacter);
-            if (!idToCharacter.TryAdd(character.Id, character))
+            if (!idToCharacter.TryAdd(character.characterId, character))
             {
                 Log.Warning($"不能添加角色到字典 {dbCharacter.Id.NameValue()}");
             }

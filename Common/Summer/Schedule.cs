@@ -1,4 +1,4 @@
-﻿using Serilog;
+﻿/*using Serilog;
 using Summer;
 using System;
 using System.Collections.Generic;
@@ -224,4 +224,4 @@ namespace Summer
             lastTick = now;
         }
     }
-}
+}*/
