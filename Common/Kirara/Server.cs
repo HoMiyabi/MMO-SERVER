@@ -27,8 +27,9 @@ namespace Kirara
             serverSocket.Bind(endPoint);
             serverSocket.Listen();
             Log.Information($"开始监听 {endPoint.Address}:{endPoint.Port}");
+            MessageRouter.Instance.Start(10);
 
-            Accept(cts.Token);
+            _ = Accept(cts.Token);
         }
 
         private async Task Accept(CancellationToken token)

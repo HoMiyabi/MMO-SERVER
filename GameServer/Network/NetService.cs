@@ -1,24 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using GameServer.Database;
 using GameServer.Manager;
 using GameServer.Model;
 using Kirara;
+using Proto;
 using Serilog;
-// using Connection = Summer.Network.Connection;
-// using MessageRouter = Summer.Network.MessageRouter;
 
 namespace GameServer.Network
 {
     public class NetService
     {
-        // private TcpServer tcpServer;
         private Server server;
 
         // 记录conn最后一次心跳包的时间
-        private Dictionary<Connection, DateTime> connToLastHeartBeatTime = new();
+        private ConcurrentDictionary<Connection, DateTime> connToLastHeartBeatTime = new();
 
         private CancellationTokenSource cts = new();
 
@@ -31,22 +30,22 @@ namespace GameServer.Network
 
         public void Start()
         {
-            // tcpServer.Start();
             server.Start();
-            MessageRouter.Instance.Start(10);
 
-            MessageRouter.Instance.Subscribe<Proto.HeartBeatRequest>(OnHeartBeatRequest);
+            MessageRouter.Instance.Subscribe<HeartBeatRequest>(OnHeartBeatRequest);
 
             Task.Run(() => CleanConnectionAsync(cts.Token));
         }
 
-        // todo)) 有线程安全问题
         private async Task CleanConnectionAsync(CancellationToken token)
         {
             while (!token.IsCancellationRequested)
             {
-                await Task.Delay(TimeSpan.FromSeconds(5.0), token);
-                if (token.IsCancellationRequested)
+                try
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(5.0), token);
+                }
+                catch (TaskCanceledException)
                 {
                     break;
                 }
@@ -57,7 +56,10 @@ namespace GameServer.Network
                     if ((now - lastTime).TotalSeconds > 10)
                     {
                         conn.Close();
-                        connToLastHeartBeatTime.Remove(conn);
+                        if (!connToLastHeartBeatTime.TryRemove(conn, out _))
+                        {
+                            Log.Warning($"删除失败 {conn.Get<DbPlayer>().Id} {lastTime}");
+                        }
                     }
                 }
             }
@@ -82,7 +84,10 @@ namespace GameServer.Network
 
         private void OnDisconnected(Connection conn)
         {
-            connToLastHeartBeatTime.Remove(conn);
+            if (!connToLastHeartBeatTime.TryRemove(conn, out var lastTime))
+            {
+                Log.Warning($"删除失败 {conn.Get<DbPlayer>().Id} {lastTime}");
+            }
             // IPEndPoint iPEndPoint = conn.Socket.RemoteEndPoint as IPEndPoint;
             // Log.Information($"客户端断开 IP:{iPEndPoint?.Address} Port:{iPEndPoint?.Port}");
             Log.Information($"客户端断开");

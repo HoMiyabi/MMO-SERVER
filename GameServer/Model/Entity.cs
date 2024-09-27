@@ -10,7 +10,7 @@ namespace GameServer.Model
         public Int3 direction; // 方向
         private NEntity nEntity;
 
-        public int EntityId => nEntity.Id;
+        public int EntityId => nEntity.EntityId;
 
         public NEntity NEntity
         {

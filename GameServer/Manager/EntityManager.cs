@@ -21,7 +21,7 @@ namespace GameServer.Manager
 
         public void AddEntity(int spaceId, Entity entity)
         {
-            entity.NEntity.Id = NextEntityId;
+            entity.NEntity.EntityId = NextEntityId;
             if (!entityIdToEntity.TryAdd(entity.EntityId, entity))
             {
                 Log.Warning($"不能添加到entityIdToEntity {entity.EntityId.NameValue()}");

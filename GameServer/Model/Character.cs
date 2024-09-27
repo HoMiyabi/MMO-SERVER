@@ -22,19 +22,18 @@ namespace GameServer.Model
             Int3.zero)
         {
             this.dbCharacter = dbCharacter;
-            nCharacter = new NCharacter()
+            nCharacter = new NCharacter
             {
+                NEntity = NEntity,
                 Id = dbCharacter.Id,
-                TypeId = dbCharacter.JobId,
-                EntityId = 0,
+                JobId = dbCharacter.JobId,
                 Name = dbCharacter.Name,
+                Hp = dbCharacter.Hp,
+                Mp = dbCharacter.Mp,
                 Level = dbCharacter.Level,
                 Exp = dbCharacter.Exp,
                 SpaceId = dbCharacter.SpaceId,
                 Gold = dbCharacter.Gold,
-                Entity = NEntity,
-                Hp = dbCharacter.Hp,
-                Mp = dbCharacter.Mp,
             };
         }
     }

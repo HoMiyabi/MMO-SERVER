@@ -45,11 +45,11 @@ namespace GameServer.Network
             var list = Db.fsql.Select<DbCharacter>().Where(it => it.PlayerId == player.Id).ToList();
             foreach (var item in list)
             {
-                response.CharacterList.Add(new NCharacter()
+                response.NCharacters.Add(new NCharacter()
                 {
                     Id = item.Id,
                     Name = item.Name,
-                    TypeId = item.JobId,
+                    JobId = item.JobId,
                     Exp = item.Exp,
                     Gold = item.Gold,
                     Level = item.Level,
@@ -113,10 +113,10 @@ namespace GameServer.Network
                 return;
             }
 
-            var character = new DbCharacter()
+            var dbCharacter = new DbCharacter()
             {
                 Name = message.Name,
-                JobId = message.JobType,
+                JobId = message.JobId,
                 Hp = 100,
                 Mp = 100,
                 Level = 1,
@@ -125,7 +125,7 @@ namespace GameServer.Network
                 Gold = 0,
                 PlayerId = player.Id
             };
-            int aff = Db.fsql.Insert(character).ExecuteAffrows();
+            int aff = Db.fsql.Insert(dbCharacter).ExecuteAffrows();
             if (aff > 0)
             {
                 response.Success = true;
@@ -141,7 +141,7 @@ namespace GameServer.Network
                 .Where(it => it.Password == message.Password)
                 .First();
 
-            UserLoginResponse response = new();
+            var response = new UserLoginResponse();
 
             if (dbPlayer != null)
             {
@@ -176,7 +176,6 @@ namespace GameServer.Network
             var response = new GameEnterResponse()
             {
                 Success = true,
-                Entity = character.NEntity,
                 Character = character.nCharacter,
             };
             Log.Debug($"response={response}");

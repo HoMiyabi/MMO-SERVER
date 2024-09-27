@@ -102,7 +102,7 @@ namespace GameServer.Model
             // Log.Information("UpdateEntity " + entitySync);
             foreach (var (_, ch) in idToCharacter)
             {
-                if (ch.EntityId == entitySync.Entity.Id)
+                if (ch.EntityId == entitySync.Entity.EntityId)
                 {
                     ch.NEntity = entitySync.Entity;
                     ch.dbCharacter.X = entitySync.Entity.Position.X;
@@ -111,7 +111,7 @@ namespace GameServer.Model
                 }
                 else
                 {
-                    var response = new Proto.SpaceEntitySyncResponse()
+                    var response = new SpaceEntitySyncResponse()
                     {
                         EntitySync = entitySync,
                     };

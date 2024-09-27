@@ -2,16 +2,6 @@ syntax = "proto3";
 
 package proto;
 
-message HeartBeatRequest
-{
-    
-}
-
-message HeartBeatResponse
-{
-    
-}
-
 message NInt3
 {
     int32 x = 1;
@@ -40,6 +30,24 @@ message NEntitySync
     EntityState state = 2;
 }
 
+message NCharacter
+{
+    NEntity nEntity = 1;
+    int32 id = 2;
+    int32 jobId = 3;
+    string name = 4;
+    int32 hp = 5;
+    int32 mp = 6;
+    int32 level = 7;
+    int64 exp = 8;
+    int32 spaceId = 9;
+    int64 gold = 10;
+}
+
+message HeartBeatRequest {}
+
+message HeartBeatResponse {}
+
 message SpaceEntitySyncRequest
 {
     NEntitySync entitySync = 1;
@@ -58,8 +66,7 @@ message GameEnterRequest
 message GameEnterResponse
 {
     bool success = 1;
-    NEntity entity = 2;
-    NCharacter character = 3;
+    NCharacter character = 2;
 }
 
 message SpaceCharactersEnterResponse
@@ -99,24 +106,17 @@ message UserLoginResponse
     string message = 3;
 }
 
+message CharacterListRequest {}
+
+message CharacterListResponse
+{
+    repeated NCharacter nCharacters = 1;
+}
+
 message CharacterCreateRequest
 {
     string name = 1;
-    int32 jobType = 2;
-}
-
-message NCharacter
-{
-    NEntity nEntity = 1;
-    int32 type_id = 2; // 角色类型
-    int32 entity_id = 3;
-    string name = 4;
-    int32 level = 5;
-    int64 exp = 6;
-    int32 spaceId = 7;
-    int64 gold = 8;
-    int32 hp = 10;
-    int32 mp = 11;
+    int32 jobId = 2;
 }
 
 message CharacterCreateResponse
@@ -124,15 +124,6 @@ message CharacterCreateResponse
     bool success = 1;
     string message = 2;
     NCharacter character = 3;
-}
-
-message CharacterListRequest
-{
-}
-
-message CharacterListResponse
-{
-    repeated NCharacter characterList = 1;
 }
 
 message CharacterDeleteRequest
