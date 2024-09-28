@@ -24,7 +24,7 @@ namespace GameServer.Manager
             var repository = Db.fsql.GetRepository<DbCharacter>();
             foreach (var character in idToCharacter.Values)
             {
-                Log.Information($"保存角色 {character.dbCharacter.X} {character.dbCharacter.Y} {character.dbCharacter.Z}");
+                Log.Verbose($"保存角色 {character.dbCharacter.X} {character.dbCharacter.Y} {character.dbCharacter.Z}");
                 repository.UpdateAsync(character.dbCharacter);
             }
         }

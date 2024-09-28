@@ -2,11 +2,18 @@ syntax = "proto3";
 
 package proto;
 
-message NInt3
+//message NInt3
+//{
+//    int32 x = 1;
+//    int32 y = 2;
+//    int32 z = 3;
+//}
+
+message NFloat3
 {
-    int32 x = 1;
-    int32 y = 2;
-    int32 z = 3;
+    float x = 1;
+    float y = 2;
+    float z = 3;
 }
 
 enum EntityState
@@ -20,8 +27,9 @@ enum EntityState
 message NEntity
 {
     int32 entityId = 1;
-    NInt3 position = 2;
-    NInt3 direction = 3;
+    NFloat3 position = 2;
+    NFloat3 direction = 3;
+    int32 speed = 4;
 }
 
 message NEntitySync

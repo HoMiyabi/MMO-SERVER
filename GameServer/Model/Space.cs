@@ -82,9 +82,9 @@ namespace GameServer.Model
             Log.Information($"角色离开场景 SpaceId={SpaceDefine.SID} CharacterId={character.characterId}");
             idToCharacter.Remove(character.characterId);
 
-            var response = new Proto.SpaceCharacterLeaveResponse()
+            var response = new SpaceCharacterLeaveResponse()
             {
-                EntityId = character.EntityId
+                EntityId = character.NEntity.EntityId,
             };
 
             foreach (var (_, ch) in idToCharacter)
@@ -102,7 +102,7 @@ namespace GameServer.Model
             // Log.Information("UpdateEntity " + entitySync);
             foreach (var (_, ch) in idToCharacter)
             {
-                if (ch.EntityId == entitySync.Entity.EntityId)
+                if (ch.NEntity.EntityId == entitySync.Entity.EntityId)
                 {
                     ch.NEntity = entitySync.Entity;
                     ch.dbCharacter.X = entitySync.Entity.Position.X;

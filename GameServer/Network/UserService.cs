@@ -1,6 +1,5 @@
 ﻿using GameServer.Database;
 using GameServer.Manager;
-using GameServer.Model;
 using Kirara;
 using Proto;
 using Serilog;
@@ -178,7 +177,7 @@ namespace GameServer.Network
                 Success = true,
                 Character = character.nCharacter,
             };
-            Log.Debug($"response={response}");
+            // Log.Debug($"response={response}");
             conn.Send(response);
 
             // 将新角色加入到地图

@@ -18,7 +18,7 @@ namespace GameServer.Network
             MessageRouter.Instance.Subscribe<SpaceEntitySyncRequest>(OnSpaceEntitySyncRequest);
         }
 
-        private void OnSpaceEntitySyncRequest(Connection conn, Proto.SpaceEntitySyncRequest message)
+        private void OnSpaceEntitySyncRequest(Connection conn, SpaceEntitySyncRequest message)
         {
             // 获取当前场景
             var space = conn.Get<Character>()?.space;

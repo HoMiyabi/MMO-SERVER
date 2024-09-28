@@ -140,7 +140,14 @@ namespace Kirara
         {
             if (messageNameToAction.TryGetValue(messageUnit.messageName, out var action))
             {
-                action.DynamicInvoke(messageUnit.conn, messageUnit.message);
+                try
+                {
+                    action.DynamicInvoke(messageUnit.conn, messageUnit.message);
+                }
+                catch (Exception ex)
+                {
+                    Log.Warning($"MessageName={messageUnit.messageName}\n" + ex.Message + ex.StackTrace);
+                }
             }
         }
     }

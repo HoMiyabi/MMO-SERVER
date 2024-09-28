@@ -18,8 +18,8 @@ namespace GameServer.Model
         public DbCharacter dbCharacter;
 
         public Character(DbCharacter dbCharacter) : base(
-            new Int3(dbCharacter.X, dbCharacter.Y, dbCharacter.Z),
-            Int3.zero)
+            new Float3(dbCharacter.X, dbCharacter.Y, dbCharacter.Z),
+            Float3.Zero)
         {
             this.dbCharacter = dbCharacter;
             nCharacter = new NCharacter

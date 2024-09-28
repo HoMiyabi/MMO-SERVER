@@ -24,45 +24,46 @@ namespace Proto {
     static MessageReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg1NZXNzYWdlLnByb3RvEgVwcm90byIoCgVOSW50MxIJCgF4GAEgASgFEgkK",
-            "AXkYAiABKAUSCQoBehgDIAEoBSJcCgdORW50aXR5EhAKCGVudGl0eUlkGAEg",
-            "ASgFEh4KCHBvc2l0aW9uGAIgASgLMgwucHJvdG8uTkludDMSHwoJZGlyZWN0",
-            "aW9uGAMgASgLMgwucHJvdG8uTkludDMiUAoLTkVudGl0eVN5bmMSHgoGZW50",
-            "aXR5GAEgASgLMg4ucHJvdG8uTkVudGl0eRIhCgVzdGF0ZRgCIAEoDjISLnBy",
-            "b3RvLkVudGl0eVN0YXRlIqkBCgpOQ2hhcmFjdGVyEh8KB25FbnRpdHkYASAB",
-            "KAsyDi5wcm90by5ORW50aXR5EgoKAmlkGAIgASgFEg0KBWpvYklkGAMgASgF",
-            "EgwKBG5hbWUYBCABKAkSCgoCaHAYBSABKAUSCgoCbXAYBiABKAUSDQoFbGV2",
-            "ZWwYByABKAUSCwoDZXhwGAggASgDEg8KB3NwYWNlSWQYCSABKAUSDAoEZ29s",
-            "ZBgKIAEoAyISChBIZWFydEJlYXRSZXF1ZXN0IhMKEUhlYXJ0QmVhdFJlc3Bv",
-            "bnNlIkAKFlNwYWNlRW50aXR5U3luY1JlcXVlc3QSJgoKZW50aXR5U3luYxgB",
-            "IAEoCzISLnByb3RvLk5FbnRpdHlTeW5jIkEKF1NwYWNlRW50aXR5U3luY1Jl",
-            "c3BvbnNlEiYKCmVudGl0eVN5bmMYASABKAsyEi5wcm90by5ORW50aXR5U3lu",
-            "YyInChBHYW1lRW50ZXJSZXF1ZXN0EhMKC2NoYXJhY3RlcklkGAEgASgFIkoK",
-            "EUdhbWVFbnRlclJlc3BvbnNlEg8KB3N1Y2Nlc3MYASABKAgSJAoJY2hhcmFj",
-            "dGVyGAIgASgLMhEucHJvdG8uTkNoYXJhY3RlciJWChxTcGFjZUNoYXJhY3Rl",
-            "cnNFbnRlclJlc3BvbnNlEg8KB3NwYWNlSWQYASABKAUSJQoKY2hhcmFjdGVy",
-            "cxgCIAMoCzIRLnByb3RvLk5DaGFyYWN0ZXIiLwobU3BhY2VDaGFyYWN0ZXJM",
-            "ZWF2ZVJlc3BvbnNlEhAKCGVudGl0eUlkGAEgASgFIjkKE1VzZXJSZWdpc3Rl",
-            "clJlcXVlc3QSEAoIdXNlcm5hbWUYASABKAkSEAoIcGFzc3dvcmQYAiABKAki",
-            "RgoUVXNlclJlZ2lzdGVyUmVzcG9uc2USDwoHc3VjY2VzcxgBIAEoCBIMCgRj",
-            "b2RlGAIgASgFEg8KB21lc3NhZ2UYAyABKAkiNgoQVXNlckxvZ2luUmVxdWVz",
-            "dBIQCgh1c2VybmFtZRgBIAEoCRIQCghwYXNzd29yZBgCIAEoCSJDChFVc2Vy",
-            "TG9naW5SZXNwb25zZRIPCgdzdWNjZXNzGAEgASgIEgwKBGNvZGUYAiABKAUS",
-            "DwoHbWVzc2FnZRgDIAEoCSIWChRDaGFyYWN0ZXJMaXN0UmVxdWVzdCI/ChVD",
-            "aGFyYWN0ZXJMaXN0UmVzcG9uc2USJgoLbkNoYXJhY3RlcnMYASADKAsyES5w",
-            "cm90by5OQ2hhcmFjdGVyIjUKFkNoYXJhY3RlckNyZWF0ZVJlcXVlc3QSDAoE",
-            "bmFtZRgBIAEoCRINCgVqb2JJZBgCIAEoBSJhChdDaGFyYWN0ZXJDcmVhdGVS",
-            "ZXNwb25zZRIPCgdzdWNjZXNzGAEgASgIEg8KB21lc3NhZ2UYAiABKAkSJAoJ",
-            "Y2hhcmFjdGVyGAMgASgLMhEucHJvdG8uTkNoYXJhY3RlciItChZDaGFyYWN0",
-            "ZXJEZWxldGVSZXF1ZXN0EhMKC2NoYXJhY3RlcklkGAEgASgFIjsKF0NoYXJh",
-            "Y3RlckRlbGV0ZVJlc3BvbnNlEg8KB3N1Y2Nlc3MYASABKAgSDwoHbWVzc2Fn",
-            "ZRgCIAEoCSo1CgtFbnRpdHlTdGF0ZRIICgROT05FEAASCAoESURMRRABEggK",
-            "BE1PVkUQAhIICgRKVU1QEANiBnByb3RvMw=="));
+            "Cg1NZXNzYWdlLnByb3RvEgVwcm90byIqCgdORmxvYXQzEgkKAXgYASABKAIS",
+            "CQoBeRgCIAEoAhIJCgF6GAMgASgCIm8KB05FbnRpdHkSEAoIZW50aXR5SWQY",
+            "ASABKAUSIAoIcG9zaXRpb24YAiABKAsyDi5wcm90by5ORmxvYXQzEiEKCWRp",
+            "cmVjdGlvbhgDIAEoCzIOLnByb3RvLk5GbG9hdDMSDQoFc3BlZWQYBCABKAUi",
+            "UAoLTkVudGl0eVN5bmMSHgoGZW50aXR5GAEgASgLMg4ucHJvdG8uTkVudGl0",
+            "eRIhCgVzdGF0ZRgCIAEoDjISLnByb3RvLkVudGl0eVN0YXRlIqkBCgpOQ2hh",
+            "cmFjdGVyEh8KB25FbnRpdHkYASABKAsyDi5wcm90by5ORW50aXR5EgoKAmlk",
+            "GAIgASgFEg0KBWpvYklkGAMgASgFEgwKBG5hbWUYBCABKAkSCgoCaHAYBSAB",
+            "KAUSCgoCbXAYBiABKAUSDQoFbGV2ZWwYByABKAUSCwoDZXhwGAggASgDEg8K",
+            "B3NwYWNlSWQYCSABKAUSDAoEZ29sZBgKIAEoAyISChBIZWFydEJlYXRSZXF1",
+            "ZXN0IhMKEUhlYXJ0QmVhdFJlc3BvbnNlIkAKFlNwYWNlRW50aXR5U3luY1Jl",
+            "cXVlc3QSJgoKZW50aXR5U3luYxgBIAEoCzISLnByb3RvLk5FbnRpdHlTeW5j",
+            "IkEKF1NwYWNlRW50aXR5U3luY1Jlc3BvbnNlEiYKCmVudGl0eVN5bmMYASAB",
+            "KAsyEi5wcm90by5ORW50aXR5U3luYyInChBHYW1lRW50ZXJSZXF1ZXN0EhMK",
+            "C2NoYXJhY3RlcklkGAEgASgFIkoKEUdhbWVFbnRlclJlc3BvbnNlEg8KB3N1",
+            "Y2Nlc3MYASABKAgSJAoJY2hhcmFjdGVyGAIgASgLMhEucHJvdG8uTkNoYXJh",
+            "Y3RlciJWChxTcGFjZUNoYXJhY3RlcnNFbnRlclJlc3BvbnNlEg8KB3NwYWNl",
+            "SWQYASABKAUSJQoKY2hhcmFjdGVycxgCIAMoCzIRLnByb3RvLk5DaGFyYWN0",
+            "ZXIiLwobU3BhY2VDaGFyYWN0ZXJMZWF2ZVJlc3BvbnNlEhAKCGVudGl0eUlk",
+            "GAEgASgFIjkKE1VzZXJSZWdpc3RlclJlcXVlc3QSEAoIdXNlcm5hbWUYASAB",
+            "KAkSEAoIcGFzc3dvcmQYAiABKAkiRgoUVXNlclJlZ2lzdGVyUmVzcG9uc2US",
+            "DwoHc3VjY2VzcxgBIAEoCBIMCgRjb2RlGAIgASgFEg8KB21lc3NhZ2UYAyAB",
+            "KAkiNgoQVXNlckxvZ2luUmVxdWVzdBIQCgh1c2VybmFtZRgBIAEoCRIQCghw",
+            "YXNzd29yZBgCIAEoCSJDChFVc2VyTG9naW5SZXNwb25zZRIPCgdzdWNjZXNz",
+            "GAEgASgIEgwKBGNvZGUYAiABKAUSDwoHbWVzc2FnZRgDIAEoCSIWChRDaGFy",
+            "YWN0ZXJMaXN0UmVxdWVzdCI/ChVDaGFyYWN0ZXJMaXN0UmVzcG9uc2USJgoL",
+            "bkNoYXJhY3RlcnMYASADKAsyES5wcm90by5OQ2hhcmFjdGVyIjUKFkNoYXJh",
+            "Y3RlckNyZWF0ZVJlcXVlc3QSDAoEbmFtZRgBIAEoCRINCgVqb2JJZBgCIAEo",
+            "BSJhChdDaGFyYWN0ZXJDcmVhdGVSZXNwb25zZRIPCgdzdWNjZXNzGAEgASgI",
+            "Eg8KB21lc3NhZ2UYAiABKAkSJAoJY2hhcmFjdGVyGAMgASgLMhEucHJvdG8u",
+            "TkNoYXJhY3RlciItChZDaGFyYWN0ZXJEZWxldGVSZXF1ZXN0EhMKC2NoYXJh",
+            "Y3RlcklkGAEgASgFIjsKF0NoYXJhY3RlckRlbGV0ZVJlc3BvbnNlEg8KB3N1",
+            "Y2Nlc3MYASABKAgSDwoHbWVzc2FnZRgCIAEoCSo1CgtFbnRpdHlTdGF0ZRII",
+            "CgROT05FEAASCAoESURMRRABEggKBE1PVkUQAhIICgRKVU1QEANiBnByb3Rv",
+            "Mw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Proto.EntityState), }, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.NInt3), global::Proto.NInt3.Parser, new[]{ "X", "Y", "Z" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.NEntity), global::Proto.NEntity.Parser, new[]{ "EntityId", "Position", "Direction" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.NFloat3), global::Proto.NFloat3.Parser, new[]{ "X", "Y", "Z" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.NEntity), global::Proto.NEntity.Parser, new[]{ "EntityId", "Position", "Direction", "Speed" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.NEntitySync), global::Proto.NEntitySync.Parser, new[]{ "Entity", "State" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.NCharacter), global::Proto.NCharacter.Parser, new[]{ "NEntity", "Id", "JobId", "Name", "Hp", "Mp", "Level", "Exp", "SpaceId", "Gold" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.HeartBeatRequest), global::Proto.HeartBeatRequest.Parser, null, null, null, null, null),
@@ -100,16 +101,16 @@ namespace Proto {
 
   #region Messages
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class NInt3 : pb::IMessage<NInt3>
+  public sealed partial class NFloat3 : pb::IMessage<NFloat3>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<NInt3> _parser = new pb::MessageParser<NInt3>(() => new NInt3());
+    private static readonly pb::MessageParser<NFloat3> _parser = new pb::MessageParser<NFloat3>(() => new NFloat3());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<NInt3> Parser { get { return _parser; } }
+    public static pb::MessageParser<NFloat3> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -125,7 +126,7 @@ namespace Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public NInt3() {
+    public NFloat3() {
       OnConstruction();
     }
 
@@ -133,7 +134,7 @@ namespace Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public NInt3(NInt3 other) : this() {
+    public NFloat3(NFloat3 other) : this() {
       x_ = other.x_;
       y_ = other.y_;
       z_ = other.z_;
@@ -142,16 +143,16 @@ namespace Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public NInt3 Clone() {
-      return new NInt3(this);
+    public NFloat3 Clone() {
+      return new NFloat3(this);
     }
 
     /// <summary>Field number for the "x" field.</summary>
     public const int XFieldNumber = 1;
-    private int x_;
+    private float x_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int X {
+    public float X {
       get { return x_; }
       set {
         x_ = value;
@@ -160,10 +161,10 @@ namespace Proto {
 
     /// <summary>Field number for the "y" field.</summary>
     public const int YFieldNumber = 2;
-    private int y_;
+    private float y_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int Y {
+    public float Y {
       get { return y_; }
       set {
         y_ = value;
@@ -172,10 +173,10 @@ namespace Proto {
 
     /// <summary>Field number for the "z" field.</summary>
     public const int ZFieldNumber = 3;
-    private int z_;
+    private float z_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int Z {
+    public float Z {
       get { return z_; }
       set {
         z_ = value;
@@ -185,21 +186,21 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as NInt3);
+      return Equals(other as NFloat3);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(NInt3 other) {
+    public bool Equals(NFloat3 other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (X != other.X) return false;
-      if (Y != other.Y) return false;
-      if (Z != other.Z) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(X, other.X)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Y, other.Y)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Z, other.Z)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -207,9 +208,9 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (X != 0) hash ^= X.GetHashCode();
-      if (Y != 0) hash ^= Y.GetHashCode();
-      if (Z != 0) hash ^= Z.GetHashCode();
+      if (X != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(X);
+      if (Y != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Y);
+      if (Z != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Z);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -228,17 +229,17 @@ namespace Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (X != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(X);
+      if (X != 0F) {
+        output.WriteRawTag(13);
+        output.WriteFloat(X);
       }
-      if (Y != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(Y);
+      if (Y != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(Y);
       }
-      if (Z != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(Z);
+      if (Z != 0F) {
+        output.WriteRawTag(29);
+        output.WriteFloat(Z);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -250,17 +251,17 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (X != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(X);
+      if (X != 0F) {
+        output.WriteRawTag(13);
+        output.WriteFloat(X);
       }
-      if (Y != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(Y);
+      if (Y != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(Y);
       }
-      if (Z != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(Z);
+      if (Z != 0F) {
+        output.WriteRawTag(29);
+        output.WriteFloat(Z);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -272,14 +273,14 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (X != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(X);
+      if (X != 0F) {
+        size += 1 + 4;
       }
-      if (Y != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Y);
+      if (Y != 0F) {
+        size += 1 + 4;
       }
-      if (Z != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Z);
+      if (Z != 0F) {
+        size += 1 + 4;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -289,17 +290,17 @@ namespace Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(NInt3 other) {
+    public void MergeFrom(NFloat3 other) {
       if (other == null) {
         return;
       }
-      if (other.X != 0) {
+      if (other.X != 0F) {
         X = other.X;
       }
-      if (other.Y != 0) {
+      if (other.Y != 0F) {
         Y = other.Y;
       }
-      if (other.Z != 0) {
+      if (other.Z != 0F) {
         Z = other.Z;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -321,16 +322,16 @@ namespace Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            X = input.ReadInt32();
+          case 13: {
+            X = input.ReadFloat();
             break;
           }
-          case 16: {
-            Y = input.ReadInt32();
+          case 21: {
+            Y = input.ReadFloat();
             break;
           }
-          case 24: {
-            Z = input.ReadInt32();
+          case 29: {
+            Z = input.ReadFloat();
             break;
           }
         }
@@ -352,16 +353,16 @@ namespace Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 8: {
-            X = input.ReadInt32();
+          case 13: {
+            X = input.ReadFloat();
             break;
           }
-          case 16: {
-            Y = input.ReadInt32();
+          case 21: {
+            Y = input.ReadFloat();
             break;
           }
-          case 24: {
-            Z = input.ReadInt32();
+          case 29: {
+            Z = input.ReadFloat();
             break;
           }
         }
@@ -409,6 +410,7 @@ namespace Proto {
       entityId_ = other.entityId_;
       position_ = other.position_ != null ? other.position_.Clone() : null;
       direction_ = other.direction_ != null ? other.direction_.Clone() : null;
+      speed_ = other.speed_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -432,10 +434,10 @@ namespace Proto {
 
     /// <summary>Field number for the "position" field.</summary>
     public const int PositionFieldNumber = 2;
-    private global::Proto.NInt3 position_;
+    private global::Proto.NFloat3 position_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Proto.NInt3 Position {
+    public global::Proto.NFloat3 Position {
       get { return position_; }
       set {
         position_ = value;
@@ -444,13 +446,25 @@ namespace Proto {
 
     /// <summary>Field number for the "direction" field.</summary>
     public const int DirectionFieldNumber = 3;
-    private global::Proto.NInt3 direction_;
+    private global::Proto.NFloat3 direction_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Proto.NInt3 Direction {
+    public global::Proto.NFloat3 Direction {
       get { return direction_; }
       set {
         direction_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "speed" field.</summary>
+    public const int SpeedFieldNumber = 4;
+    private int speed_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Speed {
+      get { return speed_; }
+      set {
+        speed_ = value;
       }
     }
 
@@ -472,6 +486,7 @@ namespace Proto {
       if (EntityId != other.EntityId) return false;
       if (!object.Equals(Position, other.Position)) return false;
       if (!object.Equals(Direction, other.Direction)) return false;
+      if (Speed != other.Speed) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -482,6 +497,7 @@ namespace Proto {
       if (EntityId != 0) hash ^= EntityId.GetHashCode();
       if (position_ != null) hash ^= Position.GetHashCode();
       if (direction_ != null) hash ^= Direction.GetHashCode();
+      if (Speed != 0) hash ^= Speed.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -512,6 +528,10 @@ namespace Proto {
         output.WriteRawTag(26);
         output.WriteMessage(Direction);
       }
+      if (Speed != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(Speed);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -534,6 +554,10 @@ namespace Proto {
         output.WriteRawTag(26);
         output.WriteMessage(Direction);
       }
+      if (Speed != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(Speed);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -553,6 +577,9 @@ namespace Proto {
       if (direction_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Direction);
       }
+      if (Speed != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Speed);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -570,15 +597,18 @@ namespace Proto {
       }
       if (other.position_ != null) {
         if (position_ == null) {
-          Position = new global::Proto.NInt3();
+          Position = new global::Proto.NFloat3();
         }
         Position.MergeFrom(other.Position);
       }
       if (other.direction_ != null) {
         if (direction_ == null) {
-          Direction = new global::Proto.NInt3();
+          Direction = new global::Proto.NFloat3();
         }
         Direction.MergeFrom(other.Direction);
+      }
+      if (other.Speed != 0) {
+        Speed = other.Speed;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -605,16 +635,20 @@ namespace Proto {
           }
           case 18: {
             if (position_ == null) {
-              Position = new global::Proto.NInt3();
+              Position = new global::Proto.NFloat3();
             }
             input.ReadMessage(Position);
             break;
           }
           case 26: {
             if (direction_ == null) {
-              Direction = new global::Proto.NInt3();
+              Direction = new global::Proto.NFloat3();
             }
             input.ReadMessage(Direction);
+            break;
+          }
+          case 32: {
+            Speed = input.ReadInt32();
             break;
           }
         }
@@ -642,16 +676,20 @@ namespace Proto {
           }
           case 18: {
             if (position_ == null) {
-              Position = new global::Proto.NInt3();
+              Position = new global::Proto.NFloat3();
             }
             input.ReadMessage(Position);
             break;
           }
           case 26: {
             if (direction_ == null) {
-              Direction = new global::Proto.NInt3();
+              Direction = new global::Proto.NFloat3();
             }
             input.ReadMessage(Direction);
+            break;
+          }
+          case 32: {
+            Speed = input.ReadInt32();
             break;
           }
         }

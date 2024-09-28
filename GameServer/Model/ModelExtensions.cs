@@ -5,9 +5,9 @@ namespace GameServer.Model
 {
     internal static class ModelExtensions
     {
-        public static NInt3 GetProto(this Int3 self)
+        public static NFloat3 GetProto(this Float3 self)
         {
-            return new NInt3()
+            return new NFloat3()
             {
                 X = self.x,
                 Y = self.y,
@@ -15,9 +15,9 @@ namespace GameServer.Model
             };
         }
 
-        public static Int3 GetNative(this NInt3 self)
+        public static Float3 GetNative(this NFloat3 self)
         {
-            return new Int3(self.X, self.Y, self.Z);
+            return new Float3(self.X, self.Y, self.Z);
         }
     }
 }

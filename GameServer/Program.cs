@@ -5,7 +5,7 @@ using Serilog;
 
 namespace GameServer
 {
-    internal class Program
+    internal static class Program
     {
         private static void InitLogger()
         {
@@ -41,6 +41,8 @@ namespace GameServer
             Console.ReadLine();
             netService.Close();
             CharacterManager.Instance.Close();
+
+            Log.Information("Bye bye!");
         }
     }
 }

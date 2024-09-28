@@ -1,4 +1,6 @@
-﻿namespace Kirara
+﻿using System;
+
+namespace Kirara
 {
     public struct Float3
     {
@@ -8,7 +10,7 @@
 
         public Float3 xzy
         {
-            get => new Float3(x, z, y);
+            get => new(x, z, y);
             set
             {
                 x = value.x;
@@ -16,6 +18,8 @@
                 y = value.z;
             }
         }
+
+        public static readonly Float3 Zero = new(0f, 0f, 0f);
 
         public Float3(float x, float y, float z)
         {
@@ -62,6 +66,16 @@
         public static Float3 operator /(Float3 l, float r)
         {
             return new Float3(l.x / r, l.y / r, l.z / r);
+        }
+
+        public float Dot(Float3 v)
+        {
+            return x * v.x + y * v.y + z * v.z;
+        }
+
+        public float Length()
+        {
+            return (float)Math.Sqrt(x * x + y * y + z * z);
         }
     }
 }

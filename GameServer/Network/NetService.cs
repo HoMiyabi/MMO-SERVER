@@ -79,7 +79,7 @@ namespace GameServer.Network
             connToLastHeartBeatTime[conn] = DateTime.UtcNow;
 
             IPEndPoint iPEndPoint = conn.socket.RemoteEndPoint as IPEndPoint;
-            Log.Information($"客户端连接 IP:{iPEndPoint?.Address} Port:{iPEndPoint?.Port}");
+            Log.Information($"客户端连接 {iPEndPoint?.Address}:{iPEndPoint?.Port}");
         }
 
         private void OnDisconnected(Connection conn)
