@@ -5,7 +5,7 @@ namespace GameServer.Model
 {
     internal static class ModelExtensions
     {
-        public static NFloat3 GetProto(this Float3 self)
+        public static NFloat3 Proto(this Float3 self)
         {
             return new NFloat3()
             {
@@ -15,7 +15,7 @@ namespace GameServer.Model
             };
         }
 
-        public static Float3 GetNative(this NFloat3 self)
+        public static Float3 Float3(this NFloat3 self)
         {
             return new Float3(self.X, self.Y, self.Z);
         }

@@ -35,6 +35,7 @@ namespace GameServer.Model
                 SpaceId = dbCharacter.SpaceId,
                 Gold = dbCharacter.Gold,
             };
+            speed = 10;
         }
     }
 }

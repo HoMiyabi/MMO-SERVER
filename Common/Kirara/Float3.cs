@@ -77,5 +77,10 @@ namespace Kirara
         {
             return (float)Math.Sqrt(x * x + y * y + z * z);
         }
+
+        public static float Distance(Float3 l, Float3 r)
+        {
+            return (l - r).Length();
+        }
     }
 }

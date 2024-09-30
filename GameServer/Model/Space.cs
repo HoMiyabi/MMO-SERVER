@@ -48,7 +48,7 @@ namespace GameServer.Model
             {
                 SpaceId = SpaceDefine.SID,
             };
-            response.Characters.Add(character.nCharacter);
+            response.NCharacters.Add(character.nCharacter);
 
             // 发送角色进入场景的消息给其他人
             foreach (var (_, ch) in idToCharacter)
@@ -60,12 +60,12 @@ namespace GameServer.Model
             }
 
             // 新上线的角色需要获取其他角色
-            response.Characters.Clear();
+            response.NCharacters.Clear();
             foreach (var (_, ch) in idToCharacter)
             {
                 if (ch.conn != conn)
                 {
-                    response.Characters.Add(ch.nCharacter);
+                    response.NCharacters.Add(ch.nCharacter);
                 }
             }
             conn.Send(response);
@@ -84,7 +84,7 @@ namespace GameServer.Model
 
             var response = new SpaceCharacterLeaveResponse()
             {
-                EntityId = character.NEntity.EntityId,
+                EntityId = character.entityId,
             };
 
             foreach (var (_, ch) in idToCharacter)
@@ -100,14 +100,14 @@ namespace GameServer.Model
         public void UpdateEntity(NEntitySync entitySync)
         {
             // Log.Information("UpdateEntity " + entitySync);
-            foreach (var (_, ch) in idToCharacter)
+            foreach (var (_, character) in idToCharacter)
             {
-                if (ch.NEntity.EntityId == entitySync.Entity.EntityId)
+                if (character.entityId == entitySync.NEntity.EntityId)
                 {
-                    ch.NEntity = entitySync.Entity;
-                    ch.dbCharacter.X = entitySync.Entity.Position.X;
-                    ch.dbCharacter.Y = entitySync.Entity.Position.Y;
-                    ch.dbCharacter.Z = entitySync.Entity.Position.Z;
+                    character.Update(entitySync.NEntity);
+                    character.dbCharacter.X = entitySync.NEntity.Position.X;
+                    character.dbCharacter.Y = entitySync.NEntity.Position.Y;
+                    character.dbCharacter.Z = entitySync.NEntity.Position.Z;
                 }
                 else
                 {
@@ -115,7 +115,7 @@ namespace GameServer.Model
                     {
                         EntitySync = entitySync,
                     };
-                    ch.conn.Send(response);
+                    character.conn.Send(response);
                 }
             }
         }

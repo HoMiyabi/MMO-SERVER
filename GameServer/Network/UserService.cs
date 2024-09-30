@@ -175,7 +175,7 @@ namespace GameServer.Network
             var response = new GameEnterResponse()
             {
                 Success = true,
-                Character = character.nCharacter,
+                NCharacter = character.nCharacter,
             };
             // Log.Debug($"response={response}");
             conn.Send(response);

@@ -34,7 +34,7 @@ message NEntity
 
 message NEntitySync
 {
-    NEntity entity = 1;
+    NEntity nEntity = 1;
     EntityState state = 2;
 }
 
@@ -74,13 +74,13 @@ message GameEnterRequest
 message GameEnterResponse
 {
     bool success = 1;
-    NCharacter character = 2;
+    NCharacter nCharacter = 2;
 }
 
 message SpaceCharactersEnterResponse
 {
     int32 spaceId = 1;
-    repeated NCharacter characters = 2;
+    repeated NCharacter nCharacters = 2;
 }
 
 message SpaceCharacterLeaveResponse
@@ -131,7 +131,7 @@ message CharacterCreateResponse
 {
     bool success = 1;
     string message = 2;
-    NCharacter character = 3;
+    NCharacter nCharacter = 3;
 }
 
 message CharacterDeleteRequest

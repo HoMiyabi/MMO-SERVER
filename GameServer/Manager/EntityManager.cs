@@ -21,10 +21,10 @@ namespace GameServer.Manager
 
         public void AddEntity(int spaceId, Entity entity)
         {
-            entity.NEntity.EntityId = NextEntityId;
-            if (!entityIdToEntity.TryAdd(entity.NEntity.EntityId, entity))
+            entity.entityId = NextEntityId;
+            if (!entityIdToEntity.TryAdd(entity.entityId, entity))
             {
-                Log.Warning($"不能添加到entityIdToEntity {entity.NEntity.EntityId.NameValue()}");
+                Log.Warning($"不能添加到entityIdToEntity {entity.entityId.NameValue()}");
             }
 
             if (!spaceIdToEntities.TryAdd(spaceId, new List<Entity>() {entity}))
@@ -39,21 +39,21 @@ namespace GameServer.Manager
 
         public void RemoveEntity(int spaceId, Entity entity)
         {
-            if (!entityIdToEntity.TryRemove(entity.NEntity.EntityId, out _))
+            if (!entityIdToEntity.TryRemove(entity.entityId, out _))
             {
-                Log.Warning($"不能删除 {entity.NEntity.EntityId.NameValue()}");
+                Log.Warning($"不能删除 {entity.entityId.NameValue()}");
             }
 
             if (spaceIdToEntities.TryGetValue(spaceId, out var list))
             {
                 lock (list)
                 {
-                    list.RemoveAll(it => it.NEntity.EntityId == entity.NEntity.EntityId);
+                    list.RemoveAll(it => it.entityId == entity.entityId);
                 }
             }
             else
             {
-                Log.Warning($"场景找不到 {spaceId.NameValue()} {entity.NEntity.EntityId.NameValue()}");
+                Log.Warning($"场景找不到 {spaceId.NameValue()} {entity.entityId.NameValue()}");
             }
         }
 

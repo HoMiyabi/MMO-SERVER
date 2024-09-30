@@ -1,4 +1,5 @@
-﻿using GameServer.Manager;
+﻿using System;
+using GameServer.Manager;
 using GameServer.Model;
 using Kirara;
 using Proto;
@@ -23,12 +24,19 @@ namespace GameServer.Network
             // 获取当前场景
             var space = conn.Get<Character>()?.space;
 
-            if (space == null)
+            var nEntity = message.EntitySync.NEntity;
+            var serverEntity = EntityManager.Instance.GetEntity(nEntity.EntityId);
+            float distance = Float3.Distance(serverEntity.position, nEntity.Position.Float3());
+            float dt = (float)(DateTime.UtcNow - serverEntity.lastUpdateTime).TotalSeconds;
+
+            dt = Math.Min(dt, 1f);
+
+            if (distance > serverEntity.speed * dt * 1.5f)
             {
                 return;
             }
 
-            space.UpdateEntity(message.EntitySync);
+            space?.UpdateEntity(message.EntitySync);
         }
     }
 }
