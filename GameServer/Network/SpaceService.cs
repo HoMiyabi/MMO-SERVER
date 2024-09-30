@@ -3,6 +3,7 @@ using GameServer.Manager;
 using GameServer.Model;
 using Kirara;
 using Proto;
+using Serilog;
 
 namespace GameServer.Network
 {
@@ -22,7 +23,8 @@ namespace GameServer.Network
         private void OnSpaceEntitySyncRequest(Connection conn, SpaceEntitySyncRequest message)
         {
             // 获取当前场景
-            var space = conn.Get<Character>()?.space;
+            var character = conn.Get<Character>();
+            var space = character?.space;
 
             var nEntity = message.EntitySync.NEntity;
             var serverEntity = EntityManager.Instance.GetEntity(nEntity.EntityId);
@@ -31,8 +33,20 @@ namespace GameServer.Network
 
             dt = Math.Min(dt, 1f);
 
-            if (distance > serverEntity.speed * dt * 1.5f)
+            float limit = serverEntity.speed * dt * 1.5f;
+
+            if (float.IsNaN(distance) || distance > limit)
             {
+                Log.Information($"角色移动过快 {character?.characterId.NameValue()} {distance.NameValue()} {limit.NameValue()}");
+                var response = new SpaceEntitySyncResponse
+                {
+                    EntitySync = new NEntitySync
+                    {
+                        NEntity = serverEntity.NEntity,
+                        Force = true,
+                    },
+                };
+                conn.Send(response);
                 return;
             }
 

@@ -144,9 +144,14 @@ namespace Kirara
                 {
                     action.DynamicInvoke(messageUnit.conn, messageUnit.message);
                 }
+                catch (TargetInvocationException ex)
+                {
+                    var inner = ex.InnerException;
+                    Log.Warning($"{messageUnit.messageName.NameValue()} {inner.Message} {inner.StackTrace}");
+                }
                 catch (Exception ex)
                 {
-                    Log.Warning($"MessageName={messageUnit.messageName}\n" + ex.Message + ex.StackTrace);
+                    Log.Warning($"{messageUnit.messageName.NameValue()} {ex.Message} {ex.StackTrace}");
                 }
             }
         }

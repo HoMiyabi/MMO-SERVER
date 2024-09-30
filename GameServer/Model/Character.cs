@@ -13,7 +13,28 @@ namespace GameServer.Model
 
         public Space space { get; set; }
 
-        public NCharacter nCharacter { get; set; }
+        private NCharacter nCharacter;
+
+        public NCharacter NCharacter
+        {
+            get
+            {
+                nCharacter = new NCharacter
+                {
+                    NEntity = NEntity,
+                    Id = dbCharacter.Id,
+                    JobId = dbCharacter.JobId,
+                    Name = dbCharacter.Name,
+                    Hp = dbCharacter.Hp,
+                    Mp = dbCharacter.Mp,
+                    Level = dbCharacter.Level,
+                    Exp = dbCharacter.Exp,
+                    SpaceId = dbCharacter.SpaceId,
+                    Gold = dbCharacter.Gold,
+                };
+                return nCharacter;
+            }
+        }
 
         public DbCharacter dbCharacter;
 
@@ -22,20 +43,7 @@ namespace GameServer.Model
             Float3.Zero)
         {
             this.dbCharacter = dbCharacter;
-            nCharacter = new NCharacter
-            {
-                NEntity = NEntity,
-                Id = dbCharacter.Id,
-                JobId = dbCharacter.JobId,
-                Name = dbCharacter.Name,
-                Hp = dbCharacter.Hp,
-                Mp = dbCharacter.Mp,
-                Level = dbCharacter.Level,
-                Exp = dbCharacter.Exp,
-                SpaceId = dbCharacter.SpaceId,
-                Gold = dbCharacter.Gold,
-            };
-            speed = 10;
+            speed = 20;
         }
     }
 }

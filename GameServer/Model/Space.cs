@@ -48,7 +48,7 @@ namespace GameServer.Model
             {
                 SpaceId = SpaceDefine.SID,
             };
-            response.NCharacters.Add(character.nCharacter);
+            response.NCharacters.Add(character.NCharacter);
 
             // 发送角色进入场景的消息给其他人
             foreach (var (_, ch) in idToCharacter)
@@ -65,7 +65,7 @@ namespace GameServer.Model
             {
                 if (ch.conn != conn)
                 {
-                    response.NCharacters.Add(ch.nCharacter);
+                    response.NCharacters.Add(ch.NCharacter);
                 }
             }
             conn.Send(response);

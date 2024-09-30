@@ -8,18 +8,18 @@ namespace Kirara
         /// <summary>
         ///
         /// </summary>
-        /// <returns>"variable name=value"</returns>
+        /// <returns>"name=value"</returns>
         [Pure]
-        public static string NameValue<T>(this T variable, [CallerArgumentExpression("variable")] string name = null)
+        public static string NameValue<T>(this T value, [CallerArgumentExpression("value")] string name = null)
         {
-            string valueText = variable switch
+            string valueText = value switch
             {
                 null => "null",
-                char => $"'{variable}'",
-                string => $"\"{variable}\"",
-                _ => variable.ToString(),
+                char => $"'{value}'",
+                string => $"\"{value}\"",
+                _ => value.ToString(),
             };
-            return name + '=' + valueText;
+            return $"{name}={valueText}";
         }
     }
 }

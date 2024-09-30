@@ -36,6 +36,7 @@ message NEntitySync
 {
     NEntity nEntity = 1;
     EntityState state = 2;
+    bool force = 3;
 }
 
 message NCharacter

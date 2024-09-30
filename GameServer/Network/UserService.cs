@@ -160,7 +160,7 @@ namespace GameServer.Network
         {
             Log.Information($"玩家进入游戏，id={message.CharacterId}");
 
-            // 获取当前角色
+            // 获取当前玩家
             var player = conn.Get<DbPlayer>();
             // 查询数据库的角色
             var dbCharacter = Db.fsql.Select<DbCharacter>()
@@ -175,7 +175,7 @@ namespace GameServer.Network
             var response = new GameEnterResponse()
             {
                 Success = true,
-                NCharacter = character.nCharacter,
+                NCharacter = character.NCharacter,
             };
             // Log.Debug($"response={response}");
             conn.Send(response);

@@ -32,7 +32,7 @@ namespace GameServer.Model
             entityId = nEntity.EntityId;
             position = nEntity.Position.Float3();
             direction = nEntity.Direction.Float3();
-            speed = nEntity.Speed;
+            // speed = nEntity.Speed;
 
             lastUpdateTime = DateTime.UtcNow;
         }
