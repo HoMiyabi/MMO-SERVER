@@ -8,10 +8,12 @@ namespace GameServer.Manager
     public class DefineManager : Singleton<DefineManager>
     {
         public Dictionary<int, SpaceDefine> spaceDefineDict;
+        public Dictionary<int, UnitDefine> unitDefineDict;
 
         public void Init()
         {
-            spaceDefineDict = Load<SpaceDefine>("Data/SpaceDefine.json");
+            spaceDefineDict = Load<SpaceDefine>("Define/SpaceDefine.json");
+            unitDefineDict = Load<UnitDefine>("Define/UnitDefine.json");
         }
 
         private static string LoadFile(string filePath)

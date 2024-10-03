@@ -1,18 +1,18 @@
-$excelPath = "./excel"
+$excelsPath = "./excel"
 $outPath = "./out"
 $exe = "./excel2json.exe"
 $excelFilter = "*.xlsx"
 $copyDestPaths = @(
-    "C:\Things\Code\CSharp\MMO-SERVER\GameServer\Data",
-    "C:\UnityProjects\MMOGAME\Assets\Resources\Data"
+    "C:\Things\Code\CSharp\MMO-SERVER\GameServer\Define",
+    "C:\UnityProjects\MMOGAME\Assets\Resources\Define"
 )
 
-$excelFiles = Get-ChildItem -Path $excelPath -Filter $excelFilter
+$excelFiles = Get-ChildItem -Path $excelsPath -Filter $excelFilter
 
-Write-Output "转换..."
+Write-Output "生成..."
 foreach ($file in $excelFiles)
 {
-    $excelPath = Join-Path $excelPath $file.Name
+    $excelPath = Join-Path $excelsPath $file.Name
     $jsonPath = Join-Path $outPath ($file.BaseName + ".json")
     $csharpPath = Join-Path $outPath ($file.BaseName + ".cs")
     & $exe @("--excel", $excelPath,
