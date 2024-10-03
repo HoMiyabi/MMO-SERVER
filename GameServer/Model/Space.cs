@@ -29,13 +29,13 @@ namespace GameServer.Model
         /// <param name="character"></param>
         public void CharacterEnter(Connection conn, Character character)
         {
-            Log.Information($"角色进入场景 SpaceId={SpaceDefine.SID} CharacterId={character.characterId}");
+            Log.Information($"角色进入场景 SpaceId={SpaceDefine.SID} {character.id.NameValue()}");
 
             // 角色和场景存入连接
             conn.Set(character);
             character.space = this;
 
-            idToCharacter.Add(character.characterId, character);
+            idToCharacter.Add(character.id, character);
             character.conn = conn;
 
             if (!connectionToCharacter.ContainsKey(conn))
@@ -79,8 +79,8 @@ namespace GameServer.Model
         /// <param name="character"></param>
         public void CharacterLeave(Connection conn, Character character)
         {
-            Log.Information($"角色离开场景 SpaceId={SpaceDefine.SID} CharacterId={character.characterId}");
-            idToCharacter.Remove(character.characterId);
+            Log.Information($"角色离开场景 {SpaceDefine.SID.NameValue()} {character.id.NameValue()}");
+            idToCharacter.Remove(character.id);
 
             var response = new SpaceCharacterLeaveResponse()
             {
@@ -105,9 +105,6 @@ namespace GameServer.Model
                 if (character.entityId == entitySync.NEntity.EntityId)
                 {
                     character.Update(entitySync.NEntity);
-                    character.dbCharacter.X = entitySync.NEntity.Position.X;
-                    character.dbCharacter.Y = entitySync.NEntity.Position.Y;
-                    character.dbCharacter.Z = entitySync.NEntity.Position.Z;
                 }
                 else
                 {

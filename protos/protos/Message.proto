@@ -29,7 +29,7 @@ message NEntity
     int32 entityId = 1;
     NFloat3 position = 2;
     NFloat3 direction = 3;
-    int32 speed = 4;
+    float speed = 4;
 }
 
 message NEntitySync

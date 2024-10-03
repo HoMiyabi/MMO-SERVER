@@ -24,15 +24,15 @@ namespace GameServer.Manager
             var repository = Db.fsql.GetRepository<DbCharacter>();
             foreach (var character in idToCharacter.Values)
             {
-                Log.Verbose($"保存角色 {character.dbCharacter.X} {character.dbCharacter.Y} {character.dbCharacter.Z}");
-                repository.UpdateAsync(character.dbCharacter);
+                Log.Verbose($"保存角色 {character.position.NameValue()}");
+                repository.UpdateAsync(character.DbCharacter);
             }
         }
 
         public Character CreateCharacter(DbCharacter dbCharacter)
         {
             var character = new Character(dbCharacter);
-            if (!idToCharacter.TryAdd(character.characterId, character))
+            if (!idToCharacter.TryAdd(character.id, character))
             {
                 Log.Warning($"不能添加角色到字典 {dbCharacter.Id.NameValue()}");
             }
@@ -46,7 +46,7 @@ namespace GameServer.Manager
             {
                 Log.Warning($"字典找不到角色 {characterId.NameValue()}");
             }
-            EntityManager.Instance.RemoveEntity(character.dbCharacter.SpaceId, character);
+            EntityManager.Instance.RemoveEntity(character.spaceId, character);
         }
 
         public void ClearCharacter()

@@ -86,7 +86,7 @@ namespace GameServer.Network
         {
             if (!connToLastHeartBeatTime.TryRemove(conn, out var lastTime))
             {
-                Log.Warning($"删除失败 {conn.Get<DbPlayer>().Id} {lastTime}");
+                Log.Warning($"删除失败 {conn.Get<DbPlayer>().Id} {lastTime.NameValue()}");
             }
             // IPEndPoint iPEndPoint = conn.Socket.RemoteEndPoint as IPEndPoint;
             // Log.Information($"客户端断开 IP:{iPEndPoint?.Address} Port:{iPEndPoint?.Port}");
@@ -100,7 +100,7 @@ namespace GameServer.Network
                 {
                     space.CharacterLeave(conn, character);
                 }
-                CharacterManager.Instance.RemoveCharacter(character.characterId);
+                CharacterManager.Instance.RemoveCharacter(character.id);
             }
         }
 

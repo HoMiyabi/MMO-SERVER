@@ -10,7 +10,7 @@ namespace GameServer.Model
         public int entityId;
         public Float3 position;
         public Float3 direction;
-        public int speed;
+        public float speed;
 
         public DateTime lastUpdateTime;
 
