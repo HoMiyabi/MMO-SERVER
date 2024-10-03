@@ -14,18 +14,13 @@ namespace GameServer.Model
 
         public DateTime lastUpdateTime;
 
-        private NEntity nEntity;
-        public NEntity NEntity
+        public NEntity NEntity => new()
         {
-            get
-            {
-                nEntity.EntityId = entityId;
-                nEntity.Position = position.Proto();
-                nEntity.Direction = position.Proto();
-                nEntity.Speed = speed;
-                return nEntity;
-            }
-        }
+            EntityId = entityId,
+            Position = position.Proto(),
+            Direction = direction.Proto(),
+            Speed = speed,
+        };
 
         public void Update(NEntity nEntity)
         {
@@ -39,7 +34,6 @@ namespace GameServer.Model
 
         public Entity(Float3 position, Float3 direction)
         {
-            nEntity = new NEntity();
             this.position = position;
             this.direction = direction;
             lastUpdateTime = DateTime.UtcNow;
