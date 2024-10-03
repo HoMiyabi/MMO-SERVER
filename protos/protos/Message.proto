@@ -9,6 +9,13 @@ package proto;
 //    int32 z = 3;
 //}
 
+enum EntityType
+{
+    Character = 0;
+    Monster = 1;
+    NPC = 2;
+}
+
 message NFloat3
 {
     float x = 1;

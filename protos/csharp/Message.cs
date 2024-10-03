@@ -57,11 +57,12 @@ namespace Proto {
             "Y3RlchgDIAEoCzIRLnByb3RvLk5DaGFyYWN0ZXIiLQoWQ2hhcmFjdGVyRGVs",
             "ZXRlUmVxdWVzdBITCgtjaGFyYWN0ZXJJZBgBIAEoBSI7ChdDaGFyYWN0ZXJE",
             "ZWxldGVSZXNwb25zZRIPCgdzdWNjZXNzGAEgASgIEg8KB21lc3NhZ2UYAiAB",
-            "KAkqNQoLRW50aXR5U3RhdGUSCAoETk9ORRAAEggKBElETEUQARIICgRNT1ZF",
-            "EAISCAoESlVNUBADYgZwcm90bzM="));
+            "KAkqMQoKRW50aXR5VHlwZRINCglDaGFyYWN0ZXIQABILCgdNb25zdGVyEAES",
+            "BwoDTlBDEAIqNQoLRW50aXR5U3RhdGUSCAoETk9ORRAAEggKBElETEUQARII",
+            "CgRNT1ZFEAISCAoESlVNUBADYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Proto.EntityState), }, null, new pbr::GeneratedClrTypeInfo[] {
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Proto.EntityType), typeof(global::Proto.EntityState), }, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.NFloat3), global::Proto.NFloat3.Parser, new[]{ "X", "Y", "Z" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.NEntity), global::Proto.NEntity.Parser, new[]{ "EntityId", "Position", "Direction", "Speed" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.NEntitySync), global::Proto.NEntitySync.Parser, new[]{ "NEntity", "State", "Force" }, null, null, null, null),
@@ -90,6 +91,12 @@ namespace Proto {
 
   }
   #region Enums
+  public enum EntityType {
+    [pbr::OriginalName("Character")] Character = 0,
+    [pbr::OriginalName("Monster")] Monster = 1,
+    [pbr::OriginalName("NPC")] Npc = 2,
+  }
+
   public enum EntityState {
     [pbr::OriginalName("NONE")] None = 0,
     [pbr::OriginalName("IDLE")] Idle = 1,
