@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
+using FreeSql;
 using GameServer.Database;
 using GameServer.Model;
 using Kirara;
@@ -14,6 +15,8 @@ namespace GameServer.Manager
         private readonly ConcurrentDictionary<int, Character> idToCharacter = new();
         private Timer saveTimer;
 
+        private IBaseRepository<DbCharacter> dbCharacterRepo = Db.fsql.GetRepository<DbCharacter>();
+
         public CharacterManager()
         {
             saveTimer = new Timer(Save, null, 0, 2);
@@ -21,11 +24,10 @@ namespace GameServer.Manager
 
         private void Save(object _)
         {
-            var repository = Db.fsql.GetRepository<DbCharacter>();
             foreach (var character in idToCharacter.Values)
             {
                 Log.Verbose($"保存角色 {character.position.NameValue()}");
-                repository.UpdateAsync(character.DbCharacter);
+                dbCharacterRepo.UpdateAsync(character.DbCharacter);
             }
         }
 
