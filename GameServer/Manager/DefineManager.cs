@@ -7,13 +7,13 @@ namespace GameServer.Manager
 {
     public class DefineManager : Singleton<DefineManager>
     {
-        public Dictionary<int, SpaceDefine> spaceDefineDict;
-        public Dictionary<int, UnitDefine> unitDefineDict;
+        public Dictionary<int, SpaceDefine> SIDToSpaceDefine;
+        public Dictionary<int, UnitDefine> TIDToUnitDefine;
 
         public void Init()
         {
-            spaceDefineDict = Load<SpaceDefine>("Define/SpaceDefine.json");
-            unitDefineDict = Load<UnitDefine>("Define/UnitDefine.json");
+            SIDToSpaceDefine = Load<SpaceDefine>("Define/SpaceDefine.json");
+            TIDToUnitDefine = Load<UnitDefine>("Define/UnitDefine.json");
         }
 
         private static string LoadFile(string filePath)

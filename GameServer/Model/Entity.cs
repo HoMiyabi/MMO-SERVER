@@ -1,4 +1,5 @@
 ﻿using System;
+using GameServer.Manager;
 using Kirara;
 using Proto;
 
@@ -11,6 +12,9 @@ namespace GameServer.Model
         public Float3 position;
         public Float3 direction;
         public float speed;
+
+        public EntityType entityType;
+        public UnitDefine unitDefine;
 
         public DateTime lastUpdateTime;
 
@@ -32,11 +36,15 @@ namespace GameServer.Model
             lastUpdateTime = DateTime.UtcNow;
         }
 
-        public Entity(Float3 position, Float3 direction)
+        public Entity(Float3 position, Float3 direction, EntityType entityType, int TID)
         {
             this.position = position;
             this.direction = direction;
             lastUpdateTime = DateTime.UtcNow;
+
+            this.entityType = entityType;
+            unitDefine = DefineManager.Instance.TIDToUnitDefine[TID];
+
         }
     }
 }

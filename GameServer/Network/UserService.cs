@@ -48,7 +48,7 @@ namespace GameServer.Network
                 {
                     Id = item.Id,
                     Name = item.Name,
-                    JobId = item.JobId,
+                    Tid = item.JobId,
                     Exp = item.Exp,
                     Gold = item.Gold,
                     Level = item.Level,
@@ -158,7 +158,7 @@ namespace GameServer.Network
 
         private void OnGameEnterRequest(Connection conn, GameEnterRequest message)
         {
-            Log.Information($"玩家进入游戏，id={message.CharacterId}");
+            Log.Information($"玩家进入游戏，CharacterId={message.CharacterId}");
 
             // 获取当前玩家
             var player = conn.Get<DbPlayer>();

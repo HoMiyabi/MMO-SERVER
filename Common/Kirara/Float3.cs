@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 
 namespace Kirara
 {
@@ -20,6 +21,7 @@ namespace Kirara
         }
 
         public static readonly Float3 Zero = new(0f, 0f, 0f);
+        public static readonly Float3 One = new(1f, 1f, 1f);
 
         public Float3(float x, float y, float z)
         {
@@ -81,6 +83,16 @@ namespace Kirara
         public static float Distance(Float3 l, Float3 r)
         {
             return (l - r).Length();
+        }
+
+        public static Float3 Max(Float3 l, Float3 r)
+        {
+            return new Float3(Math.Max(l.x, r.x), Math.Max(l.y, r.y), Math.Max(l.z, r.z));
+        }
+
+        public static Float3 Min(Float3 l, Float3 r)
+        {
+            return new Float3(Math.Min(l.x, r.x), Math.Min(l.y, r.y), Math.Min(l.z, r.z));
         }
     }
 }

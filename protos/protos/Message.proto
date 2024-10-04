@@ -2,13 +2,6 @@ syntax = "proto3";
 
 package proto;
 
-//message NInt3
-//{
-//    int32 x = 1;
-//    int32 y = 2;
-//    int32 z = 3;
-//}
-
 enum EntityType
 {
     Character = 0;
@@ -50,7 +43,7 @@ message NCharacter
 {
     NEntity nEntity = 1;
     int32 id = 2;
-    int32 jobId = 3;
+    int32 tid = 3; // 单位类型
     string name = 4;
     int32 hp = 5;
     int32 mp = 6;
@@ -58,6 +51,7 @@ message NCharacter
     int64 exp = 8;
     int32 spaceId = 9;
     int64 gold = 10;
+    EntityType entityType = 11;
 }
 
 message HeartBeatRequest {}

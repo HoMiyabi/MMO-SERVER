@@ -8,7 +8,9 @@ namespace GameServer.Model
     // 空间 场景
     public class Space
     {
-        public SpaceDefine SpaceDefine { get; set; }
+        public readonly int id;
+
+        // public SpaceDefine SpaceDefine { get; set; }
 
         // 当前场景中全部的角色 <ChrId, ChrObj>
         private Dictionary<int, Character> idToCharacter = new();
@@ -19,7 +21,8 @@ namespace GameServer.Model
 
         public Space(SpaceDefine spaceDefine)
         {
-            SpaceDefine = spaceDefine;
+            // SpaceDefine = spaceDefine;
+            id = spaceDefine.SID;
         }
 
         /// <summary>
@@ -29,7 +32,7 @@ namespace GameServer.Model
         /// <param name="character"></param>
         public void CharacterEnter(Connection conn, Character character)
         {
-            Log.Information($"角色进入场景 SpaceId={SpaceDefine.SID} {character.id.NameValue()}");
+            Log.Information($"角色进入场景 {id.NameValue()} {character.id.NameValue()}");
 
             // 角色和场景存入连接
             conn.Set(character);
@@ -38,15 +41,12 @@ namespace GameServer.Model
             idToCharacter.Add(character.id, character);
             character.conn = conn;
 
-            if (!connectionToCharacter.ContainsKey(conn))
-            {
-                connectionToCharacter.Add(conn, character);
-            }
+            connectionToCharacter.TryAdd(conn, character);
 
             // 把新进入的角色广播给场景的其他玩家
             var response = new SpaceCharactersEnterResponse()
             {
-                SpaceId = SpaceDefine.SID,
+                SpaceId = id,
             };
             response.NCharacters.Add(character.NCharacter);
 
@@ -79,7 +79,7 @@ namespace GameServer.Model
         /// <param name="character"></param>
         public void CharacterLeave(Connection conn, Character character)
         {
-            Log.Information($"角色离开场景 {SpaceDefine.SID.NameValue()} {character.id.NameValue()}");
+            Log.Information($"角色离开场景 {id.NameValue()} {character.id.NameValue()}");
             idToCharacter.Remove(character.id);
 
             var response = new SpaceCharacterLeaveResponse()

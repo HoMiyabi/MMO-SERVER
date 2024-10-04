@@ -65,12 +65,12 @@ namespace GameServer.Network
             }
         }
 
-        private void OnHeartBeatRequest(Connection conn, Proto.HeartBeatRequest message)
+        private void OnHeartBeatRequest(Connection conn, HeartBeatRequest message)
         {
             // Log.Debug("收到心跳包: " + conn);
             connToLastHeartBeatTime[conn] = DateTime.UtcNow;
 
-            Proto.HeartBeatResponse response = new();
+            HeartBeatResponse response = new();
             conn.Send(response);
         }
 
@@ -90,7 +90,7 @@ namespace GameServer.Network
             }
             // IPEndPoint iPEndPoint = conn.Socket.RemoteEndPoint as IPEndPoint;
             // Log.Information($"客户端断开 IP:{iPEndPoint?.Address} Port:{iPEndPoint?.Port}");
-            Log.Information($"客户端断开");
+            Log.Information("客户端断开");
 
             var character = conn.Get<Character>();
             if (character != null)

@@ -9,7 +9,7 @@ namespace GameServer.Model
     public class Character : Entity
     {
         public int id;
-        public int jobId;
+        public int tid;
         public string name;
         public int hp;
         public int mp;
@@ -27,7 +27,7 @@ namespace GameServer.Model
         {
             NEntity = NEntity,
             Id = id,
-            JobId = jobId,
+            Tid = tid,
             Name = name,
             Hp = hp,
             Mp = mp,
@@ -35,12 +35,13 @@ namespace GameServer.Model
             Exp = exp,
             SpaceId = spaceId,
             Gold = gold,
+            EntityType = entityType,
         };
 
         public DbCharacter DbCharacter => new()
         {
             Id = id,
-            JobId = jobId,
+            JobId = tid,
             Name = name,
             Hp = hp,
             Mp = mp,
@@ -56,10 +57,10 @@ namespace GameServer.Model
 
         public Character(DbCharacter dbCharacter) : base(
             new Float3(dbCharacter.X, dbCharacter.Y, dbCharacter.Z),
-            Float3.Zero)
+            Float3.Zero, EntityType.Character, dbCharacter.JobId)
         {
             id = dbCharacter.Id;
-            jobId = dbCharacter.JobId;
+            tid = dbCharacter.JobId;
             name = dbCharacter.Name;
             hp = dbCharacter.Hp;
             mp = dbCharacter.Mp;
@@ -69,7 +70,7 @@ namespace GameServer.Model
             gold = dbCharacter.Gold;
             playerId = dbCharacter.PlayerId;
             
-            var ud = DefineManager.Instance.unitDefineDict[dbCharacter.JobId];
+            var ud = DefineManager.Instance.TIDToUnitDefine[dbCharacter.JobId];
             speed = ud.Speed;
         }
     }
