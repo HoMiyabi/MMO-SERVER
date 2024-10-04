@@ -1,6 +1,7 @@
 ﻿using System;
 using GameServer.Network;
 using GameServer.Manager;
+using Kirara;
 using Serilog;
 
 namespace GameServer
@@ -23,22 +24,23 @@ namespace GameServer
 
             DefineManager.Instance.Init();
 
-            NetService netService = new();
+            var netService = new NetService();
             netService.Start();
             Log.Debug("网络服务启动完成");
 
-            UserService userService = UserService.Instance;
+            var userService = UserService.Instance;
             userService.Start();
             Log.Debug("玩家服务启动完成");
 
-            SpaceService spaceService = SpaceService.Instance;
+            var spaceService = SpaceService.Instance;
             spaceService.Start();
             Log.Debug("地图服务启动完成");
 
-            // Schedule.Instance.Start();
-            // Log.Debug("定时器启动完成");
+            var space = SpaceManager.Instance.GetSpace(2);
+            var monster = space.monsterManager.CreateMonster(1002, 3, new Float3(0, 0, 0), new Float3(0, 0, 0));
 
             Console.ReadLine();
+
             netService.Close();
             CharacterManager.Instance.Close();
 

@@ -7,21 +7,21 @@ namespace GameServer.Manager
 {
     public class SpaceManager : Singleton<SpaceManager>
     {
-        private Dictionary<int, Space> idToSpace;
+        private Dictionary<int, Space> spaceIdToSpace;
 
         public void Init()
         {
-            idToSpace = new Dictionary<int, Space>();
+            spaceIdToSpace = new Dictionary<int, Space>();
             foreach (var (_, spaceDefine) in DefineManager.Instance.SIDToSpaceDefine)
             {
-                idToSpace.Add(spaceDefine.SID, new Space(spaceDefine));
+                spaceIdToSpace.Add(spaceDefine.SID, new Space(spaceDefine));
                 Log.Information($"初始化地图：{spaceDefine.Name}");
             }
         }
 
         public Space GetSpace(int id)
         {
-            return idToSpace[id];
+            return spaceIdToSpace[id];
         }
     }
 }

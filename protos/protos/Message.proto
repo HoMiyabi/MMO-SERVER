@@ -146,3 +146,16 @@ message CharacterDeleteResponse
     bool success = 1;
     string message = 2;
 }
+
+message NMonster
+{
+    NEntity nEntity = 1;
+    string name = 2;
+    int32 level = 3;
+}
+
+message MonstersEnterSpaceResponse
+{
+    int32 spaceId = 1;
+    repeated NMonster nMonsters = 2;
+}

@@ -8,7 +8,6 @@ namespace GameServer.Manager
     {
         private readonly Space space;
 
-
         private Dictionary<int, Monster> entityIdToMonster = new();
 
         public MonsterManager(Space space)
@@ -20,9 +19,9 @@ namespace GameServer.Manager
         {
             var monster = new Monster(position, direction, tid, level)
             {
-                spaceId = space.id,
+                spaceId = space.spaceId,
             };
-            EntityManager.Instance.AddEntity(space.id, monster);
+            EntityManager.Instance.AddEntity(space.spaceId, monster);
             entityIdToMonster.Add(monster.entityId, monster);
             return monster;
         }

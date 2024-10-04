@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GameServer.Manager;
 using Serilog;
 using Kirara;
 using Proto;
@@ -8,21 +9,26 @@ namespace GameServer.Model
     // 空间 场景
     public class Space
     {
-        public readonly int id;
+        public readonly int spaceId;
 
         // public SpaceDefine SpaceDefine { get; set; }
 
         // 当前场景中全部的角色 <ChrId, ChrObj>
         private Dictionary<int, Character> idToCharacter = new();
 
+        // 当前场景中的野怪 <entityId, monster>
+        private Dictionary<int, Monster> entityIdToMonster = new();
+
         private Dictionary<Connection, Character> connectionToCharacter = new();
 
-        // public Space() {}
+        public MonsterManager monsterManager;
 
         public Space(SpaceDefine spaceDefine)
         {
             // SpaceDefine = spaceDefine;
-            id = spaceDefine.SID;
+            spaceId = spaceDefine.SID;
+
+            monsterManager = new MonsterManager(this);
         }
 
         /// <summary>
@@ -32,7 +38,7 @@ namespace GameServer.Model
         /// <param name="character"></param>
         public void CharacterEnter(Connection conn, Character character)
         {
-            Log.Information($"角色进入场景 {id.NameValue()} {character.id.NameValue()}");
+            Log.Information($"角色进入场景 {spaceId.NameValue()} {character.id.NameValue()}");
 
             // 角色和场景存入连接
             conn.Set(character);
@@ -46,7 +52,7 @@ namespace GameServer.Model
             // 把新进入的角色广播给场景的其他玩家
             var response = new SpaceCharactersEnterResponse()
             {
-                SpaceId = id,
+                SpaceId = spaceId,
             };
             response.NCharacters.Add(character.NCharacter);
 
@@ -69,6 +75,18 @@ namespace GameServer.Model
                 }
             }
             conn.Send(response);
+
+            // 同步野怪
+
+            var monstersEnterSpaceResponse = new MonstersEnterSpaceResponse()
+            {
+                SpaceId = spaceId
+            };
+            foreach (var (_, monster) in entityIdToMonster)
+            {
+                monstersEnterSpaceResponse.NMonsters.Add(monster.NMonster);
+            }
+            conn.Send(monstersEnterSpaceResponse);
         }
 
         /// <summary>
@@ -79,7 +97,7 @@ namespace GameServer.Model
         /// <param name="character"></param>
         public void CharacterLeave(Connection conn, Character character)
         {
-            Log.Information($"角色离开场景 {id.NameValue()} {character.id.NameValue()}");
+            Log.Information($"角色离开场景 {spaceId.NameValue()} {character.id.NameValue()}");
             idToCharacter.Remove(character.id);
 
             var response = new SpaceCharacterLeaveResponse()
@@ -114,6 +132,25 @@ namespace GameServer.Model
                     };
                     character.conn.Send(response);
                 }
+            }
+        }
+
+        public void AddMonster(Monster monster)
+        {
+            monster.space = this;
+            monster.spaceId = spaceId;
+
+            entityIdToMonster.Add(monster.entityId, monster);
+
+            var response = new MonstersEnterSpaceResponse
+            {
+                SpaceId = spaceId
+            };
+            response.NMonsters.Add(monster.NMonster);
+
+            foreach (var (_, character) in idToCharacter)
+            {
+                character.conn.Send(response);
             }
         }
     }
