@@ -15,9 +15,9 @@ namespace GameServer.Manager
             this.space = space;
         }
 
-        public Monster CreateMonster(int tid, int level, Float3 position, Float3 direction)
+        public Monster CreateMonster(int tid, int level, Float3 position, Float3 direction, string name)
         {
-            var monster = new Monster(position, direction, tid, level)
+            var monster = new Monster(position, direction, tid, level, name)
             {
                 spaceId = space.spaceId,
             };

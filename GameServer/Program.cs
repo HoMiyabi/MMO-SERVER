@@ -37,7 +37,9 @@ namespace GameServer
             Log.Debug("地图服务启动完成");
 
             var space = SpaceManager.Instance.GetSpace(2);
-            var monster = space.monsterManager.CreateMonster(1002, 3, new Float3(0, 0, 0), new Float3(0, 0, 0));
+            var monster = space.monsterManager.CreateMonster(
+                1002, 3, new Float3(0, 0, 0), new Float3(0, 0, 0), "aaa");
+            space.AddMonster(monster);
 
             Console.ReadLine();
 

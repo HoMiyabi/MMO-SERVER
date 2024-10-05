@@ -57,13 +57,14 @@ namespace Proto {
             "Y2VzcxgBIAEoCBIPCgdtZXNzYWdlGAIgASgJEiUKCm5DaGFyYWN0ZXIYAyAB",
             "KAsyES5wcm90by5OQ2hhcmFjdGVyIi0KFkNoYXJhY3RlckRlbGV0ZVJlcXVl",
             "c3QSEwoLY2hhcmFjdGVySWQYASABKAUiOwoXQ2hhcmFjdGVyRGVsZXRlUmVz",
-            "cG9uc2USDwoHc3VjY2VzcxgBIAEoCBIPCgdtZXNzYWdlGAIgASgJIkgKCE5N",
+            "cG9uc2USDwoHc3VjY2VzcxgBIAEoCBIPCgdtZXNzYWdlGAIgASgJIlUKCE5N",
             "b25zdGVyEh8KB25FbnRpdHkYASABKAsyDi5wcm90by5ORW50aXR5EgwKBG5h",
-            "bWUYAiABKAkSDQoFbGV2ZWwYAyABKAUiUQoaTW9uc3RlcnNFbnRlclNwYWNl",
-            "UmVzcG9uc2USDwoHc3BhY2VJZBgBIAEoBRIiCgluTW9uc3RlcnMYAiADKAsy",
-            "Dy5wcm90by5OTW9uc3RlcioxCgpFbnRpdHlUeXBlEg0KCUNoYXJhY3RlchAA",
-            "EgsKB01vbnN0ZXIQARIHCgNOUEMQAio1CgtFbnRpdHlTdGF0ZRIICgROT05F",
-            "EAASCAoESURMRRABEggKBE1PVkUQAhIICgRKVU1QEANiBnByb3RvMw=="));
+            "bWUYAiABKAkSDQoFbGV2ZWwYAyABKAUSCwoDdGlkGAQgASgFIlEKGk1vbnN0",
+            "ZXJzRW50ZXJTcGFjZVJlc3BvbnNlEg8KB3NwYWNlSWQYASABKAUSIgoJbk1v",
+            "bnN0ZXJzGAIgAygLMg8ucHJvdG8uTk1vbnN0ZXIqMQoKRW50aXR5VHlwZRIN",
+            "CglDaGFyYWN0ZXIQABILCgdNb25zdGVyEAESBwoDTlBDEAIqNQoLRW50aXR5",
+            "U3RhdGUSCAoETk9ORRAAEggKBElETEUQARIICgRNT1ZFEAISCAoESlVNUBAD",
+            "YgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Proto.EntityType), typeof(global::Proto.EntityState), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -89,7 +90,7 @@ namespace Proto {
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.CharacterCreateResponse), global::Proto.CharacterCreateResponse.Parser, new[]{ "Success", "Message", "NCharacter" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.CharacterDeleteRequest), global::Proto.CharacterDeleteRequest.Parser, new[]{ "CharacterId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.CharacterDeleteResponse), global::Proto.CharacterDeleteResponse.Parser, new[]{ "Success", "Message" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.NMonster), global::Proto.NMonster.Parser, new[]{ "NEntity", "Name", "Level" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.NMonster), global::Proto.NMonster.Parser, new[]{ "NEntity", "Name", "Level", "Tid" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.MonstersEnterSpaceResponse), global::Proto.MonstersEnterSpaceResponse.Parser, new[]{ "SpaceId", "NMonsters" }, null, null, null, null)
           }));
     }
@@ -5522,6 +5523,7 @@ namespace Proto {
       nEntity_ = other.nEntity_ != null ? other.nEntity_.Clone() : null;
       name_ = other.name_;
       level_ = other.level_;
+      tid_ = other.tid_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -5567,6 +5569,18 @@ namespace Proto {
       }
     }
 
+    /// <summary>Field number for the "tid" field.</summary>
+    public const int TidFieldNumber = 4;
+    private int tid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Tid {
+      get { return tid_; }
+      set {
+        tid_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -5585,6 +5599,7 @@ namespace Proto {
       if (!object.Equals(NEntity, other.NEntity)) return false;
       if (Name != other.Name) return false;
       if (Level != other.Level) return false;
+      if (Tid != other.Tid) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -5595,6 +5610,7 @@ namespace Proto {
       if (nEntity_ != null) hash ^= NEntity.GetHashCode();
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (Level != 0) hash ^= Level.GetHashCode();
+      if (Tid != 0) hash ^= Tid.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -5625,6 +5641,10 @@ namespace Proto {
         output.WriteRawTag(24);
         output.WriteInt32(Level);
       }
+      if (Tid != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(Tid);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -5647,6 +5667,10 @@ namespace Proto {
         output.WriteRawTag(24);
         output.WriteInt32(Level);
       }
+      if (Tid != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(Tid);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -5665,6 +5689,9 @@ namespace Proto {
       }
       if (Level != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Level);
+      }
+      if (Tid != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Tid);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -5689,6 +5716,9 @@ namespace Proto {
       }
       if (other.Level != 0) {
         Level = other.Level;
+      }
+      if (other.Tid != 0) {
+        Tid = other.Tid;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -5724,6 +5754,10 @@ namespace Proto {
             Level = input.ReadInt32();
             break;
           }
+          case 32: {
+            Tid = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -5756,6 +5790,10 @@ namespace Proto {
           }
           case 24: {
             Level = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            Tid = input.ReadInt32();
             break;
           }
         }

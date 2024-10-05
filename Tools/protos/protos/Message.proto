@@ -152,6 +152,7 @@ message NMonster
     NEntity nEntity = 1;
     string name = 2;
     int32 level = 3;
+    int32 tid = 4;
 }
 
 message MonstersEnterSpaceResponse

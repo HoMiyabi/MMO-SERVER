@@ -15,12 +15,14 @@ namespace GameServer.Model
         {
             NEntity = NEntity,
             Name = name,
-            Level = level
+            Level = level,
+            Tid = tid
         };
 
-        public Monster(Float3 position, Float3 direction, int TID, int level) : base(position, direction, EntityType.Monster, TID)
+        public Monster(Float3 position, Float3 direction, int TID, int level, string name) : base(position, direction, EntityType.Monster, TID)
         {
             this.level = level;
+            this.name = name;
         }
     }
 }

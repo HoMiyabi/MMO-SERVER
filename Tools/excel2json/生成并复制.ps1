@@ -2,9 +2,15 @@ $excelsPath = "./excel"
 $outPath = "./out"
 $exe = "./excel2json.exe"
 $excelFilter = "*.xlsx"
-$copyDestPaths = @(
-    "C:\Things\Code\CSharp\MMO-SERVER\GameServer\Define",
-    "C:\UnityProjects\MMOGAME\Assets\Resources\Define"
+
+$copyModelPaths = @(
+    "C:\UnityProjects\MMOGAME\Assets\Scripts\DefineModel",
+    "C:\Things\Code\CSharp\MMO-SERVER\GameServer\Define"
+)
+
+$copyJsonPaths = @(
+    "C:\UnityProjects\MMOGAME\Assets\Resources\DefineJson",
+    "C:\Things\Code\CSharp\MMO-SERVER\GameServer\Define"
 )
 
 $excelFiles = Get-ChildItem -Path $excelsPath -Filter $excelFilter
@@ -22,8 +28,14 @@ foreach ($file in $excelFiles)
 }
 
 Write-Output "复制..."
-foreach ($copyDestPath in $copyDestPaths)
+
+foreach ($copyModelPath in $copyModelPaths)
 {
-    Get-ChildItem -Path $outPath | Copy-Item -Destination $copyDestPath
+    Get-ChildItem -Path $outPath -Filter "*.cs" | Copy-Item -Destination $copyModelPath
+}
+
+foreach ($copyJsonPath in $copyJsonPaths)
+{
+    Get-ChildItem -Path $outPath -Filter "*.json" | Copy-Item -Destination $copyJsonPath
 }
 Pause

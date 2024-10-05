@@ -13,6 +13,7 @@ namespace GameServer.Model
         public Float3 direction;
         public float speed;
 
+        public int tid;
         public EntityType entityType;
         public UnitDefine unitDefine;
 
@@ -36,15 +37,14 @@ namespace GameServer.Model
             lastUpdateTime = DateTime.UtcNow;
         }
 
-        public Entity(Float3 position, Float3 direction, EntityType entityType, int TID)
+        public Entity(Float3 position, Float3 direction, EntityType entityType, int tid)
         {
             this.position = position;
             this.direction = direction;
             lastUpdateTime = DateTime.UtcNow;
 
             this.entityType = entityType;
-            unitDefine = DefineManager.Instance.TIDToUnitDefine[TID];
-
+            unitDefine = DefineManager.Instance.TIDToUnitDefine[tid];
         }
     }
 }
