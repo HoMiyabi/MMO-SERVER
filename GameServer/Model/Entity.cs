@@ -13,7 +13,6 @@ namespace GameServer.Model
         public Float3 direction;
         public float speed;
 
-        public int tid;
         public EntityType entityType;
         public UnitDefine unitDefine;
 

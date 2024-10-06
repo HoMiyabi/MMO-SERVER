@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using FreeSql;
 using GameServer.Database;
@@ -19,16 +20,14 @@ namespace GameServer.Manager
 
         public CharacterManager()
         {
-            saveTimer = new Timer(Save, null, 0, 2);
+            saveTimer = new Timer(Save, null, 0, 2000);
         }
 
         private void Save(object _)
         {
-            foreach (var character in idToCharacter.Values)
-            {
-                Log.Verbose($"保存角色 {character.position.NameValue()}");
-                dbCharacterRepo.UpdateAsync(character.DbCharacter);
-            }
+            Db.fsql.Update<DbCharacter>()
+                .SetSource(idToCharacter.Values.Select(character => character.DbCharacter))
+                .ExecuteAffrows();
         }
 
         public Character CreateCharacter(DbCharacter dbCharacter)

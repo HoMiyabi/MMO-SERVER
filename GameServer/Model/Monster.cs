@@ -8,6 +8,7 @@ namespace GameServer.Model
         public int level;
         public int spaceId;
         public string name;
+        public int tid;
 
         public Space space;
 
@@ -19,10 +20,11 @@ namespace GameServer.Model
             Tid = tid
         };
 
-        public Monster(Float3 position, Float3 direction, int TID, int level, string name) : base(position, direction, EntityType.Monster, TID)
+        public Monster(Float3 position, Float3 direction, int tid, int level, string name) : base(position, direction, EntityType.Monster, tid)
         {
             this.level = level;
             this.name = name;
+            this.tid = tid;
         }
     }
 }

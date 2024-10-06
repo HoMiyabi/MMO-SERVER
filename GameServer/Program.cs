@@ -38,7 +38,7 @@ namespace GameServer
 
             var space = SpaceManager.Instance.GetSpace(2);
             var monster = space.monsterManager.CreateMonster(
-                1002, 3, new Float3(0, 0, 0), new Float3(0, 0, 0), "aaa");
+                1001, 3, new Float3(79.9143f, 22.4004f, 33.5548f), new Float3(0, 0, 0), "鸡哥");
             space.AddMonster(monster);
 
             Console.ReadLine();

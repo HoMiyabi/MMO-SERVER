@@ -37,7 +37,7 @@ namespace GameServer.Network
 
             if (float.IsNaN(distance) || distance > limit)
             {
-                Log.Information($"角色移动过快 {character?.id.NameValue()} {distance.NameValue()} {limit.NameValue()}");
+                Log.Information($"角色移动过快 {character?.id.NameValue()} {distance.NameValue()} {serverEntity.speed.NameValue()} {dt.NameValue()} {limit.NameValue()}");
                 var response = new SpaceEntitySyncResponse
                 {
                     EntitySync = new NEntitySync
