@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Reflection;
 using System.Threading;
 using Google.Protobuf;
@@ -140,6 +141,9 @@ namespace Kirara
         {
             if (messageNameToAction.TryGetValue(messageUnit.messageName, out var action))
             {
+                // Log.Information($"开始 {messageUnit.messageName} {DateTime.UtcNow:HH:mm:ss.fff}");
+                // var sw = new Stopwatch();
+                // sw.Start();
                 try
                 {
                     action.DynamicInvoke(messageUnit.conn, messageUnit.message);
@@ -147,12 +151,14 @@ namespace Kirara
                 catch (TargetInvocationException ex)
                 {
                     var inner = ex.InnerException;
-                    Log.Warning($"{messageUnit.messageName.NameValue()} {inner.Message} {inner.StackTrace}");
+                    Log.Warning($"{messageUnit.messageName.NameValue()} {inner?.Message} {inner?.StackTrace}");
                 }
                 catch (Exception ex)
                 {
                     Log.Warning($"{messageUnit.messageName.NameValue()} {ex.Message} {ex.StackTrace}");
                 }
+                // sw.Stop();
+                // Log.Information($"结束 {messageUnit.messageName} {DateTime.UtcNow:HH:mm:ss.fff} {sw.ElapsedMilliseconds}ms");
             }
         }
     }

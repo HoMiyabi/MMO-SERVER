@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Google.Protobuf;
 using Proto;
+using Serilog;
 
 namespace Kirara
 {
@@ -34,7 +35,7 @@ namespace Kirara
             socket.Close();
         }
 
-        public void Send(IMessage message)
+        public static byte[] GetSendBytes(IMessage message)
         {
             var packet = new Packet()
             {
@@ -51,7 +52,19 @@ namespace Kirara
             }
             packet.WriteTo(new Span<byte>(sendBytes, sizeof(int), size));
 
-            socket.SendAsync(sendBytes, SocketFlags.None, cts.Token);
+            return sendBytes;
+        }
+
+        public void SendBytes(byte[] bytes)
+        {
+            socket.Send(bytes, SocketFlags.None);
+            // socket.SendAsync(bytes, SocketFlags.None, cts.Token);
+        }
+
+        public void Send(IMessage message)
+        {
+            byte[] sendBytes = GetSendBytes(message);
+            SendBytes(sendBytes);
         }
 
         private async Task Receive(CancellationToken token)
@@ -62,9 +75,18 @@ namespace Kirara
                 int receiveCount;
                 while (receivedCount < sizeof(int))
                 {
-                    receiveCount = await socket.ReceiveAsync(
-                        new ArraySegment<byte>(receiveBuffer, receivedCount, receiveBuffer.Length - receivedCount),
-                        token);
+                    try
+                    {
+                        receiveCount = await socket.ReceiveAsync(
+                            new ArraySegment<byte>(receiveBuffer, receivedCount, receiveBuffer.Length - receivedCount),
+                            token);
+                    }
+                    catch (SocketException)
+                    {
+                        Close();
+                        Disconnected?.Invoke(this);
+                        return;
+                    }
                     if (receiveCount == 0)
                     {
                         Close();
@@ -77,9 +99,18 @@ namespace Kirara
                 int size = BinaryPrimitives.ReadInt32BigEndian(new ReadOnlySpan<byte>(receiveBuffer, 0, sizeof(int)));
                 while (receivedCount < sizeof(int) + size)
                 {
-                    receiveCount = await socket.ReceiveAsync(
-                        new ArraySegment<byte>(receiveBuffer, receivedCount, receiveBuffer.Length - receivedCount),
-                        token);
+                    try
+                    {
+                        receiveCount = await socket.ReceiveAsync(
+                            new ArraySegment<byte>(receiveBuffer, receivedCount, receiveBuffer.Length - receivedCount),
+                            token);
+                    }
+                    catch (SocketException)
+                    {
+                        Close();
+                        Disconnected?.Invoke(this);
+                        return;
+                    }
                     if (receiveCount == 0)
                     {
                         Close();
@@ -89,8 +120,13 @@ namespace Kirara
                     receivedCount += receiveCount;
                 }
 
+                // Log.Information($"接收到消息 {DateTime.UtcNow:HH:mm:ss.fff}");
+
                 var packet = Packet.Parser.ParseFrom(new Span<byte>(receiveBuffer, sizeof(int), size));
                 var message = ProtoHelper.fullNameToDescriptor[packet.MessageName].Parser.ParseFrom(packet.Message);
+
+                // Log.Information($"得到消息体 {DateTime.UtcNow:HH:mm:ss.fff}");
+
                 Received?.Invoke(this, message);
 
                 Array.Copy(receiveBuffer, sizeof(int) + size,

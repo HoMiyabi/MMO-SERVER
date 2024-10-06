@@ -1,4 +1,5 @@
 ﻿using System;
+using GameServer.Database;
 using GameServer.Network;
 using GameServer.Manager;
 using Kirara;
@@ -20,6 +21,7 @@ namespace GameServer
 
         private static void Main(string[] args)
         {
+            Db.Init();
             InitLogger();
 
             DefineManager.Instance.Init();

@@ -15,9 +15,14 @@
             $"Data Source={host};Port={port};User ID={user};Password={password};" +
             $"Initial Catalog={dbName};Charset=utf8mb4;SslMode=Required;Min pool size=10";
 
-        public static IFreeSql fsql = new FreeSql.FreeSqlBuilder()
-            .UseConnectionString(FreeSql.DataType.MySql, connectionString)
-            .UseAutoSyncStructure(true) // 自动同步实体到数据库
-            .Build();
+        public static IFreeSql fsql;
+
+        public static void Init()
+        {
+            fsql = new FreeSql.FreeSqlBuilder()
+                .UseConnectionString(FreeSql.DataType.MySql, connectionString)
+                .UseAutoSyncStructure(true) // 自动同步实体到数据库
+                .Build();
+        }
     }
 }

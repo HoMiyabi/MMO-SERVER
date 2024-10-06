@@ -21,11 +21,15 @@ namespace GameServer.Network
 
         private CancellationTokenSource cts = new();
 
+        private readonly byte[] heartBeatResponseSendBytes;
+
         public NetService()
         {
             server = new Server("0.0.0.0", 32510);
             server.Connected += OnClientConnected;
             server.Disconnected += OnDisconnected;
+
+            heartBeatResponseSendBytes = Connection.GetSendBytes(new HeartBeatResponse());
         }
 
         public void Start()
@@ -67,11 +71,8 @@ namespace GameServer.Network
 
         private void OnHeartBeatRequest(Connection conn, HeartBeatRequest message)
         {
-            // Log.Debug("收到心跳包: " + conn);
             connToLastHeartBeatTime[conn] = DateTime.UtcNow;
-
-            HeartBeatResponse response = new();
-            conn.Send(response);
+            conn.SendBytes(heartBeatResponseSendBytes);
         }
 
         private void OnClientConnected(Connection conn)
