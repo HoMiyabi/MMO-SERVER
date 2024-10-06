@@ -33,7 +33,7 @@ namespace GameServer.Network
 
             dt = Math.Min(dt, 1f);
 
-            float limit = serverEntity.speed * dt * 1.5f;
+            float limit = serverEntity.speed * dt * 2f;
 
             if (float.IsNaN(distance) || distance > limit)
             {
@@ -44,7 +44,7 @@ namespace GameServer.Network
                     {
                         NEntity = serverEntity.NEntity,
                         Force = true,
-                    },
+                    }
                 };
                 conn.Send(response);
                 return;
